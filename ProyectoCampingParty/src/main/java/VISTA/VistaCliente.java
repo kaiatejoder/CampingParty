@@ -4,6 +4,7 @@
  */
 package VISTA;
 
+import com.formdev.flatlaf.FlatLightLaf;
 /**
  *
  * @author HP
@@ -16,7 +17,7 @@ public class VistaCliente extends javax.swing.JFrame {
      * Creates new form VistaCliente
      */
     public VistaCliente() {
-        
+        FlatLightLaf.setup();
         initComponents();
     }
 
@@ -67,7 +68,7 @@ public class VistaCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("FeCHA");
+        jLabel3.setText("FECHA");
 
         modReserva.setText("Modificar");
 

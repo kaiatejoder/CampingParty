@@ -8,7 +8,12 @@ package MODELO;
  *
  * @author HP
  */
-public class Modelo {
-    private int descuento;
-    
+public class Tienda {
+    String nombre;
+    float m2;
+
+    public Tienda(String nombre, float m2){
+        this.nombre = nombre;
+        this.m2 = m2;
+    }
 }
