@@ -4,6 +4,7 @@
  */
 package MODELO;
 
+import java.util.ArrayList;
 /**
  * Clase Cliente que representa un cliente del camping.
  * @author HP
@@ -15,6 +16,7 @@ public class Cliente {
     private boolean hayReserva;
     private String username;
     private String password;
+    private ArrayList<Participacion> participaciones;
     
     public Cliente(String nombre, String dni, String telefono, String username, String password){
         this.nombre = nombre;
@@ -23,6 +25,7 @@ public class Cliente {
         this.hayReserva = false;
         this.username = username;
         this.password = password;
+        this.participaciones = new ArrayList<>();
     }
 
     public String getNombre(){
@@ -50,5 +53,20 @@ public class Cliente {
     }
     public String getPassword(){
         return password;
+    }
+    
+    public ArrayList<Participacion> getParticipaciones(){
+        return participaciones;
+    }
+
+    public void inscribirseEnActividad(Actividad a){
+        Participacion p = new Participacion(this, a);
+        participaciones.add(p);
+        a.agregarParticipante(this);
+    }
+
+    public void cancelarActividad(Actividad a){
+        participaciones.removeIf(p -> p.getActividad().equals(a));
+        a.eliminarParticipante(this);
     }
 }
