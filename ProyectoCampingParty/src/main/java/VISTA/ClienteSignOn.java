@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  *
- * @author HP
+ * @author Carla
  */
 public class ClienteSignOn extends javax.swing.JFrame {
     

@@ -8,7 +8,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 /**
  *
- * @author HP
+ * @author Carla
  */
 public class ClienteModificarReservaVista extends javax.swing.JFrame {
     

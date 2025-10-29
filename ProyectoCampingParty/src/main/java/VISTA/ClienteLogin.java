@@ -8,7 +8,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 /**
  *
- * @author HP
+ * @author Carla
  */
 public class ClienteLogin extends javax.swing.JFrame {
     
