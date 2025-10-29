@@ -4,6 +4,7 @@
  */
 package VISTA;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 /**
@@ -18,6 +19,7 @@ public class ClienteLogLogin extends javax.swing.JFrame {
      * Creates new form CLienteLogLogin
      */
     public ClienteLogLogin() {
+        FlatLaf.registerCustomDefaultsSource("themes");
         FlatLightLaf.setup();
         initComponents();
     }

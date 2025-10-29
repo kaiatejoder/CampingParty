@@ -9,5 +9,7 @@ package CONTROLADOR;
  * @author HP
  */
 public class Controlador {
-    
+
+
+
 }
