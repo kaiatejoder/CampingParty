@@ -70,7 +70,7 @@ public class ActividadSeleccionada extends javax.swing.JDialog {
         jLabel5.setText("Hora");
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Asistente1", "Asistente2", "Asistente3", "Asistente4" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
