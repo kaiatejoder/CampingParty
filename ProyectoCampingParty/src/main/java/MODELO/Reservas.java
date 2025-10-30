@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class Reservas {
     private ArrayList<Reserva> reservas;
