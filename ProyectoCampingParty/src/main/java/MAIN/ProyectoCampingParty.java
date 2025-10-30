@@ -6,7 +6,7 @@ package MAIN;
 
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class ProyectoCampingParty {
 

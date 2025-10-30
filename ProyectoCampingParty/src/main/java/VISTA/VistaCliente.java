@@ -7,7 +7,7 @@ package VISTA;
 import com.formdev.flatlaf.FlatLightLaf;
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class VistaCliente extends javax.swing.JFrame {
     

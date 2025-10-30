@@ -6,7 +6,7 @@ package CONTROLADOR;
 
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class Controlador {
 

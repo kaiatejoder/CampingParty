@@ -8,15 +8,17 @@ package MODELO;
  *
  * @author Carla Terol
  */
-public class Tienda {
-    String nombre;
-    float m2;
-
-    public Tienda(String nombre, float m2){
+public class Acompanyante {
+    private String nombre;
+    private int edad;
+    public Acompanyante(String nombre, int edad){
         this.nombre = nombre;
-        this.m2 = m2;
+        this.edad = edad;
     }
-    public float getM2(){
-        return m2;
+    public String getNombre(){
+        return nombre;
+    }
+    public int getEdad(){
+        return edad;
     }
 }

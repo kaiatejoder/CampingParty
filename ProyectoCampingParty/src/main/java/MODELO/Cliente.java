@@ -7,22 +7,23 @@ package MODELO;
 import java.util.ArrayList;
 /**
  * Clase Cliente que representa un cliente del camping.
- * @author HP
+ * @author Carla Terol
  */
 public class Cliente {
     private String dni;
     private String nombre;
     private String telefono;
-    private boolean hayReserva;
+    private int edad;
     private String username;
     private String password;
     private ArrayList<Participacion> participaciones;
+    private ArrayList<Reserva> reservas;
+    private ArrayList<Acompanyante> acompanyantes;
     
     public Cliente(String nombre, String dni, String telefono, String username, String password){
         this.nombre = nombre;
         this.dni = dni;
         this.telefono = telefono;
-        this.hayReserva = false;
         this.username = username;
         this.password = password;
         this.participaciones = new ArrayList<>();
@@ -39,14 +40,14 @@ public class Cliente {
     public String getTelefono(){
         return telefono;
     }
-    public void tieneReserva(){
-        this.hayReserva = true;
+    public boolean tieneReserva(){
+        return !this.reservas.isEmpty();
     }
-    public void borrarReserva(){
-        this.hayReserva = false;
+    public void borrarReserva(int index){
+        this.reservas.remove(index);
     }
-    public boolean getHayReserva(){
-        return hayReserva;
+    public Reserva getReserva(){
+        return reservas.get(0);
     }
     public String getUsername(){
         return username;

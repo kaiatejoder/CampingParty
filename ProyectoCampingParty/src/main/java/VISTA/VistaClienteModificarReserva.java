@@ -6,7 +6,7 @@ package VISTA;
 import com.formdev.flatlaf.FlatLightLaf;
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class VistaClienteModificarReserva extends javax.swing.JFrame {
     

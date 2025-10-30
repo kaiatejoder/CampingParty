@@ -6,7 +6,7 @@ package VISTA;
 
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class VistaReservas extends javax.swing.JFrame {
     

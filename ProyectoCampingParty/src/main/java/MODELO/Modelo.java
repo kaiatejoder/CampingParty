@@ -4,11 +4,17 @@
  */
 package MODELO;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class Modelo {
     private int descuento;
+    private Parcelas parcelas;
+    private ArrayList<Cliente> clientes;
+    private ArrayList<Actividad> acts;
+    private ArrayList<Reserva> res;
     
 }

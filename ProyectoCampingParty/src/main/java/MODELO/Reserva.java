@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author HP
+ * @author Carla Terol
  */
 public class Reserva {
     private Date inicioReserva;
@@ -20,6 +20,7 @@ public class Reserva {
     private ArrayList<Tienda> tiendas;
     private ArrayList<String> acompanyantes;
     private float precioTotal;
+    private float precioDia;
 
     public Reserva(Date inicioReserva, Date finReserva, Cliente c){
         this.inicioReserva = inicioReserva;
@@ -37,4 +38,54 @@ public class Reserva {
         this.tiendas = t;
         this.acompanyantes = a;
     }
+    //Getters y Setters
+    public Date getInicioReserva() {
+        return inicioReserva;
+    }   
+    public void setInicioReserva(Date inicioReserva) {
+        this.inicioReserva = inicioReserva;
+    }
+    public Date getFinReserva() {
+        return finReserva;
+    }
+    public void setFinReserva(Date finReserva) {
+        this.finReserva = finReserva;
+    }
+    public Cliente getC() {
+        return c;
+    }
+    public void setInicioEstancia(Date inicioEstancia) {
+        this.inicioEstancia = inicioEstancia;
+    }
+    public Date getInicioEstancia() {
+        return inicioEstancia;
+    }
+    public void setFinEstancia(Date finEstancia) {
+        this.finEstancia = finEstancia;
+    }
+    public Date getFinEstancia() {
+        return finEstancia;
+    }
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+    public void setPrecioDia(){
+        float precioDia = 0;
+        for(int i =0; i <= parcelas.size(); i++){
+            Parcela p = parcelas.get(i);
+            precioDia += p.getPrecio();
+        }
+        this.precioDia = precioDia;
+    }
+    public void setPrecioTotal(int dias, int descuento) {
+        float p;
+        if(dias > 15){
+             p = dias * (descuento / 100.0f);
+        }
+        else
+            p = dias * precioDia;
+        
+        this.precioTotal = p;
+    }
+    
 }
