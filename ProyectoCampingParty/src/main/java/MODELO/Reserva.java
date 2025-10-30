@@ -6,8 +6,6 @@ package MODELO;
 import java.util.Date;
 import java.util.ArrayList;
 
-
-
 /**
  *
  * @author HP
