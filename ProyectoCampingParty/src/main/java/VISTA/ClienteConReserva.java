@@ -4,6 +4,8 @@
  */
 package VISTA;
 
+import CONTROLADOR.RiuRauLaf;
+
 /**
  *
  * @author PERSONAL
@@ -16,6 +18,7 @@ public class ClienteConReserva extends javax.swing.JFrame {
      * Creates new form ClienteConReserva
      */
     public ClienteConReserva() {
+        RiuRauLaf.setup();
         initComponents();
     }
 

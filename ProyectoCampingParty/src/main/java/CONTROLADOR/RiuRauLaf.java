@@ -13,6 +13,7 @@ import com.formdev.flatlaf.FlatLightLaf;
  */
 public class RiuRauLaf extends FlatLightLaf  {
     public static boolean setup() {
+        
         return setup( new RiuRauLaf() );
     }
 
