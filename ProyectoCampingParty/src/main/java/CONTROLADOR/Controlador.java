@@ -50,7 +50,7 @@ private VistaStaffActividad vsa;
 private VistaStaffEntrada vse;
 private Modelo m;
  public Controlador(Modelo m){
-     this.m = m;
+    this.m = new Modelo();
     
     tl = new TrabajadorLogin();
     cll = new ClienteLogLogin();
