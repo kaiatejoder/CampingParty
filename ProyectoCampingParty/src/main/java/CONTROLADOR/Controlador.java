@@ -49,13 +49,23 @@ private VistaReservas vr;
 private VistaStaffActividad vsa;
 private VistaStaffEntrada vse;
 private Modelo m;
-private Actividad a;
-private Cliente c;
-private Parcela p;
-private Participacion pa;
-private Reserva r;
-private Tienda t;
-
+ public Controlador(Modelo m){
+     this.m = m;
+    
+    tl = new TrabajadorLogin();
+    cll = new ClienteLogLogin();
+    cl = new ClienteLogin();
+    cso = new ClienteSignOn();
+    vc = new VistaCliente();
+    vcr = new VistaClienteReserva();
+    vcmr = new VistaClienteModificarReserva();
+    vr = new VistaReservas();
+    ts = new TrabajadorSesión();
+    vse = new VistaStaffEntrada();
+    vsa = new VistaStaffActividad();
+    ccr = new ClienteConReserva();
+    vl = new VistaLogin(tl,cl);
+ }
 
 
 }

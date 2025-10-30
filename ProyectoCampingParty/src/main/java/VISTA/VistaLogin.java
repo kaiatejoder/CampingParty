@@ -11,13 +11,18 @@ import com.formdev.flatlaf.FlatLightLaf;
  * @author Carla Terol
  */
 public class VistaLogin extends javax.swing.JFrame {
-    
+    private TrabajadorLogin tl;
+    private ClienteLogin cl;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaLogin.class.getName());
 
     /**
      * Creates new form VistaLogin
+     * @param tl La vista trabajador
+     * @param cl  La vista Cliente
      */
-    public VistaLogin() {
+    public VistaLogin(TrabajadorLogin tl, ClienteLogin cl) {
+        this.tl = tl;
+        this.cl = cl;
         FlatLightLaf.setup();
         initComponents();
     }
@@ -89,41 +94,21 @@ public class VistaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    this.setVisible(false); 
+    this.cl.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     this.setVisible(false); 
-        
-        // Crear y mostrar el nuevo frame
-         TrabajadorLogin t = new TrabajadorLogin();
-        t.setVisible(true);
+    this.setVisible(false); 
+    this.tl.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new VistaLogin().setVisible(true));
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
