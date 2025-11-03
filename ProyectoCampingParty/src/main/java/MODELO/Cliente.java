@@ -30,7 +30,13 @@ public class Cliente {
         this.tiendas = new ArrayList<>();
         this.reservas = new Reservas();
     }
-
+     public Cliente(String nombre, String dni, int edad){
+        this.nombre = nombre;
+        this.dni = dni;
+        this.edad = edad;
+        this.tiendas = new ArrayList<>();
+        this.reservas = new Reservas();
+    }
     public String getNombre(){
         return nombre;
     }
@@ -69,7 +75,16 @@ public class Cliente {
     public void addTienda(Tienda t){
         this.tiendas.add(t);
     }
-    
+    public void setPhone(String s){
+        this.telefono = s;
+    }
+    public void setUser(String s){
+        this.username = s;
+    }
+    public void setPassword(String s){
+        this.password = s;
+    }
+
     @Override
     public String toString(){
         return dni +";" + nombre + ";" + edad + ";" + telefono + ";" + username + ";" + password + "\n";

@@ -407,10 +407,11 @@ public class ClienteSignOn extends javax.swing.JFrame {
     private void Siguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Siguiente1ActionPerformed
       
         if(Integer.parseInt(Edad.getText()) >= 18) {
-            c = new Cliente();
-            c.setNombre(jTextField1.getText() + " " + jTextField2.getText());
-            c.setDni(jTextField3.getText());
-            c.setEdad(Integer.parseInt(Edad.getText()));
+            
+            String nombre = (jTextField1.getText() + " " + jTextField2.getText());
+            String dni=(jTextField3.getText());
+            int edad=(Integer.parseInt(Edad.getText()));
+            c = new Cliente(nombre,dni,edad);
         }
         else if (Integer.parseInt(Edad.getText()) < 18) {
             Error.setText("ERROR: Tienes que tener al menos 18 años");
