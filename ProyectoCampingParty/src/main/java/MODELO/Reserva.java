@@ -19,6 +19,7 @@ public class Reserva {
     private ArrayList<Parcela> parcelas;
     private ArrayList<Tienda> tiendas;
     private ArrayList<String> acompanyantes;
+    private ArrayList<Participacion> participaciones;
     private float precioTotal;
     private float precioDia;
 
@@ -70,12 +71,12 @@ public class Reserva {
         return precioTotal;
     }
     public void setPrecioDia(){
-        float precioDia = 0;
-        for(int i =0; i <= parcelas.size(); i++){
+        float precio = 0;
+        for (int i =0; i <= parcelas.size(); i++){
             Parcela p = parcelas.get(i);
-            precioDia += p.getPrecio();
+            precio += p.getPrecio();
         }
-        this.precioDia = precioDia;
+        this.precioDia = precio;
     }
     public void setPrecioTotal(int dias, int descuento) {
         float p;

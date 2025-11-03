@@ -16,17 +16,19 @@ public class Cliente {
     private int edad;
     private String username;
     private String password;
-    private ArrayList<Participacion> participaciones;
-    private ArrayList<Reserva> reservas;
-    private ArrayList<Acompanyante> acompanyantes;
+    private ArrayList<Tienda> tiendas;
+    private Reservas reservas;
+
     
-    public Cliente(String nombre, String dni, String telefono, String username, String password){
+    public Cliente(String nombre, String dni, int edad, String telefono, String username, String password){
         this.nombre = nombre;
         this.dni = dni;
         this.telefono = telefono;
         this.username = username;
         this.password = password;
-        this.participaciones = new ArrayList<>();
+        this.edad = edad;
+        this.tiendas = new ArrayList<>();
+        this.reservas = new Reservas();
     }
 
     public String getNombre(){
@@ -55,19 +57,21 @@ public class Cliente {
     public String getPassword(){
         return password;
     }
+    public int getEdad(){
+        return edad;
+    }
+    public Reservas getReservas(){
+        return reservas;
+    }
+    public ArrayList<Tienda> getTiendas(){
+        return tiendas;
+    }
+    public void addTienda(Tienda t){
+        this.tiendas.add(t);
+    }
     
-    public ArrayList<Participacion> getParticipaciones(){
-        return participaciones;
-    }
-
-    public void inscribirseEnActividad(Actividad a){
-        Participacion p = new Participacion(this, a);
-        participaciones.add(p);
-        a.agregarParticipante(this);
-    }
-
-    public void cancelarActividad(Actividad a){
-        participaciones.removeIf(p -> p.getActividad().equals(a));
-        a.eliminarParticipante(this);
+    @Override
+    public String toString(){
+        return dni +";" + nombre + ";" + edad + ";" + telefono + ";" + username + ";" + password + "\n";
     }
 }

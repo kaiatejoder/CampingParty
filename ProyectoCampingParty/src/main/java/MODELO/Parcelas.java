@@ -8,11 +8,14 @@ import MODELO.Parcela;
  *
  * @author Carla Terol
  */
-public class Parcelas {
+public class Parcelas{
     private Parcela[] parcelas;
     public Parcelas(){
         parcelas = new Parcela[16];
     }
+    public Parcelas(Parcela[] parcelas){
+        this.parcelas = parcelas;
+    }   
     public Parcela[] getParcelas(){
         return parcelas;
     }
@@ -30,6 +33,7 @@ public class Parcelas {
         }
         return libres;
     }
+
     public String[] getParcelaString(int index){
         String[] info = new String[4];
         Parcela p = parcelas[index];

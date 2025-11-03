@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Carla Terol
  */
-public class Reservas {
+public class Reservas extends ArrayList<Reserva> {
     private ArrayList<Reserva> reservas;
     public Reservas(){
         this.reservas = new ArrayList<>();
