@@ -75,4 +75,16 @@ public class Parcela {
     public void setPrecio(float precio){
         this.precio = precio;
     }
+    @Override
+    public String toString(){
+        String s;
+        if (this.isLibre())
+            s = "Sí";
+        else
+            s = "No";
+
+        return "Parcela " + id + "\n "
+         + m2 + "m2 \n Luz: " + luz 
+         + " - Precio: " + precio + "€ \n Libre: " + s ;
+    }   
 }

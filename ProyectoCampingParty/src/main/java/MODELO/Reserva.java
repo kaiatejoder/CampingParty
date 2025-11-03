@@ -6,7 +6,6 @@ package MODELO;
 import java.util.Date;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Carla Terol
@@ -19,11 +18,12 @@ public class Reserva {
     private Cliente c;
     private ArrayList<Parcela> parcelas;
     private ArrayList<Tienda> tiendas;
-    private ArrayList<Acompanyante> acompanyantes;
+    private ArrayList<String> acompanyantes;
+    private ArrayList<Participacion> participaciones;
     private float precioTotal;
     private float precioDia;
 
-    public Reserva(Date inicioReserva, Date finReserva, Cliente c, ArrayList<Acompanyante> a){
+    public Reserva(Date inicioReserva, Date finReserva, Cliente c){
         this.inicioReserva = inicioReserva;
         this.finReserva = finReserva;
         this.c = c;
@@ -31,7 +31,7 @@ public class Reserva {
         this.tiendas = new ArrayList<>();
         this.acompanyantes = new ArrayList<>();
     }
-    public Reserva(Date inicioReserva, Date finReserva, ArrayList<Parcela> p,  ArrayList<Tienda> t, ArrayList<Acompanyante> a,  Cliente c){
+    public Reserva(Date inicioReserva, Date finReserva, ArrayList<Parcela> p,  ArrayList<Tienda> t, ArrayList<String> a,  Cliente c){
         this.inicioReserva = inicioReserva;
         this.finReserva = finReserva;
         this.c = c;
@@ -71,12 +71,12 @@ public class Reserva {
         return precioTotal;
     }
     public void setPrecioDia(){
-        float precioDia = 0;
-        for(int i =0; i <= parcelas.size(); i++){
+        float precio = 0;
+        for (int i =0; i <= parcelas.size(); i++){
             Parcela p = parcelas.get(i);
-            precioDia += p.getPrecio();
+            precio += p.getPrecio();
         }
-        this.precioDia = precioDia;
+        this.precioDia = precio;
     }
     public void setPrecioTotal(int dias, int descuento) {
         float p;
@@ -87,9 +87,6 @@ public class Reserva {
             p = dias * precioDia;
         
         this.precioTotal = p;
-    }
-    public void acompanyante(Acompanyante a){
-        this.acompanyantes.add(a);
     }
     
 }
