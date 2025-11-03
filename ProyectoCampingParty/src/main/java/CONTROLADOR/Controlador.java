@@ -52,11 +52,11 @@ private Modelo m;
  public Controlador(Modelo m){
     this.m = new Modelo();
     
-    tl = new TrabajadorLogin();
+    /*tl = new TrabajadorLogin();
     cll = new ClienteLogLogin();
-    cl = new ClienteLogin();
-    cso = new ClienteSignOn();
-    vc = new VistaCliente();
+    cl = new ClienteLogin();*/
+    cso = new ClienteSignOn(m);
+    /*vc = new VistaCliente();
     vcr = new VistaClienteReserva();
     vcmr = new VistaClienteModificarReserva();
     vr = new VistaReservas();
@@ -64,7 +64,7 @@ private Modelo m;
     vse = new VistaStaffEntrada();
     vsa = new VistaStaffActividad();
     ccr = new ClienteConReserva();
-    vl = new VistaLogin(tl,cl);
+    vl = new VistaLogin(tl,cl);*/
  }
 
 

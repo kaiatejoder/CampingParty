@@ -4,8 +4,11 @@
  */
 package VISTA;
 
+
 import MODELO.Cliente;
 import MODELO.Modelo;
+import MODELO.Valid;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.IOException;
 
@@ -18,10 +21,12 @@ public class ClienteSignOn extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteSignOn.class.getName());
     private Modelo m;
     private Cliente c;
+    private boolean b;
     /**
      * Creates new form ClienteSignOn
      */
     public ClienteSignOn(Modelo m) {
+        FlatLaf.registerCustomDefaultsSource("com.ProyectoCampingParty.src.main.java.themes");
         this.m = m;
         FlatLightLaf.setup();
         initComponents();
@@ -46,28 +51,28 @@ public class ClienteSignOn extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        Edad = new javax.swing.JTextField();
         Siguiente1 = new javax.swing.JButton();
         Error = new javax.swing.JLabel();
+        Edad = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         tlf = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        Error2 = new javax.swing.JLabel();
         correo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         sig = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
+        atras = new javax.swing.JButton();
         verContra = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        Error3 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jButton4 = new javax.swing.JButton();
+        Registra = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -93,8 +98,6 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
         jLabel5.setText("Edad");
 
-        Edad.setText("Edad...");
-
         Siguiente1.setText("Siguiente");
         Siguiente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +108,8 @@ public class ClienteSignOn extends javax.swing.JFrame {
         Error.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Error.setForeground(new java.awt.Color(204, 0, 51));
 
+        Edad.setModel(new javax.swing.SpinnerNumberModel());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,8 +119,8 @@ public class ClienteSignOn extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,9 +177,8 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
         jLabel10.setText("Número de teléfono");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel12.setText("ERROR: Tienes que tener al menos 18 años");
+        Error2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Error2.setForeground(new java.awt.Color(204, 0, 51));
 
         correo.setText("hola@campingriurau.es");
 
@@ -194,10 +198,10 @@ public class ClienteSignOn extends javax.swing.JFrame {
         jPasswordField1.setEchoChar('*');
         jPasswordField1.setEnabled(false);
 
-        jButton2.setText("Atrás");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        atras.setText("Atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                atrasActionPerformed(evt);
             }
         });
 
@@ -224,11 +228,6 @@ public class ClienteSignOn extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(0, 51, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -244,10 +243,15 @@ public class ClienteSignOn extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Error2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 20, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jButton2)
+                .addComponent(atras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sig)
                 .addGap(45, 45, 45))
@@ -258,7 +262,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Error2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,8 +280,8 @@ public class ClienteSignOn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sig)
-                    .addComponent(jButton2))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(atras))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -302,9 +306,8 @@ public class ClienteSignOn extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 18)); // NOI18N
         jLabel13.setText("Confirmación");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel14.setText("ERROR: Tienes que tener al menos 18 años");
+        Error3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Error3.setForeground(new java.awt.Color(204, 0, 51));
 
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,10 +321,10 @@ public class ClienteSignOn extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Registrarme");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Registra.setText("Registrarme");
+        Registra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                RegistraActionPerformed(evt);
             }
         });
 
@@ -357,10 +360,10 @@ public class ClienteSignOn extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGap(15, 15, 15)
-                            .addComponent(jLabel14))
+                            .addComponent(Error3))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGap(109, 109, 109)
-                            .addComponent(jButton4))
+                            .addComponent(Registra))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jCheckBox1)
@@ -374,7 +377,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Error3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox2)
@@ -384,7 +387,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
                     .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addComponent(jButton4)
+                .addComponent(Registra)
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
@@ -405,42 +408,60 @@ public class ClienteSignOn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Siguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Siguiente1ActionPerformed
-      
-        if(Integer.parseInt(Edad.getText()) >= 18) {
-            
-            String nombre = (jTextField1.getText() + " " + jTextField2.getText());
-            String dni=(jTextField3.getText());
-            int edad=(Integer.parseInt(Edad.getText()));
-            c = new Cliente(nombre,dni,edad);
+      String nombre = (jTextField1.getText() + " " + jTextField2.getText());
+      String dni=(jTextField3.getText());
+      int e;
+        e = (Integer) Edad.getValue();
+        if( e >= 18 && Valid.dni(dni)) {
+            c = new Cliente(nombre,dni,e);
+            jTabbedPane1.setSelectedIndex(1);
         }
-        else if (Integer.parseInt(Edad.getText()) < 18) {
+        else if (e < 18) {
             Error.setText("ERROR: Tienes que tener al menos 18 años");
+        }
+        else if (!Valid.dni(dni)){
+            Error.setText("ERROR: Formato de DNI incorrecto");
         }
        
     }//GEN-LAST:event_Siguiente1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+    jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_atrasActionPerformed
 
     private void sigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigActionPerformed
       c.setPhone(tlf.getText());
-      c.setUser(correo.getText());
-      c.setPassword(jPasswordField1.getPassword());
+      if(Valid.correo(correo.getText()))
+          c.setUser(correo.getText());
+      else if(!Valid.correo(correo.getText())){
+            Error2.setText("ERROR: Formato de correo incorrecto");
+        }
+      if(Valid.password(jPasswordField1.getPassword())){
+        c.setPassword(jPasswordField1.getPassword().toString());
+        jTabbedPane1.setSelectedIndex(2);
+      }
+      else if (!Valid.password(jPasswordField1.getPassword()))
+          Error2.setText("ERROR: La contraseña debe incluir al menos una minúscula"
+                  + ", una mayúscula, un dígito y un carácter especial");
         
     }//GEN-LAST:event_sigActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
+        b = jCheckBox1.isSelected() && jCheckBox2.isSelected();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
+    b = jCheckBox1.isSelected() && jCheckBox2.isSelected();
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void RegistraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistraActionPerformed
+    if(b){
+        //AQUÍ TOCA CERRAR Y PIRARSE A CLIENTELOGIN.
+     Error3.setText("Cliente registrado correctamente");
+    }
+    else
+        Error3.setText("ERROR: debes de estar de acuerdo para registrarte");
+    }//GEN-LAST:event_RegistraActionPerformed
 
     private void PoliticaPrivacidad(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PoliticaPrivacidad
     String url="https://youtu.be/dQw4w9WgXcQ?si=AZ-OLL4JaMbtQKBc";
@@ -500,20 +521,20 @@ public class ClienteSignOn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Edad;
+    private javax.swing.JSpinner Edad;
     private javax.swing.JLabel Error;
+    private javax.swing.JLabel Error2;
+    private javax.swing.JLabel Error3;
+    private javax.swing.JButton Registra;
     private javax.swing.JButton Siguiente1;
+    private javax.swing.JButton atras;
     private javax.swing.JTextField correo;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
