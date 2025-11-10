@@ -193,10 +193,10 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
         jLabel16.setText("Contraseña");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("zzzzzzzzzzzzzzzzzzzzzzzz");
         jPasswordField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jPasswordField1.setEchoChar('*');
-        jPasswordField1.setEnabled(false);
+        jPasswordField1.setEnabled(true);
 
         atras.setText("Atrás");
         atras.addActionListener(new java.awt.event.ActionListener() {
