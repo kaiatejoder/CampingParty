@@ -4,6 +4,7 @@
  */
 package VISTA;
 
+import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLightLaf;
 
 /**
@@ -21,6 +22,10 @@ public class ClienteLogin extends javax.swing.JFrame {
         FlatLightLaf.setup();
         initComponents();
     }
+
+  
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +52,11 @@ public class ClienteLogin extends javax.swing.JFrame {
         jButton2.setText("Iniciar sesión");
 
         jButton3.setText("Registrarme");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,6 +93,11 @@ public class ClienteLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+     ClienteSignOn c;
+        c = new ClienteSignOn(new Modelo() );
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
