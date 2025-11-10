@@ -4,6 +4,8 @@
  */
 package VISTA;
 
+import MODELO.Cliente;
+import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -14,11 +16,15 @@ import com.formdev.flatlaf.FlatLightLaf;
 public class ClienteLogLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteLogLogin.class.getName());
-
+    private String usuario;
+    private String password;
+    private Modelo m;
     /**
      * Creates new form CLienteLogLogin
      */
     public ClienteLogLogin() {
+        m = new Modelo();
+        m.setDatos();
         FlatLaf.registerCustomDefaultsSource("themes");
         FlatLightLaf.setup();
         initComponents();
@@ -131,15 +137,24 @@ public class ClienteLogLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-    String usuario = jTextField1.getText().trim();
-    String contraseña = new String(jPasswordField1.getPassword());
-    if (usuario.isEmpty() || contraseña.isEmpty()) {
+    usuario = jTextField1.getText().trim();
+    password = new String(jPasswordField1.getPassword());
+    if (usuario.isEmpty() || password.isEmpty()) {
         return;
     }
-    this.dispose();
-    VistaCliente ventanaCliente = new VistaCliente();
-    ventanaCliente.setVisible(true);
-    ventanaCliente.setLocationRelativeTo(null);
+    else{
+        int  i = m.tryUserPass(usuario,password);
+      if( i > 0){
+          Cliente c = m.clientes.get(i);
+          VistaCliente ventanaCliente = new VistaCliente(c);
+          this.dispose();
+            ventanaCliente.setVisible(true);
+            ventanaCliente.setLocationRelativeTo(null);
+      }
+     
+        
+    }
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed

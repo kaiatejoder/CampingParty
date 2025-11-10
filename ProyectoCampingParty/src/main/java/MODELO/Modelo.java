@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class Modelo {
     private int descuento;
     private Parcelas parcelas;
-    private ArrayList<Cliente> clientes;
+    public ArrayList<Cliente> clientes;
     private ArrayList<Actividad> acts;
     private Reservas r;
 
@@ -34,7 +35,35 @@ public class Modelo {
     public boolean[]getParcelasLibres(){
     return this.parcelas.getLibres();
 }
-    
+    public void setDatos(){
+        Cliente c = new Cliente("Lupe López","11111111Y",22,"666666666","lupelopez@pornhub.com","Lupita");
+        clientes.add(c);
+        Date dateIn = new Date(30,11,2025);
+        Date dateOut = new Date(3,12,2025);
+        Reserva res = new Reserva(dateIn,dateOut,c);
+    }
+    public ArrayList<String> getUserPass(){
+        ArrayList<String> res = new ArrayList<>();
+        for(int i =0; i< clientes.size(); i++){
+            res.add(clientes.get(i).getUsername());
+            res.add(clientes.get(i).getPassword());
+        }
+        return res;
+    }
+    public int tryUserPass(String u, String p){
+        int b = 0;
+        boolean user = false;
+        boolean pass = false;
+        
+        for(int i =0; i< clientes.size(); i++){
+            while(0<=b){
+            user = u.equals(clientes.get(i).getUsername());
+            pass = p.equals(clientes.get(i).getPassword());
+            if(user &&pass){
+            b = i/2;}
+        }}
+        return b;
+    }
     public void write (String FileN,String s){
         try{
         File f = new File(FileN);

@@ -4,6 +4,7 @@
  */
 package VISTA;
 
+import MODELO.Cliente;
 import com.formdev.flatlaf.FlatLightLaf;
 /**
  *
@@ -16,7 +17,7 @@ public class VistaCliente extends javax.swing.JFrame {
     /**
      * Creates new form VistaCliente
      */
-    public VistaCliente() {
+    public VistaCliente(Cliente c) {
         FlatLightLaf.setup();
         initComponents();
     }
@@ -190,7 +191,7 @@ public class VistaCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaCliente().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VistaCliente(new Cliente()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -20,6 +20,9 @@ public class Reservas extends ArrayList<Reserva> {
     public ArrayList<Reserva> getReservas(){
         return reservas;
     }
+    public Reserva getReserva(int i){
+        return reservas.get(i);
+    }
     public void addReserva(Reserva r){
         reservas.add(r);
     }

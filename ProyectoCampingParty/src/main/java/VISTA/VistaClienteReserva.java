@@ -8,6 +8,7 @@ import MODELO.Modelo;
 import MODELO.Reserva;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.Date;
+import javax.swing.ButtonGroup;
 /**
  *
  * @author Carla Terol
@@ -26,8 +27,10 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     public VistaClienteReserva(Modelo m, Cliente c) {
         this.c = c;
         this.m = m;
+        
         FlatLightLaf.setup();
         initComponents();
+        ButtonGroup parcelas = new ButtonGroup();
     }
 
     /**
@@ -672,9 +675,8 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jDateReservaInPropertyChange
 
     private void jButtonSig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig1ActionPerformed
-        for(int i = 1; i <= 16; i++){
-            parcela1.setEnabled(this.m.getParcelasLibres());
-        }
+        boolean[] parcelas = this.m.getParcelasLibres();
+        
     }//GEN-LAST:event_jButtonSig1ActionPerformed
 
     /**
@@ -699,7 +701,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaClienteReserva().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VistaClienteReserva(new Modelo(), new Cliente()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
