@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VISTA;
+import MODELO.Cliente;
+import MODELO.Modelo;
+import MODELO.Reserva;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.Date;
 /**
@@ -12,11 +15,17 @@ import java.util.Date;
 public class VistaClienteReserva extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaClienteReserva.class.getName());
+    private Date fechaOut,fechaIn;
+    Reserva r;
+    Cliente c;
+    Modelo m;
 
     /**
      * Creates new form VistaClienteReserva
      */
-    public VistaClienteReserva() {
+    public VistaClienteReserva(Modelo m, Cliente c) {
+        this.c = c;
+        this.m = m;
         FlatLightLaf.setup();
         initComponents();
     }
@@ -36,7 +45,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jButtonSig1 = new javax.swing.JButton();
         jLabelFechas = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
@@ -102,7 +111,12 @@ public class VistaClienteReserva extends javax.swing.JFrame {
 
         jTabbedPane2.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        jButton2.setText("Siguiente");
+        jButtonSig1.setText("Siguiente");
+        jButtonSig1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSig1ActionPerformed(evt);
+            }
+        });
 
         jLabelFechas.setText("¡Se puede");
 
@@ -171,14 +185,14 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                 .addGap(208, 208, 208)
                 .addComponent(jButton3)
                 .addGap(64, 64, 64)
-                .addComponent(jButton2)
+                .addComponent(jButtonSig1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
@@ -195,7 +209,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                 .addComponent(jLabelFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonSig1)
                     .addComponent(jButton3))
                 .addContainerGap())
         );
@@ -641,12 +655,27 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_ButCancActionPerformed
 
     private void jDateReservaOutPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateReservaOutPropertyChange
-        // TODO add your handling code here:
+    fechaOut = jDateReservaOut.getDate();
+    if (fechaIn.before(fechaOut))
+    {
+        jLabelFechas.setText("¡Bien! Hay parcelas disponibles");
+        r = new Reserva(fechaIn,fechaOut, c);
+        
+    }
+    else{
+        jLabelFechas.setText("¡Error! las fechas no representan un rango");
+    }
     }//GEN-LAST:event_jDateReservaOutPropertyChange
 
     private void jDateReservaInPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateReservaInPropertyChange
-    Date fecha = jDateReservaIn.getDate();
+    fechaIn = jDateReservaIn.getDate();
     }//GEN-LAST:event_jDateReservaInPropertyChange
+
+    private void jButtonSig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig1ActionPerformed
+        for(int i = 1; i <= 16; i++){
+            parcela1.setEnabled(this.m.getParcelasLibres());
+        }
+    }//GEN-LAST:event_jButtonSig1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -680,12 +709,12 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     private javax.swing.JLabel fin;
     private javax.swing.JLabel fsal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonSig1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateReservaIn;
     private com.toedter.calendar.JDateChooser jDateReservaOut;

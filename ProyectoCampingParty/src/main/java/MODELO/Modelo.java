@@ -31,7 +31,9 @@ public class Modelo {
         this.acts = new ArrayList<>();
         this.r = new Reservas();
     }
-    
+    public boolean[]getParcelasLibres(){
+    return this.parcelas.getLibres();
+}
     
     public void write (String FileN,String s){
         try{
