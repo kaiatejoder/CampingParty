@@ -130,7 +130,16 @@ public class ClienteLogLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+    String usuario = jTextField1.getText().trim();
+    String contraseña = new String(jPasswordField1.getPassword());
+    if (usuario.isEmpty() || contraseña.isEmpty()) {
+        return;
+    }
+    this.dispose();
+    VistaCliente ventanaCliente = new VistaCliente();
+    ventanaCliente.setVisible(true);
+    ventanaCliente.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed

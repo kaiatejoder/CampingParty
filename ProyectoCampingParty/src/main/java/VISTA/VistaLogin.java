@@ -103,8 +103,6 @@ public class VistaLogin extends javax.swing.JFrame {
     this.tl.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
-     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new VistaLogin(new TrabajadorLogin(),new ClienteLogin()).setVisible(true));
     }
