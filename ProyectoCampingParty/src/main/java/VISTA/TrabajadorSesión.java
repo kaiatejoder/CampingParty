@@ -4,9 +4,12 @@
  */
 package VISTA;
 
+import javax.swing.JOptionPane;
+import MODELO.Staff;
+import MODELO.StaffRepo;
 /**
  *
- * @author igrub
+ * @author Abel Saiz
  */
 public class TrabajadorSesión extends javax.swing.JFrame {
 
@@ -124,11 +127,41 @@ public class TrabajadorSesión extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+          String usuario = jTextField1.getText();
+    String contrasena = new String(jPasswordField1.getPassword());
+
+    if (usuario.isBlank() || contrasena.isBlank()) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Por favor, complete ambos campos.",
+                "Campos vacíos", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    MODELO.Staff staff = MODELO.StaffRepo.autenticar(usuario, contrasena);
+
+    if (staff == null) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Usuario o contraseña incorrectos.",
+                "Error de autenticación", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    javax.swing.JOptionPane.showMessageDialog(this,
+            "Bienvenido/a, " + staff.getNombre() + "!",
+            "Inicio de sesión correcto", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+    // Abre la pantalla principal del staff
+    VISTA.StaffMain main = new VISTA.StaffMain(staff);
+    main.setLocationRelativeTo(this);
+    main.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+      VISTA.TrabajadorLogin login = new VISTA.TrabajadorLogin();
+      login.setLocationRelativeTo(this);
+      login.setVisible(true);
+      this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

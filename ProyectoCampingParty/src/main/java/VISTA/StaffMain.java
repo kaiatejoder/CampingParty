@@ -4,19 +4,56 @@
  */
 package VISTA;
 
+import MODELO.Staff;
+
 /**
  *
- * @author PERSONAL
+ * @author Abel Saiz
  */
 public class StaffMain extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffMain.class.getName());
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(StaffMain.class.getName());
 
-    /**
-     * Creates new form SaffMain
-     */
-    public StaffMain() {
+    private final MODELO.Staff staff; // importa la clase MODELO.Staff arriba
+
+    /** Constructor que recibe el staff autenticado */
+    public StaffMain(MODELO.Staff staff) {
+        this.staff = staff;
         initComponents();
+        setLocationRelativeTo(null);
+        if (staff != null) {
+            // Personaliza el saludo
+            jLabel1.setText("¡Hola, " + staff.getNombre() + "!");
+            setTitle("Panel Staff - " + staff.getNombre());
+        } else {
+            setTitle("Panel Staff");
+        }
+        jButton1.addActionListener(e -> {
+        // Registrar Entrada
+        VistaStaffEntrada v = new VistaStaffEntrada();
+        v.setLocationRelativeTo(this);
+        v.setVisible(true);
+    });
+
+    jButton2.addActionListener(e -> {
+        // Administrar Reservas
+        VistaStaffActividad v = new VistaStaffActividad();
+        v.setLocationRelativeTo(this);
+        v.setVisible(true);
+    });
+
+    jButton3.addActionListener(e -> {
+        // Cambiar descuento (placeholder)
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Funcionalidad en construcción.",
+            "Cambiar descuento", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    });  
+    }
+
+    /** Constructor vacío para el GUI Builder (no lo borres) */
+    public StaffMain() {
+        this(null);
     }
 
     /**
