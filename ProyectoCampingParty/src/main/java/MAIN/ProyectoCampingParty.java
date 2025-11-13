@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package MAIN;
 import VISTA.ClienteLogin;
 import VISTA.TrabajadorLogin;
