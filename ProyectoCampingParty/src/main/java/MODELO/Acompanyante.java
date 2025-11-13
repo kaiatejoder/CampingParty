@@ -8,16 +8,13 @@ package MODELO;
  *
  * @author Carla Terol
  */
-public class Acompanyante {
-    private String nombre;
+public class Acompanyante extends Persona {
     private int edad;
     public Acompanyante(String nombre, int edad){
         this.nombre = nombre;
         this.edad = edad;
     }
-    public String getNombre(){
-        return nombre;
-    }
+    
     public int getEdad(){
         return edad;
     }

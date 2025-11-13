@@ -40,7 +40,7 @@ public class Valid {
     public static boolean password(char[] c){
         String s = c.toString();
         if(s.contains("[A-Z]+") && s.contains("[a-z]+") && s.contains("\\d")
-                && s.contains("[.-,=!_*/?¿]+") )
+                && s.contains("[.-,=!_*/?¿]+") && s.length()>=8)
             return true;
         else
             return false;

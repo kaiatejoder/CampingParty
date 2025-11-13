@@ -9,23 +9,20 @@ import java.util.ArrayList;
  * Clase Cliente que representa un cliente del camping.
  * @author Carla Terol
  */
-public class Cliente {
-    private String dni;
-    private String nombre;
-    private String telefono;
+public class Cliente extends Persona {
+    
     private int edad;
-    private String username;
-    private String password;
+    
     private ArrayList<Tienda> tiendas;
     private Reservas reservas;
 
     
-    public Cliente(String nombre, String dni, int edad, String telefono, String username, String password){
+    public Cliente(String nombre, String dni, int edad, int telefono, String username, String password){
         this.nombre = nombre;
         this.dni = dni;
-        this.telefono = telefono;
-        this.username = username;
-        this.password = password;
+        this.tlf = telefono;
+        this.user = username;
+        this.pass = password;
         this.edad = edad;
         this.tiendas = new ArrayList<>();
         this.reservas = new Reservas();
@@ -41,16 +38,21 @@ public class Cliente {
     public Cliente() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public String getNombre(){
-        return nombre;
-    }
+    
 
-    public String getDni(){
-        return dni;
+   public void setUser(String u){
+        this.user = u;
     }
-
-    public String getTelefono(){
-        return telefono;
+    public void setPass(String p){
+        this.pass = p;
+    }
+    public void setTlf(int t){
+         this.tlf = t;
+    }
+    public void setPassword(String p){
+        this.pass = p; }
+     public void addReserva(Reserva r){
+        this.reservas.addReserva(r);
     }
     public boolean tieneReserva(){
         return !this.reservas.isEmpty();
@@ -60,12 +62,6 @@ public class Cliente {
     }
     public Reserva getReserva(){
         return reservas.get(0);
-    }
-    public String getUsername(){
-        return username;
-    }
-    public String getPassword(){
-        return password;
     }
     public int getEdad(){
         return edad;
@@ -79,18 +75,13 @@ public class Cliente {
     public void addTienda(Tienda t){
         this.tiendas.add(t);
     }
-    public void setPhone(String s){
-        this.telefono = s;
+    public void setPhone(int s){
+        this.tlf = s;
     }
-    public void setUser(String s){
-        this.username = s;
-    }
-    public void setPassword(String s){
-        this.password = s;
-    }
+    
 
     @Override
     public String toString(){
-        return dni +";" + nombre + ";" + edad + ";" + telefono + ";" + username + ";" + password + "\n";
+        return dni +";" + nombre + ";" + edad + ";" + tlf + ";" + user + ";" + pass + "\n";
     }
 }

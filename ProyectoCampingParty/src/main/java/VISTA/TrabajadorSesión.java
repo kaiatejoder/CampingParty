@@ -6,7 +6,7 @@ package VISTA;
 
 import javax.swing.JOptionPane;
 import MODELO.Staff;
-import MODELO.StaffRepo;
+
 /**
  *
  * @author Abel Saiz
@@ -137,7 +137,7 @@ public class TrabajadorSesión extends javax.swing.JFrame {
         return;
     }
 
-    MODELO.Staff staff = MODELO.StaffRepo.autenticar(usuario, contrasena);
+    MODELO.Staff staff = Staff.autenticar(usuario, contrasena);
 
     if (staff == null) {
         javax.swing.JOptionPane.showMessageDialog(this,

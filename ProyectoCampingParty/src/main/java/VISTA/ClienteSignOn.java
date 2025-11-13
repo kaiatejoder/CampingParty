@@ -430,14 +430,14 @@ public class ClienteSignOn extends javax.swing.JFrame {
     }//GEN-LAST:event_atrasActionPerformed
 
     private void sigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigActionPerformed
-      c.setPhone(tlf.getText());
+      c.setTlf(Integer.parseInt(tlf.getText()));
       if(Valid.correo(correo.getText()))
           c.setUser(correo.getText());
       else if(!Valid.correo(correo.getText())){
             Error2.setText("ERROR: Formato de correo incorrecto");
         }
       if(Valid.password(jPasswordField1.getPassword())){
-        c.setPassword(jPasswordField1.getPassword().toString());
+        c.setPass(jPasswordField1.getPassword().toString());
         jTabbedPane1.setSelectedIndex(2);
       }
       else if (!Valid.password(jPasswordField1.getPassword()))

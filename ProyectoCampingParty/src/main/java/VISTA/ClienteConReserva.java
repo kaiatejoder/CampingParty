@@ -4,11 +4,11 @@
  */
 package VISTA;
 
-import CONTROLADOR.RiuRauLaf;
+import themes.RiuRauLaf;
 
 /**
  *
- * @author PERSONAL
+ * @author Carla Terol
  */
 public class ClienteConReserva extends javax.swing.JFrame {
     
