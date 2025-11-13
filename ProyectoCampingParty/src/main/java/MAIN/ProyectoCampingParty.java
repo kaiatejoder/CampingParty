@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package MAIN;
-import MODELO.Modelo;
+import VISTA.ClienteLogin;
+import VISTA.TrabajadorLogin;
+import VISTA.VistaLogin;
 
 /**
  *
@@ -12,6 +10,11 @@ import MODELO.Modelo;
 public class ProyectoCampingParty {
 
     public static void main(String[] args) {
-        Modelo m = new Modelo();
+        TrabajadorLogin tl = new TrabajadorLogin();
+        ClienteLogin cl = new ClienteLogin();
+        VistaLogin vl = new VistaLogin(tl,cl);
+        
+        vl.setVisible(true);
+        vl.setTitle("Camping Riurau");
     }
 }
