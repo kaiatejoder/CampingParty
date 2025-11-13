@@ -11,6 +11,6 @@ package MAIN;
 public class ProyectoCampingParty {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
     }
 }
