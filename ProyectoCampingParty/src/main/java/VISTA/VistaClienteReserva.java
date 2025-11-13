@@ -31,6 +31,21 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         FlatLightLaf.setup();
         initComponents();
         ButtonGroup parcelas = new ButtonGroup();
+        parcelas.add(parcela1);
+        parcelas.add(parcela2);
+        parcelas.add(parcela3);
+        parcelas.add(parcela4);
+        parcelas.add(parcela5);
+        parcelas.add(parcela6);
+        parcelas.add(parcela7);
+        parcelas.add(parcela8);
+        parcelas.add(parcela9);
+        parcelas.add(parcela10);
+        parcelas.add(parcela11);
+        parcelas.add(parcela12);
+        parcelas.add(parcela13);
+        parcelas.add(parcela14);
+        parcelas.add(parcela15);
     }
 
     /**

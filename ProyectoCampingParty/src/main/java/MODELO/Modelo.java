@@ -36,7 +36,7 @@ public class Modelo {
     return this.parcelas.getLibres();
 }
     public void setDatos(){
-        Cliente c = new Cliente("Lupe López","11111111Y",22,"666666666","lupelopez@pornhub.com","Lupita");
+        Cliente c = new Cliente("Lupe López","11111111Y",22,666666666,"lupelopez@pornhub.com","Lupita");
         clientes.add(c);
         Date dateIn = new Date(30,11,2025);
         Date dateOut = new Date(3,12,2025);
@@ -45,8 +45,8 @@ public class Modelo {
     public ArrayList<String> getUserPass(){
         ArrayList<String> res = new ArrayList<>();
         for(int i =0; i< clientes.size(); i++){
-            res.add(clientes.get(i).getUsername());
-            res.add(clientes.get(i).getPassword());
+            res.add(clientes.get(i).getUser());
+            res.add(clientes.get(i).getPass());
         }
         return res;
     }
@@ -57,8 +57,8 @@ public class Modelo {
         
         for(int i =0; i< clientes.size(); i++){
             while(0<=b){
-            user = u.equals(clientes.get(i).getUsername());
-            pass = p.equals(clientes.get(i).getPassword());
+            user = u.equals(clientes.get(i).getUser());
+            pass = p.equals(clientes.get(i).getPass());
             if(user &&pass){
             b = i/2;}
         }}
