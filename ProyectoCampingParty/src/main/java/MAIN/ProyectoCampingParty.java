@@ -3,6 +3,7 @@
  */
 
 package MAIN;
+import MODELO.Modelo;
 
 /**
  *
@@ -11,6 +12,6 @@ package MAIN;
 public class ProyectoCampingParty {
 
     public static void main(String[] args) {
-        
+        Modelo m = new Modelo();
     }
 }
