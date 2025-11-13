@@ -88,5 +88,9 @@ public class Reserva {
         
         this.precioTotal = p;
     }
+    public String getFechas(){
+        return inicioReserva + " - " + finReserva;
+    }
+   
     
 }
