@@ -115,9 +115,9 @@ public class ClienteLogin extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     // Ir a VistaCliente (directamente sin login)
     this.dispose(); // Cerrar esta ventana
-    VistaCliente ventanaCliente = new VistaCliente(c);
-    ventanaCliente.setVisible(true);
-    ventanaCliente.setLocationRelativeTo(null);
+    ClienteLogLogin clientelog = new ClienteLogLogin();
+    clientelog.setVisible(true);
+    clientelog.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

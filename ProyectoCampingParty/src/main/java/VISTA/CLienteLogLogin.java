@@ -166,7 +166,7 @@ public class ClienteLogLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseReleased
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
