@@ -11,4 +11,5 @@ package VISTA;
  */
 public class Vista {
     
+    
 }

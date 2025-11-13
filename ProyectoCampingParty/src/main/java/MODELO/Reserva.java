@@ -18,7 +18,7 @@ public class Reserva {
     private Cliente c;
     private ArrayList<Parcela> parcelas;
     private ArrayList<Tienda> tiendas;
-    private ArrayList<String> acompanyantes;
+    private ArrayList<Acompanyante> acompanyantes;
     private ArrayList<Participacion> participaciones;
     private float precioTotal;
     private float precioDia;
@@ -31,7 +31,7 @@ public class Reserva {
         this.tiendas = new ArrayList<>();
         this.acompanyantes = new ArrayList<>();
     }
-    public Reserva(Date inicioReserva, Date finReserva, ArrayList<Parcela> p,  ArrayList<Tienda> t, ArrayList<String> a,  Cliente c){
+    public Reserva(Date inicioReserva, Date finReserva, ArrayList<Parcela> p,  ArrayList<Tienda> t, ArrayList<Acompanyante> a,  Cliente c){
         this.inicioReserva = inicioReserva;
         this.finReserva = finReserva;
         this.c = c;
@@ -91,6 +91,34 @@ public class Reserva {
     public String getFechas(){
         return inicioReserva + " - " + finReserva;
     }
-   
+    public ArrayList<Parcela> getParcelas() {
+        return parcelas;
+    }
+    public Parcela getParcela(int i) {
+        return parcelas.get(i);
+    }
+    public void addTienda(Tienda t){
+        tiendas.add(t);
+    }
+    public void setParcelas(ArrayList<Parcela> parcelas) {
+        this.parcelas = parcelas;
+    }
+    public ArrayList<Tienda> getTiendas() {
+        return tiendas;
+    }
+    public void setTiendas(ArrayList<Tienda> tiendas) {
+        this.tiendas = tiendas;
+    }
+    
+    public void addAcompanyante(String n, String a, int d){
+        String nom = n +" "+ a;
+        this.acompanyantes.add(new Acompanyante(nom, d));
+    }
+    public void addAcompanyante(Acompanyante a){
+        this.acompanyantes.add(a);
+    }
+   public ArrayList<Acompanyante> getAcompanyantes(){
+       return this.acompanyantes;
+   }
     
 }

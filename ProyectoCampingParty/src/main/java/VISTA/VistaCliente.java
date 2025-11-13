@@ -20,6 +20,8 @@ public class VistaCliente extends javax.swing.JFrame {
     public VistaCliente(Cliente c) {
         FlatLightLaf.setup();
         initComponents();
+        c.getReserva();
+        String Fechas = c.getReserva().getFechas();
     }
 
     /**

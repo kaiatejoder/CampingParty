@@ -115,7 +115,7 @@ public class ClienteLogin extends javax.swing.JFrame {
     // Ir a VistaCliente (directamente sin login)
     this.dispose(); // Cerrar esta ventana
     
-    VistaCliente ventanaCliente = new VistaCliente();
+    
     ventanaCliente.setVisible(true);
     ventanaCliente.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed

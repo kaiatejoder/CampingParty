@@ -6,9 +6,18 @@ package VISTA;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import MODELO.Reserva;
+import MODELO.tablaClientesModel;
+
 import com.formdev.flatlaf.FlatLightLaf;
+
 import java.util.Date;
+
 import javax.swing.ButtonGroup;
+
+import MODELO.Acompanyante;
+import MODELO.Tienda;
+import MODELO.tablaClientesModel;
+import java.util.ArrayList;
 /**
  *
  * @author Carla Terol
@@ -20,32 +29,23 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     Reserva r;
     Cliente c;
     Modelo m;
+    private boolean[] parcelasSelect;
+    tablaClientesModel tc;
 
     /**
      * Creates new form VistaClienteReserva
      */
     public VistaClienteReserva(Modelo m, Cliente c) {
+        
         this.c = c;
         this.m = m;
-        
+        ArrayList<Acompanyante> acom = new ArrayList();
+        tc = new tablaClientesModel(acom);
+        for(int i =0; i < 16; i++){
+        parcelasSelect[i]= false;}
         FlatLightLaf.setup();
         initComponents();
-        ButtonGroup parcelas = new ButtonGroup();
-        parcelas.add(parcela1);
-        parcelas.add(parcela2);
-        parcelas.add(parcela3);
-        parcelas.add(parcela4);
-        parcelas.add(parcela5);
-        parcelas.add(parcela6);
-        parcelas.add(parcela7);
-        parcelas.add(parcela8);
-        parcelas.add(parcela9);
-        parcelas.add(parcela10);
-        parcelas.add(parcela11);
-        parcelas.add(parcela12);
-        parcelas.add(parcela13);
-        parcelas.add(parcela14);
-        parcelas.add(parcela15);
+        
     }
 
     /**
@@ -75,13 +75,13 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         parcela1 = new javax.swing.JToggleButton();
+        parcela2 = new javax.swing.JToggleButton();
+        parcela3 = new javax.swing.JToggleButton();
+        parcela4 = new javax.swing.JToggleButton();
         parcela5 = new javax.swing.JToggleButton();
         parcela6 = new javax.swing.JToggleButton();
-        parcela2 = new javax.swing.JToggleButton();
         parcela7 = new javax.swing.JToggleButton();
-        parcela3 = new javax.swing.JToggleButton();
         parcela8 = new javax.swing.JToggleButton();
-        parcela4 = new javax.swing.JToggleButton();
         parcela9 = new javax.swing.JToggleButton();
         parcela10 = new javax.swing.JToggleButton();
         parcela11 = new javax.swing.JToggleButton();
@@ -90,30 +90,33 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         parcela14 = new javax.swing.JToggleButton();
         parcela15 = new javax.swing.JToggleButton();
         parcela16 = new javax.swing.JToggleButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jLabelValidParcelas = new javax.swing.JLabel();
+        tiendaNombre = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonSig2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        tiendam2 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        back1 = new javax.swing.JButton();
+        addTienda = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaClientes = new javax.swing.JTable();
+        tablaClientes = new javax.swing.JTable(tc);
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        apellidos = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        edad = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        addPart = new javax.swing.JButton();
+        butBack = new javax.swing.JButton();
+        butSig2 = new javax.swing.JButton();
         Confirmar = new javax.swing.JPanel();
         ButCanc = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jButtonConf = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -244,20 +247,53 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         });
         jPanel3.add(parcela1);
 
+        parcela2.setBackground(new java.awt.Color(102, 229, 146));
+        parcela2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(parcela2);
+
+        parcela3.setBackground(new java.awt.Color(102, 229, 146));
+        parcela3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(parcela3);
+
+        parcela4.setBackground(new java.awt.Color(102, 229, 146));
+        parcela4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela4ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(parcela4);
+
         parcela5.setBackground(new java.awt.Color(102, 229, 146));
+        parcela5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela5ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela5);
 
         parcela6.setBackground(new java.awt.Color(102, 229, 146));
+        parcela6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela6ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela6);
 
-        parcela2.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela2);
-
         parcela7.setBackground(new java.awt.Color(102, 229, 146));
+        parcela7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela7ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela7);
-
-        parcela3.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela3);
 
         parcela8.setBackground(new java.awt.Color(102, 229, 146));
         parcela8.addActionListener(new java.awt.event.ActionListener() {
@@ -267,13 +303,20 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         });
         jPanel3.add(parcela8);
 
-        parcela4.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela4);
-
         parcela9.setBackground(new java.awt.Color(102, 229, 146));
+        parcela9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela9ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela9);
 
         parcela10.setBackground(new java.awt.Color(102, 229, 146));
+        parcela10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela10ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela10);
 
         parcela11.setBackground(new java.awt.Color(102, 229, 146));
@@ -285,59 +328,91 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         jPanel3.add(parcela11);
 
         parcela12.setBackground(new java.awt.Color(102, 229, 146));
+        parcela12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela12ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela12);
 
         parcela13.setBackground(new java.awt.Color(102, 229, 146));
+        parcela13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela13ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela13);
 
         parcela14.setBackground(new java.awt.Color(102, 229, 146));
+        parcela14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela14ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela14);
 
         parcela15.setBackground(new java.awt.Color(102, 229, 146));
+        parcela15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela15ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela15);
 
         parcela16.setBackground(new java.awt.Color(102, 229, 146));
+        parcela16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parcela16ActionPerformed(evt);
+            }
+        });
         jPanel3.add(parcela16);
 
-        jLabel5.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
-        jLabel5.setText("Selecciona las parcelas que quieras reservar");
+        jLabelValidParcelas.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
 
-        jTextField4.setText("Nombre...");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        tiendaNombre.setText("Nombre...");
+        tiendaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                tiendaNombreActionPerformed(evt);
             }
         });
 
         jLabel11.setText("Nombre de la tienda");
 
-        jButton4.setText("Siguiente");
+        jButtonSig2.setText("Siguiente");
+        jButtonSig2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSig2ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("m2");
 
-        jTextField5.setText("Metros cuadrados...");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        tiendam2.setText("Metros cuadrados...");
+        tiendam2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                tiendam2ActionPerformed(evt);
             }
         });
 
         jLabel13.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
         jLabel13.setText("¿Quieres agregar una tienda de campaña?");
 
-        jButton5.setText("Atrás");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        back1.setText("Atrás");
+        back1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                back1ActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Agregar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addTienda.setText("Agregar");
+        addTienda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addTiendaActionPerformed(evt);
             }
         });
+
+        jLabel20.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
+        jLabel20.setText("Selecciona las parcelas que quieras reservar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -345,50 +420,54 @@ public class VistaClienteReserva extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6)
+                            .addComponent(addTienda)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tiendaNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(30, 30, 30)))
+                                    .addComponent(tiendam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelValidParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(back1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jButtonSig2)
                 .addGap(58, 58, 58))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(29, 29, 29)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(329, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5))
+                            .addComponent(jButtonSig2)
+                            .addComponent(back1))
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelValidParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -396,67 +475,68 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tiendaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tiendam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)
+                        .addComponent(addTienda)
                         .addGap(31, 31, 31))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(226, Short.MAX_VALUE)))
         );
 
         jTabbedPane2.addTab("Parcelas", jPanel1);
 
-        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre", "Apellidos", "Edad"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
         jScrollPane1.setViewportView(tablaClientes);
 
         jLabel6.setText("Quién viene?");
 
-        jTextField1.setText("Nombre...");
+        nombre.setText("Nombre...");
 
         jLabel7.setText("Nombre");
 
         jLabel8.setText("Apellidos");
 
-        jTextField2.setText("Apellidos...");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        apellidos.setText("Apellidos...");
+        apellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                apellidosActionPerformed(evt);
             }
         });
 
         jLabel9.setText("Edad");
 
-        jTextField3.setText("18");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        edad.setText("18");
+        edad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                edadActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
         jLabel10.setText("Agregar participantes");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addPart.setText("Agregar");
+        addPart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addPartActionPerformed(evt);
+            }
+        });
+
+        butBack.setText("Volver atrás");
+        butBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butBackActionPerformed(evt);
+            }
+        });
+
+        butSig2.setText("Siguiente");
+        butSig2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butSig2ActionPerformed(evt);
             }
         });
 
@@ -468,9 +548,9 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,9 +567,9 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 37, 37)
-                                .addComponent(jButton1)))
+                                .addComponent(addPart)))
                         .addGap(65, 65, 65)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -499,6 +579,12 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69))))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(butBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(butSig2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,15 +603,19 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                            .addComponent(apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addPart))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butBack)
+                    .addComponent(butSig2))
+                .addGap(18, 18, 18))
         );
 
         jTabbedPane2.addTab("Miembros", jPanel4);
@@ -537,7 +627,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setText("Sí, así perfecto");
+        jButtonConf.setText("Sí, así perfecto");
 
         jLabel14.setText("¿Estás seguro?");
 
@@ -555,26 +645,29 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         ConfirmarLayout.setHorizontalGroup(
             ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConfirmarLayout.createSequentialGroup()
-                .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(ConfirmarLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ConfirmarLayout.createSequentialGroup()
-                        .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ConfirmarLayout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ConfirmarLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
-                        .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ButCanc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonConf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConfirmarLayout.createSequentialGroup()
+                .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ConfirmarLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ConfirmarLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ConfirmarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74))
+                    .addGroup(ConfirmarLayout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(ButCanc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         ConfirmarLayout.setVerticalGroup(
             ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,8 +677,8 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                     .addGroup(ConfirmarLayout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton8)
-                        .addGap(26, 26, 26)
+                        .addComponent(jButtonConf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ButCanc))
                     .addGroup(ConfirmarLayout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -595,7 +688,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Confirmación", Confirmar);
@@ -625,48 +718,64 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void parcela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela1ActionPerformed
-        // TODO add your handling code here:
+        parcelasSelect[0]= parcela1.isSelected();
     }//GEN-LAST:event_parcela1ActionPerformed
 
     private void parcela11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela11ActionPerformed
-        // TODO add your handling code here:
+        parcelasSelect[10] = parcela11.isSelected();
     }//GEN-LAST:event_parcela11ActionPerformed
 
     private void parcela8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela8ActionPerformed
-        // TODO add your handling code here:
+        parcelasSelect[7]= parcela8.isSelected();
     }//GEN-LAST:event_parcela8ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_apellidosActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void edadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_edadActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartActionPerformed
+       String nom = nombre.getText() + " " + apellidos.getText();
+        Acompanyante a = new Acompanyante(nom, Integer.parseInt(edad.getText()));
+        r.addAcompanyante(a);
+       tablaClientes.anyade(a);
+    }//GEN-LAST:event_addPartActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void tiendaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiendaNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_tiendaNombreActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void tiendam2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiendam2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_tiendam2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back1ActionPerformed
+        jTabbedPane2.setSelectedIndex(0);
+    }//GEN-LAST:event_back1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void addTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTiendaActionPerformed
+        Tienda t = new Tienda(tiendaNombre.getText(), Integer.parseInt(tiendam2.getText()));
+        boolean v = false;
+        for (int i =0;i<16;i++){
+            if(t.getM2()< r.getParcela(i).getM2())
+            {
+                r.addTienda(t);
+                v = true;
+                jLabelValidParcelas.setText("Parcela correctamente anyadida");
+            }
+                    }
+        if(!v)
+        {
+            jLabelValidParcelas.setText("ERROR: La tienda es demasiado grande");
+        }
+    }//GEN-LAST:event_addTiendaActionPerformed
 
     private void ButCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCancActionPerformed
         // TODO add your handling code here:
@@ -691,8 +800,115 @@ public class VistaClienteReserva extends javax.swing.JFrame {
 
     private void jButtonSig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig1ActionPerformed
         boolean[] parcelas = this.m.getParcelasLibres();
+        for(int i = 0; i < parcelas.length; i++){
+            if(parcelas[i]){
+                switch(i){
+                    case 0 -> parcela1.setEnabled(true);
+                    case 1 -> parcela2.setEnabled(true);
+                    case 2 -> parcela3.setEnabled(true);
+                    case 3 -> parcela4.setEnabled(true);
+                    case 4 -> parcela5.setEnabled(true);
+                    case 5 -> parcela6.setEnabled(true);
+                    case 6 -> parcela7.setEnabled(true);
+                    case 7 -> parcela8.setEnabled(true);
+                    case 8 -> parcela9.setEnabled(true);
+                    case 9 -> parcela10.setEnabled(true);
+                    case 10 -> parcela11.setEnabled(true);
+                    case 11 -> parcela12.setEnabled(true);
+                    case 12 -> parcela13.setEnabled(true);
+                    case 13 -> parcela14.setEnabled(true);
+                    case 14 -> parcela15.setEnabled(true);
+                    case 15 -> parcela16.setEnabled(true);
+                }
+            } else {
+                switch(i){
+                    case 0 -> parcela1.setEnabled(false);
+                    case 1 -> parcela2.setEnabled(false);
+                    case 2 -> parcela3.setEnabled(false);
+                    case 3 -> parcela4.setEnabled(false);
+                    case 4 -> parcela5.setEnabled(false);
+                    case 5 -> parcela6.setEnabled(false);
+                    case 6 -> parcela7.setEnabled(false);
+                    case 7 -> parcela8.setEnabled(false);
+                    case 8 -> parcela9.setEnabled(false);
+                    case 9 -> parcela10.setEnabled(false);
+                    case 10 -> parcela11.setEnabled(false);
+                    case 11 -> parcela12.setEnabled(false);
+                    case 12 -> parcela13.setEnabled(false);
+                    case 13 -> parcela14.setEnabled(false);
+                    case 14 -> parcela15.setEnabled(false);
+                    case 15 -> parcela16.setEnabled(false);
+                }
+            }
+        }
+        jTabbedPane2.setSelectedIndex(1);
         
     }//GEN-LAST:event_jButtonSig1ActionPerformed
+
+    private void parcela2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela2ActionPerformed
+        parcelasSelect[1]= parcela2.isSelected();
+    }//GEN-LAST:event_parcela2ActionPerformed
+
+    private void parcela3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela3ActionPerformed
+        parcelasSelect[2]= parcela3.isSelected();
+    }//GEN-LAST:event_parcela3ActionPerformed
+
+    private void parcela4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela4ActionPerformed
+       parcelasSelect[3]= parcela4.isSelected();
+    }//GEN-LAST:event_parcela4ActionPerformed
+
+    private void parcela6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela6ActionPerformed
+        parcelasSelect[5]= parcela6.isSelected();
+    }//GEN-LAST:event_parcela6ActionPerformed
+
+    private void parcela5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela5ActionPerformed
+     parcelasSelect[4]= parcela5.isSelected();
+    }//GEN-LAST:event_parcela5ActionPerformed
+
+    private void parcela7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela7ActionPerformed
+       parcelasSelect[6]= parcela7.isSelected();
+    }//GEN-LAST:event_parcela7ActionPerformed
+
+    private void parcela9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela9ActionPerformed
+     parcelasSelect[8]= parcela9.isSelected();
+    }//GEN-LAST:event_parcela9ActionPerformed
+
+    private void parcela10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela10ActionPerformed
+        parcelasSelect[9]= parcela10.isSelected();
+    }//GEN-LAST:event_parcela10ActionPerformed
+
+    private void parcela12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela12ActionPerformed
+       parcelasSelect[11]= parcela12.isSelected();
+    }//GEN-LAST:event_parcela12ActionPerformed
+
+    private void parcela13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela13ActionPerformed
+       parcelasSelect[12]= parcela13.isSelected();
+    }//GEN-LAST:event_parcela13ActionPerformed
+
+    private void parcela14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela14ActionPerformed
+        parcelasSelect[13]= parcela14.isSelected();
+    }//GEN-LAST:event_parcela14ActionPerformed
+
+    private void parcela15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela15ActionPerformed
+        parcelasSelect[14]= parcela15.isSelected();
+    }//GEN-LAST:event_parcela15ActionPerformed
+
+    private void parcela16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela16ActionPerformed
+        parcelasSelect[15]= parcela16.isSelected();
+    }//GEN-LAST:event_parcela16ActionPerformed
+
+    private void butBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBackActionPerformed
+       jTabbedPane2.setSelectedIndex(1);
+    }//GEN-LAST:event_butBackActionPerformed
+
+    private void butSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butSig2ActionPerformed
+      jTabbedPane2.setSelectedIndex(3);
+      tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+    }//GEN-LAST:event_butSig2ActionPerformed
+
+    private void jButtonSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSig2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -722,16 +938,20 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButCanc;
     private javax.swing.JPanel Confirmar;
+    private javax.swing.JButton addPart;
+    private javax.swing.JButton addTienda;
+    private javax.swing.JTextField apellidos;
+    private javax.swing.JButton back1;
+    private javax.swing.JButton butBack;
+    private javax.swing.JButton butSig2;
     private javax.swing.ButtonGroup buttonReservas;
+    private javax.swing.JTextField edad;
     private javax.swing.JLabel fin;
     private javax.swing.JLabel fsal;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonConf;
     private javax.swing.JButton jButtonSig1;
+    private javax.swing.JButton jButtonSig2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateReservaIn;
     private com.toedter.calendar.JDateChooser jDateReservaOut;
@@ -746,12 +966,13 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelFechas;
+    private javax.swing.JLabel jLabelValidParcelas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -759,11 +980,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelFecha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField nombre;
     private javax.swing.JToggleButton parcela1;
     private javax.swing.JToggleButton parcela10;
     private javax.swing.JToggleButton parcela11;
@@ -782,5 +999,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     private javax.swing.JToggleButton parcela9;
     private javax.swing.JTable tablaClientes;
     private com.toedter.calendar.demo.TestDateEvaluator testDateEvaluator1;
+    private javax.swing.JTextField tiendaNombre;
+    private javax.swing.JTextField tiendam2;
     // End of variables declaration//GEN-END:variables
 }
