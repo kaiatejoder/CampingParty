@@ -19,6 +19,7 @@ public class ClienteLogLogin extends javax.swing.JFrame {
     private String usuario;
     private String password;
     private Modelo m;
+    private CONTROLADOR.ClienteLogLoginController controller;
     /**
      * Creates new form CLienteLogLogin
      */
@@ -136,23 +137,23 @@ public class ClienteLogLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
     usuario = jTextField1.getText().trim();
     password = new String(jPasswordField1.getPassword());
-    if (usuario.isEmpty() || password.isEmpty()) {
+    if (controller != null) {
+        controller.onLogin(usuario, password);
         return;
     }
-    else{
+    if (usuario.isEmpty() || password.isEmpty()) {
+        return;
+    } else {
         int  i = m.tryUserPass(usuario,password);
-      if( i > 0){
-          Cliente c = m.clientes.get(i);
-          VistaCliente ventanaCliente = new VistaCliente(c);
-          this.dispose();
+        if( i > 0){
+            Cliente c = m.clientes.get(i);
+            VistaCliente ventanaCliente = new VistaCliente(c);
+            this.dispose();
             ventanaCliente.setVisible(true);
             ventanaCliente.setLocationRelativeTo(null);
-      }
-     
-        
+        }
     }
     
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -191,8 +192,18 @@ public class ClienteLogLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteLogLogin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            ClienteLogLogin view = new ClienteLogLogin();
+            MODELO.Modelo model = view.m; // reusar el modelo ya cargado por la vista
+            CONTROLADOR.ClienteLogLoginController controller = new CONTROLADOR.ClienteLogLoginController(model, view);
+            view.controller = controller;
+            view.setVisible(true);
+        });
     }
+
+    public Modelo getModelo() { return this.m; }
+
+    public void setController(CONTROLADOR.ClienteLogLoginController controller) { this.controller = controller; }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

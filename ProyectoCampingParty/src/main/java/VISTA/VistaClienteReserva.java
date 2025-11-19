@@ -6,7 +6,6 @@ package VISTA;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import MODELO.Reserva;
-import MODELO.tablaClientesModel;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -16,8 +15,8 @@ import javax.swing.ButtonGroup;
 
 import MODELO.Acompanyante;
 import MODELO.Tienda;
-import MODELO.tablaClientesModel;
 import java.util.ArrayList;
+import CONTROLADOR.ReservaController;
 /**
  *
  * @author Carla Terol
@@ -31,6 +30,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     Modelo m;
     private boolean[] parcelasSelect;
     tablaClientesModel tc;
+    private ReservaController reservaController;
 
     /**
      * Creates new form VistaClienteReserva
@@ -39,13 +39,18 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         
         this.c = c;
         this.m = m;
-        ArrayList<Acompanyante> acom = new ArrayList();
+    ArrayList<Acompanyante> acom = new ArrayList<>();
         tc = new tablaClientesModel(acom);
+        // inicializar array de selección de parcelas
+        this.parcelasSelect = new boolean[16];
         for(int i =0; i < 16; i++){
-        parcelasSelect[i]= false;}
+            parcelasSelect[i]= false;
+        }
         FlatLightLaf.setup();
         initComponents();
-        
+    // el controlador se enlazará desde fuera mediante setController() para invertir la dependencia
+    this.reservaController = null;
+
     }
 
     /**
@@ -489,7 +494,8 @@ public class VistaClienteReserva extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Parcelas", jPanel1);
 
-        tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+    // Evitar NPE: usar el modelo vacío inicial `tc` hasta que haya una Reserva
+    tablaClientes.setModel(tc);
         jScrollPane1.setViewportView(tablaClientes);
 
         jLabel6.setText("Quién viene?");
@@ -718,15 +724,15 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void parcela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela1ActionPerformed
-        parcelasSelect[0]= parcela1.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(0, parcela1.isSelected());
     }//GEN-LAST:event_parcela1ActionPerformed
 
     private void parcela11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela11ActionPerformed
-        parcelasSelect[10] = parcela11.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(10, parcela11.isSelected());
     }//GEN-LAST:event_parcela11ActionPerformed
 
     private void parcela8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela8ActionPerformed
-        parcelasSelect[7]= parcela8.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(7, parcela8.isSelected());
     }//GEN-LAST:event_parcela8ActionPerformed
 
     private void apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosActionPerformed
@@ -738,10 +744,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_edadActionPerformed
 
     private void addPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartActionPerformed
-       String nom = nombre.getText() + " " + apellidos.getText();
-        Acompanyante a = new Acompanyante(nom, Integer.parseInt(edad.getText()));
-        r.addAcompanyante(a);
-       tablaClientes.anyade(a);
+         if (reservaController != null) reservaController.addPart(nombre.getText(), apellidos.getText(), edad.getText());
     }//GEN-LAST:event_addPartActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -761,20 +764,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_back1ActionPerformed
 
     private void addTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTiendaActionPerformed
-        Tienda t = new Tienda(tiendaNombre.getText(), Integer.parseInt(tiendam2.getText()));
-        boolean v = false;
-        for (int i =0;i<16;i++){
-            if(t.getM2()< r.getParcela(i).getM2())
-            {
-                r.addTienda(t);
-                v = true;
-                jLabelValidParcelas.setText("Parcela correctamente anyadida");
-            }
-                    }
-        if(!v)
-        {
-            jLabelValidParcelas.setText("ERROR: La tienda es demasiado grande");
-        }
+        if (reservaController != null) reservaController.addTienda(tiendaNombre.getText(), tiendam2.getText());
     }//GEN-LAST:event_addTiendaActionPerformed
 
     private void ButCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCancActionPerformed
@@ -782,119 +772,69 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_ButCancActionPerformed
 
     private void jDateReservaOutPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateReservaOutPropertyChange
-    fechaOut = jDateReservaOut.getDate();
-    if (fechaIn.before(fechaOut))
-    {
-        jLabelFechas.setText("¡Bien! Hay parcelas disponibles");
-        r = new Reserva(fechaIn,fechaOut, c);
-        
-    }
-    else{
-        jLabelFechas.setText("¡Error! las fechas no representan un rango");
-    }
+    if (reservaController != null) reservaController.onFechaOutChanged(jDateReservaOut.getDate());
     }//GEN-LAST:event_jDateReservaOutPropertyChange
 
     private void jDateReservaInPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateReservaInPropertyChange
-    fechaIn = jDateReservaIn.getDate();
+    if (reservaController != null) reservaController.onFechaInChanged(jDateReservaIn.getDate());
     }//GEN-LAST:event_jDateReservaInPropertyChange
 
     private void jButtonSig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig1ActionPerformed
-        boolean[] parcelas = this.m.getParcelasLibres();
-        for(int i = 0; i < parcelas.length; i++){
-            if(parcelas[i]){
-                switch(i){
-                    case 0 -> parcela1.setEnabled(true);
-                    case 1 -> parcela2.setEnabled(true);
-                    case 2 -> parcela3.setEnabled(true);
-                    case 3 -> parcela4.setEnabled(true);
-                    case 4 -> parcela5.setEnabled(true);
-                    case 5 -> parcela6.setEnabled(true);
-                    case 6 -> parcela7.setEnabled(true);
-                    case 7 -> parcela8.setEnabled(true);
-                    case 8 -> parcela9.setEnabled(true);
-                    case 9 -> parcela10.setEnabled(true);
-                    case 10 -> parcela11.setEnabled(true);
-                    case 11 -> parcela12.setEnabled(true);
-                    case 12 -> parcela13.setEnabled(true);
-                    case 13 -> parcela14.setEnabled(true);
-                    case 14 -> parcela15.setEnabled(true);
-                    case 15 -> parcela16.setEnabled(true);
-                }
-            } else {
-                switch(i){
-                    case 0 -> parcela1.setEnabled(false);
-                    case 1 -> parcela2.setEnabled(false);
-                    case 2 -> parcela3.setEnabled(false);
-                    case 3 -> parcela4.setEnabled(false);
-                    case 4 -> parcela5.setEnabled(false);
-                    case 5 -> parcela6.setEnabled(false);
-                    case 6 -> parcela7.setEnabled(false);
-                    case 7 -> parcela8.setEnabled(false);
-                    case 8 -> parcela9.setEnabled(false);
-                    case 9 -> parcela10.setEnabled(false);
-                    case 10 -> parcela11.setEnabled(false);
-                    case 11 -> parcela12.setEnabled(false);
-                    case 12 -> parcela13.setEnabled(false);
-                    case 13 -> parcela14.setEnabled(false);
-                    case 14 -> parcela15.setEnabled(false);
-                    case 15 -> parcela16.setEnabled(false);
-                }
-            }
-        }
-        jTabbedPane2.setSelectedIndex(1);
+        if (reservaController != null) reservaController.onCheckParcelas();
+        else jTabbedPane2.setSelectedIndex(1);
         
     }//GEN-LAST:event_jButtonSig1ActionPerformed
 
     private void parcela2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela2ActionPerformed
-        parcelasSelect[1]= parcela2.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(1, parcela2.isSelected());
     }//GEN-LAST:event_parcela2ActionPerformed
 
     private void parcela3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela3ActionPerformed
-        parcelasSelect[2]= parcela3.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(2, parcela3.isSelected());
     }//GEN-LAST:event_parcela3ActionPerformed
 
     private void parcela4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela4ActionPerformed
-       parcelasSelect[3]= parcela4.isSelected();
+         if (reservaController != null) reservaController.onParcelaToggle(3, parcela4.isSelected());
     }//GEN-LAST:event_parcela4ActionPerformed
 
     private void parcela6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela6ActionPerformed
-        parcelasSelect[5]= parcela6.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(5, parcela6.isSelected());
     }//GEN-LAST:event_parcela6ActionPerformed
 
     private void parcela5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela5ActionPerformed
-     parcelasSelect[4]= parcela5.isSelected();
+    if (reservaController != null) reservaController.onParcelaToggle(4, parcela5.isSelected());
     }//GEN-LAST:event_parcela5ActionPerformed
 
     private void parcela7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela7ActionPerformed
-       parcelasSelect[6]= parcela7.isSelected();
+         if (reservaController != null) reservaController.onParcelaToggle(6, parcela7.isSelected());
     }//GEN-LAST:event_parcela7ActionPerformed
 
     private void parcela9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela9ActionPerformed
-     parcelasSelect[8]= parcela9.isSelected();
+    if (reservaController != null) reservaController.onParcelaToggle(8, parcela9.isSelected());
     }//GEN-LAST:event_parcela9ActionPerformed
 
     private void parcela10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela10ActionPerformed
-        parcelasSelect[9]= parcela10.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(9, parcela10.isSelected());
     }//GEN-LAST:event_parcela10ActionPerformed
 
     private void parcela12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela12ActionPerformed
-       parcelasSelect[11]= parcela12.isSelected();
+         if (reservaController != null) reservaController.onParcelaToggle(11, parcela12.isSelected());
     }//GEN-LAST:event_parcela12ActionPerformed
 
     private void parcela13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela13ActionPerformed
-       parcelasSelect[12]= parcela13.isSelected();
+         if (reservaController != null) reservaController.onParcelaToggle(12, parcela13.isSelected());
     }//GEN-LAST:event_parcela13ActionPerformed
 
     private void parcela14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela14ActionPerformed
-        parcelasSelect[13]= parcela14.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(13, parcela14.isSelected());
     }//GEN-LAST:event_parcela14ActionPerformed
 
     private void parcela15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela15ActionPerformed
-        parcelasSelect[14]= parcela15.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(14, parcela15.isSelected());
     }//GEN-LAST:event_parcela15ActionPerformed
 
     private void parcela16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela16ActionPerformed
-        parcelasSelect[15]= parcela16.isSelected();
+        if (reservaController != null) reservaController.onParcelaToggle(15, parcela16.isSelected());
     }//GEN-LAST:event_parcela16ActionPerformed
 
     private void butBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBackActionPerformed
@@ -902,13 +842,102 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_butBackActionPerformed
 
     private void butSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butSig2ActionPerformed
-      jTabbedPane2.setSelectedIndex(3);
-      tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+            if (reservaController != null) reservaController.onShowConfirm();
+            else {
+                    jTabbedPane2.setSelectedIndex(3);
+                    if (r != null) tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+            }
     }//GEN-LAST:event_butSig2ActionPerformed
 
     private void jButtonSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSig2ActionPerformed
+
+    /* Public helper methods used by the controller (minimal API to separate MVC) */
+    public Modelo getModelo() {
+        return this.m;
+    }
+
+    public void setController(ReservaController controller) {
+        this.reservaController = controller;
+    }
+
+    public Date getFechaIn() {
+        return this.fechaIn;
+    }
+
+    public Date getFechaOut() {
+        return this.fechaOut;
+    }
+
+    public void setFechaIn(Date d) {
+        this.fechaIn = d;
+    }
+
+    public void setFechaOut(Date d) {
+        this.fechaOut = d;
+    }
+
+    public void setLabelFecha(String s) {
+        this.jLabelFechas.setText(s);
+    }
+
+    public void setReservaObj(Reserva res) {
+        this.r = res;
+        if (this.r != null) {
+            tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+        }
+    }
+
+    public Reserva getReservaObj() {
+        return this.r;
+    }
+
+    public void addAcompanyanteToReservation(Acompanyante a) {
+        if (this.r == null) this.r = new Reserva(fechaIn, fechaOut, c);
+    this.r.addAcompanyante(a);
+    ((MODELO.tablaClientesModel)tablaClientes.getModel()).anyade(a);
+    }
+
+    public void updateParcelasEnabled(boolean[] parcelas) {
+        for(int i = 0; i < parcelas.length; i++){
+            boolean enabled = parcelas[i];
+            switch(i){
+                case 0 -> parcela1.setEnabled(enabled);
+                case 1 -> parcela2.setEnabled(enabled);
+                case 2 -> parcela3.setEnabled(enabled);
+                case 3 -> parcela4.setEnabled(enabled);
+                case 4 -> parcela5.setEnabled(enabled);
+                case 5 -> parcela6.setEnabled(enabled);
+                case 6 -> parcela7.setEnabled(enabled);
+                case 7 -> parcela8.setEnabled(enabled);
+                case 8 -> parcela9.setEnabled(enabled);
+                case 9 -> parcela10.setEnabled(enabled);
+                case 10 -> parcela11.setEnabled(enabled);
+                case 11 -> parcela12.setEnabled(enabled);
+                case 12 -> parcela13.setEnabled(enabled);
+                case 13 -> parcela14.setEnabled(enabled);
+                case 14 -> parcela15.setEnabled(enabled);
+                case 15 -> parcela16.setEnabled(enabled);
+            }
+        }
+    }
+
+    public void setLabelValidParcelas(String s) {
+        this.jLabelValidParcelas.setText(s);
+    }
+
+    public void setParcelaSelected(int index, boolean val) {
+        if (index >= 0 && index < parcelasSelect.length) parcelasSelect[index] = val;
+    }
+
+    public void setSelectedTab(int index) {
+        jTabbedPane2.setSelectedIndex(index);
+    }
+
+    public void showMessage(String s) {
+        javax.swing.JOptionPane.showMessageDialog(this, s);
+    }
 
     /**
      * @param args the command line arguments
@@ -932,7 +961,16 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaClienteReserva(new Modelo(), new Cliente()).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            Modelo model = new Modelo();
+            // crear un cliente de ejemplo (evitar usar el constructor por defecto que lanza)
+            Cliente cliente = new Cliente("Cliente Ejemplo", "00000000A", 30);
+            VistaClienteReserva view = new VistaClienteReserva(model, cliente);
+            // crear controlador y enlazar con la vista
+            ReservaController controller = new ReservaController(model, view, cliente);
+            view.setController(controller);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

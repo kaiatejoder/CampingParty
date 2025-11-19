@@ -17,6 +17,20 @@ public class VistaReservas extends javax.swing.JFrame {
      */
     public VistaReservas() {
         initComponents();
+        // delegar acciones a un controlador (si está inyectado)
+        jButton1.addActionListener(evt -> {
+            if (reservasController != null) reservasController.onCheckIn();
+        });
+        jButton2.addActionListener(evt -> {
+            if (reservasController != null) reservasController.onBack();
+        });
+    }
+
+    // controlador inyectado desde fuera
+    private CONTROLADOR.ReservasController reservasController;
+
+    public void setController(CONTROLADOR.ReservasController controller) {
+        this.reservasController = controller;
     }
 
     /**
@@ -116,7 +130,13 @@ public class VistaReservas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaReservas().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            VistaReservas view = new VistaReservas();
+            CONTROLADOR.ReservasController controller = new CONTROLADOR.ReservasController(model, view);
+            view.setController(controller);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

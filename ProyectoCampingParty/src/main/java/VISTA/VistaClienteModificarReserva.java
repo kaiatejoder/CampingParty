@@ -11,6 +11,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 public class VistaClienteModificarReserva extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaClienteModificarReserva.class.getName());
+    private CONTROLADOR.ClienteModificarReservaController controller;
 
     /**
      * Creates new form VistaClienteReserva
@@ -625,7 +626,17 @@ public class VistaClienteModificarReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaClienteModificarReserva().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            VistaClienteModificarReserva view = new VistaClienteModificarReserva();
+            CONTROLADOR.ClienteModificarReservaController controller = new CONTROLADOR.ClienteModificarReservaController(model, view);
+            view.controller = controller;
+            view.setVisible(true);
+        });
+    }
+
+    public void setController(CONTROLADOR.ClienteModificarReservaController controller) {
+        this.controller = controller;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

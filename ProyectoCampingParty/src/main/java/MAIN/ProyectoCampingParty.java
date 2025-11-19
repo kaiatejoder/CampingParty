@@ -1,4 +1,6 @@
 package MAIN;
+import CONTROLADOR.Controlador;
+import MODELO.Modelo;
 import VISTA.ClienteLogin;
 import VISTA.TrabajadorLogin;
 import VISTA.VistaLogin;
@@ -10,11 +12,7 @@ import VISTA.VistaLogin;
 public class ProyectoCampingParty {
 
     public static void main(String[] args) {
-        TrabajadorLogin tl = new TrabajadorLogin();
-        ClienteLogin cl = new ClienteLogin();
-        VistaLogin vl = new VistaLogin(tl,cl);
-        
-        vl.setVisible(true);
-        vl.setTitle("Camping Riurau");
+        Modelo m = new Modelo();
+        Controlador c = new Controlador(new VistaLogin(), m);
     }
 }

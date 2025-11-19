@@ -4,7 +4,10 @@
  */
 package VISTA;
 
+import CONTROLADOR.Controlador;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.event.ActionListener;
+import CONTROLADOR.LoginController;
 
 /**
  *
@@ -25,6 +28,13 @@ public class VistaLogin extends javax.swing.JFrame {
         this.cl = cl;
         FlatLightLaf.setup();
         initComponents();
+    }
+
+    // controlador inyectado desde fuera
+    private LoginController loginController;
+
+    public void setController(LoginController controller) {
+        this.loginController = controller;
     }
 
     /**
@@ -94,17 +104,31 @@ public class VistaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    this.setVisible(false); 
-    this.cl.setVisible(true);
+    if (loginController != null) loginController.onClientSelected();
+    else {
+        this.setVisible(false); 
+        this.cl.setVisible(true);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    this.setVisible(false); 
-    this.tl.setVisible(true);
+    if (loginController != null) loginController.onStaffSelected();
+    else {
+        this.setVisible(false); 
+        this.tl.setVisible(true);
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new VistaLogin(new TrabajadorLogin(),new ClienteLogin()).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            VISTA.TrabajadorLogin tl = new VISTA.TrabajadorLogin();
+            VISTA.ClienteLogin cl = new VISTA.ClienteLogin();
+            VistaLogin view = new VistaLogin(tl, cl);
+            CONTROLADOR.LoginController controller = new CONTROLADOR.LoginController(model, view);
+            view.setController(controller);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -112,4 +136,9 @@ public class VistaLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    public void addActionListener(ActionListener al) {
+       jButton1.addActionListener(al);
+       jButton2.addActionListener(al);
+    }
 }

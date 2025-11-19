@@ -5,6 +5,7 @@
 package VISTA;
 
 import MODELO.Staff;
+import CONTROLADOR.StaffController;
 
 /**
  *
@@ -29,26 +30,43 @@ public class StaffMain extends javax.swing.JFrame {
         } else {
             setTitle("Panel Staff");
         }
+        // listeners: si hay controlador inyectado delegamos, si no ejecutamos comportamiento legacy
         jButton1.addActionListener(e -> {
-        // Registrar Entrada
-        VistaStaffEntrada v = new VistaStaffEntrada();
-        v.setLocationRelativeTo(this);
-        v.setVisible(true);
-    });
+            if (this.controller != null) this.controller.onRegistrarEntrada();
+            else {
+                // Registrar Entrada (comportamiento legacy)
+                VistaStaffEntrada v = new VistaStaffEntrada();
+                v.setLocationRelativeTo(this);
+                v.setVisible(true);
+            }
+        });
 
-    jButton2.addActionListener(e -> {
-        // Administrar Reservas
-        VistaStaffActividad v = new VistaStaffActividad();
-        v.setLocationRelativeTo(this);
-        v.setVisible(true);
-    });
+        jButton2.addActionListener(e -> {
+            if (this.controller != null) this.controller.onAdministrarReservas();
+            else {
+                // Administrar Reservas (legacy)
+                VistaStaffActividad v = new VistaStaffActividad();
+                v.setLocationRelativeTo(this);
+                v.setVisible(true);
+            }
+        });
 
-    jButton3.addActionListener(e -> {
-        // Cambiar descuento (placeholder)
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Funcionalidad en construcción.",
-            "Cambiar descuento", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    });  
+        jButton3.addActionListener(e -> {
+            if (this.controller != null) this.controller.onCambiarDescuento();
+            else {
+                // Cambiar descuento (placeholder)
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Funcionalidad en construcción.",
+                    "Cambiar descuento", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        });  
+    }
+
+    // Controller inyectado desde fuera
+    private StaffController controller;
+
+    public void setController(StaffController controller) {
+        this.controller = controller;
     }
 
     /** Constructor vacío para el GUI Builder (no lo borres) */
@@ -299,7 +317,15 @@ public class StaffMain extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StaffMain().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            // Crear un staff de ejemplo (constructor requiere parámetros)
+            MODELO.Staff staff = new MODELO.Staff("abelstaff@hotmail.com", "1234", "Abel Saiz", "53889931Z", 612233445);
+            StaffMain view = new StaffMain(staff);
+            CONTROLADOR.StaffController controller = new CONTROLADOR.StaffController(model, view);
+            view.setController(controller);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

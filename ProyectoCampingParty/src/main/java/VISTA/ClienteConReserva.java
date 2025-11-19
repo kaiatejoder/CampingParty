@@ -13,6 +13,8 @@ import themes.RiuRauLaf;
 public class ClienteConReserva extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteConReserva.class.getName());
+    // controlador para separar lógica de UI
+    private CONTROLADOR.ClienteConReservaController controller;
 
     /**
      * Creates new form ClienteConReserva
@@ -68,6 +70,10 @@ public class ClienteConReserva extends javax.swing.JFrame {
         jLabel3.setText("Mis actividades");
 
         jButton1.setText("Ver actividades");
+        jButton1.addActionListener(e -> {
+            if (controller != null) controller.onVerActividades();
+            else javax.swing.JOptionPane.showMessageDialog(this, "Ver actividades (legacy)");
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,7 +143,13 @@ public class ClienteConReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteConReserva().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            ClienteConReserva view = new ClienteConReserva();
+            CONTROLADOR.ClienteConReservaController controller = new CONTROLADOR.ClienteConReservaController(model, view);
+            view.controller = controller;
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

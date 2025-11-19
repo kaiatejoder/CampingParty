@@ -6,6 +6,7 @@ package VISTA;
 
 import MODELO.Cliente;
 import com.formdev.flatlaf.FlatLightLaf;
+import CONTROLADOR.ClienteController;
 /**
  *
  * @author Carla Terol
@@ -22,6 +23,13 @@ public class VistaCliente extends javax.swing.JFrame {
         initComponents();
         c.getReserva();
         String Fechas = c.getReserva().getFechas();
+    }
+
+    // controlador inyectado desde fuera para seguir MVC
+    private ClienteController clienteController;
+
+    public void setController(CONTROLADOR.ClienteController controller) {
+        this.clienteController = controller;
     }
 
     /**
@@ -160,16 +168,23 @@ public class VistaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if (clienteController != null) clienteController.onVerReservas();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        if (clienteController != null) clienteController.onVolver();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void CancReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancReservaActionPerformed
-        // TODO add your handling code here:
+        if (clienteController != null) clienteController.onCancelarReserva();
     }//GEN-LAST:event_CancReservaActionPerformed
+
+    /**
+     * Helper used by controllers to show feedback to the user.
+     */
+    public void showMessage(String s) {
+        javax.swing.JOptionPane.showMessageDialog(this, s);
+    }
 
     /**
      * @param args the command line arguments
@@ -193,7 +208,15 @@ public class VistaCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaCliente(new Cliente()).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            MODELO.Cliente cliente = new MODELO.Cliente();
+            VistaCliente view = new VistaCliente(cliente);
+            // crear controlador y enlazar (inyección)
+            CONTROLADOR.ClienteController controller = new CONTROLADOR.ClienteController(model, view, cliente);
+            view.setController(controller);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

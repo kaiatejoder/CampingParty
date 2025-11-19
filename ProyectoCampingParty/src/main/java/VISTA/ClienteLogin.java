@@ -15,6 +15,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 public class ClienteLogin extends javax.swing.JFrame {
     private Cliente c;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteLogin.class.getName());
+    // controlador inyectado desde fuera para seguir patrón MVC
+    private CONTROLADOR.ClienteLoginController controller;
 
     /**
      * Creates new form ClienteLogin
@@ -106,33 +108,47 @@ public class ClienteLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ClienteSignOn c;
-        c = new ClienteSignOn(new Modelo() );
-        c.setVisible(true); 
-        this.dispose(); 
+        if (controller != null) controller.onRegister();
+        else {
+            ClienteSignOn c;
+            c = new ClienteSignOn(new Modelo() );
+            c.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    // Ir a VistaCliente (directamente sin login)
-    this.dispose(); // Cerrar esta ventana
-    ClienteLogLogin clientelog = new ClienteLogLogin();
-    clientelog.setVisible(true);
-    clientelog.setLocationRelativeTo(null);
+    if (controller != null) controller.onLogin();
+    else {
+        // Ir a VistaCliente (directamente sin login)
+        this.dispose(); // Cerrar esta ventana
+        ClienteLogLogin clientelog = new ClienteLogLogin();
+        clientelog.setVisible(true);
+        clientelog.setLocationRelativeTo(null);
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    // Volver a VistaLogin
-    this.dispose(); // Cerrar esta ventana
-    
-    // Crear las ventanas que necesita VistaLogin
-    TrabajadorLogin ventanaTrabajador = new TrabajadorLogin();
-    ClienteLogin ventanaCliente = new ClienteLogin();
-    
-    // Pasar las ventanas al constructor
-    VistaLogin ventanaPrincipal = new VistaLogin(ventanaTrabajador, ventanaCliente);
-    ventanaPrincipal.setVisible(true);
-    ventanaPrincipal.setLocationRelativeTo(null);
+    if (controller != null) controller.onBack();
+    else {
+        // Volver a VistaLogin
+        this.dispose(); // Cerrar esta ventana
+
+        // Crear las ventanas que necesita VistaLogin
+        TrabajadorLogin ventanaTrabajador = new TrabajadorLogin();
+        ClienteLogin ventanaCliente = new ClienteLogin();
+
+        // Pasar las ventanas al constructor
+        VistaLogin ventanaPrincipal = new VistaLogin(ventanaTrabajador, ventanaCliente);
+        ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setLocationRelativeTo(null);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    /** Inyección simple del controlador */
+    public void setController(CONTROLADOR.ClienteLoginController controller) {
+        this.controller = controller;
+    }
 
     /**
      * @param args the command line arguments
@@ -156,7 +172,13 @@ public class ClienteLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteLogin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            MODELO.Modelo model = new MODELO.Modelo();
+            ClienteLogin view = new ClienteLogin();
+            CONTROLADOR.ClienteLoginController controller = new CONTROLADOR.ClienteLoginController(model, view);
+            view.setController(controller);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
