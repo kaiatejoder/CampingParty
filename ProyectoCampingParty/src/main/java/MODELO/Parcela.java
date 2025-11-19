@@ -84,7 +84,6 @@ public class Parcela {
             s = "No";
 
         return "Parcela " + id + "\n "
-         + m2 + "m2 \n Luz: " + luz 
-         + " - Precio: " + precio + "€ \n Libre: " + s ;
+        + m2 + "m2 \n Luz: " + luz  + " - Precio: " + precio + "€ \n Libre: " + s ;
     }   
 }
