@@ -8,24 +8,40 @@ import MODELO.Cliente;
 import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JFrame;   // <--- ESTO FALTABA
+
 
 /**
  *
  * @author Carla
  */
-public class ClienteLogLogin extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteLogLogin.class.getName());
+public class ClienteLogLogin extends JFrame {
+
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(ClienteLogLogin.class.getName());
+
     private String usuario;
     private String password;
     private Modelo m;
     private CONTROLADOR.ClienteLogLoginController controller;
+
     /**
-     * Creates new form CLienteLogLogin
+     * Constructor sin parámetros
+     * (útil para el editor de formularios de NetBeans o pruebas rápidas).
+     * Crea un Modelo nuevo SOLO en este caso.
      */
     public ClienteLogLogin() {
-        m = new Modelo();
+        this(new Modelo());
         m.setDatos();
+    }
+
+    /**
+     * Constructor que recibe el modelo desde fuera.
+     * Este es el que usamos en el flujo real de la aplicación,
+     * llamado desde ClienteLoginController.
+     */
+    public ClienteLogLogin(Modelo modelo) {
+        this.m = modelo;
         FlatLaf.registerCustomDefaultsSource("themes");
         FlatLightLaf.setup();
         initComponents();
@@ -137,17 +153,20 @@ public class ClienteLogLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    usuario = jTextField1.getText().trim();
+      usuario = jTextField1.getText().trim();
     password = new String(jPasswordField1.getPassword());
+
     if (controller != null) {
         controller.onLogin(usuario, password);
         return;
     }
+
+    // Fallback legacy por si se usa sin controlador
     if (usuario.isEmpty() || password.isEmpty()) {
         return;
     } else {
-        int  i = m.tryUserPass(usuario,password);
-        if( i > 0){
+        int i = m.tryUserPass(usuario, password);
+        if (i > 0) {
             Cliente c = m.clientes.get(i);
             VistaCliente ventanaCliente = new VistaCliente(c);
             this.dispose();
@@ -170,36 +189,6 @@ public class ClienteLogLogin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            ClienteLogLogin view = new ClienteLogLogin();
-            MODELO.Modelo model = view.m; // reusar el modelo ya cargado por la vista
-            CONTROLADOR.ClienteLogLoginController controller = new CONTROLADOR.ClienteLogLoginController(model, view);
-            view.controller = controller;
-            view.setVisible(true);
-        });
-    }
 
     public Modelo getModelo() { return this.m; }
 

@@ -2,40 +2,50 @@ package CONTROLADOR;
 
 import MODELO.Modelo;
 import VISTA.ClienteLogin;
+import VISTA.ClienteLogLogin;
+import VISTA.ClienteSignOn;
+import VISTA.VistaLogin;
 
 /**
- * Controlador mínimo para `ClienteLogin`.
+ * Controlador para la pantalla donde el cliente elige:
+ * - Iniciar sesión
+ * - Registrarse
+ * - Volver atrás
  */
 public class ClienteLoginController {
     private final Modelo model;
     private final ClienteLogin view;
+    private final VistaLogin vistaLogin; // para poder volver atrás
 
-    public ClienteLoginController(Modelo model, ClienteLogin view) {
+    public ClienteLoginController(Modelo model, ClienteLogin view, VistaLogin vistaLogin) {
         this.model = model;
         this.view = view;
+        this.vistaLogin = vistaLogin;
     }
 
     public void onRegister() {
-        // Abrir pantalla de registro
+        // Abrir pantalla de registro usando el mismo modelo
         view.dispose();
-        new VISTA.ClienteSignOn(model).setVisible(true);
+        ClienteSignOn signOnView = new ClienteSignOn(model);
+        signOnView.setLocationRelativeTo(null);
+        signOnView.setVisible(true);
     }
 
     public void onLogin() {
-        // Abrir ventana de login de cliente (legacy)
+        // Abrir ventana donde se introduce usuario/contraseña
         view.dispose();
-        VISTA.ClienteLogLogin clientelog = new VISTA.ClienteLogLogin();
-        clientelog.setVisible(true);
-        clientelog.setLocationRelativeTo(null);
+        ClienteLogLogin loginView = new ClienteLogLogin();
+        ClienteLogLoginController loginController =
+                new ClienteLogLoginController(model, loginView);
+        loginView.setController(loginController);
+        loginView.setLocationRelativeTo(null);
+        loginView.setVisible(true);
     }
 
     public void onBack() {
-        // Volver a la pantalla principal de selección
+        // Volver a la pantalla principal de selección (la que ya teníamos creada)
         view.dispose();
-        VISTA.TrabajadorLogin ventanaTrabajador = new VISTA.TrabajadorLogin();
-        VISTA.ClienteLogin ventanaCliente = new VISTA.ClienteLogin();
-        VISTA.VistaLogin ventanaPrincipal = new VISTA.VistaLogin(ventanaTrabajador, ventanaCliente);
-        ventanaPrincipal.setVisible(true);
-        ventanaPrincipal.setLocationRelativeTo(null);
+        vistaLogin.setLocationRelativeTo(null);
+        vistaLogin.setVisible(true);
     }
 }

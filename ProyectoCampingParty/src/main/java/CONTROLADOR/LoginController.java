@@ -2,9 +2,13 @@ package CONTROLADOR;
 
 import MODELO.Modelo;
 import VISTA.VistaLogin;
+import VISTA.ClienteLogin;
+import VISTA.TrabajadorLogin;
 
 /**
- * Controlador esqueleto para la pantalla de bienvenida/login.
+ * Controlador para la pantalla de bienvenida/login.
+ * Se encarga de reaccionar cuando el usuario pulsa
+ * "Soy Cliente" o "Soy Staff" en VistaLogin.
  */
 public class LoginController {
 
@@ -17,13 +21,24 @@ public class LoginController {
     }
 
     public void onClientSelected() {
-        // TODO: navegar a flujo cliente
+        // Ocultamos la pantalla de bienvenida
         view.setVisible(false);
-        // la vista puede crear/mostrar ClienteLogin si es necesario
+        // Mostramos la ventana de login de cliente asociada a la vista
+        ClienteLogin clienteLogin = view.getClienteLogin();
+        if (clienteLogin != null) {
+            clienteLogin.setLocationRelativeTo(view);
+            clienteLogin.setVisible(true);
+        }
     }
 
     public void onStaffSelected() {
-        // TODO: navegar a flujo staff
+        // Ocultamos la pantalla de bienvenida
         view.setVisible(false);
+        // Mostramos la ventana de login de staff asociada a la vista
+        TrabajadorLogin trabajadorLogin = view.getTrabajadorLogin();
+        if (trabajadorLogin != null) {
+            trabajadorLogin.setLocationRelativeTo(view);
+            trabajadorLogin.setVisible(true);
+        }
     }
 }

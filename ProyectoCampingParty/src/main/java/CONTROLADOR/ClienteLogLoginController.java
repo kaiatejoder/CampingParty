@@ -1,31 +1,51 @@
 package CONTROLADOR;
 
 import MODELO.Modelo;
+import VISTA.ClienteLogin;
 import VISTA.ClienteLogLogin;
+import VISTA.ClienteSignOn;
+import VISTA.VistaLogin;
 
 /**
- * Controlador mínimo para la ventana de login de cliente (ClienteLogLogin).
+ * Controlador para la pantalla donde el cliente elige:
+ * - Iniciar sesión
+ * - Registrarse
+ * - Volver atrás
  */
-public class ClienteLogLoginController {
+public class ClienteLoginController {
     private final Modelo model;
-    private final ClienteLogLogin view;
+    private final ClienteLogin view;
+    private final VistaLogin vistaLogin; // para poder volver atrás
 
-    public ClienteLogLoginController(Modelo model, ClienteLogLogin view) {
+    public ClienteLoginController(Modelo model, ClienteLogin view, VistaLogin vistaLogin) {
         this.model = model;
         this.view = view;
+        this.vistaLogin = vistaLogin;
     }
 
-    public void onLogin(String usuario, String password) {
-        if (usuario == null || password == null || usuario.isEmpty() || password.isEmpty()) return;
-        int i = model.tryUserPass(usuario, password);
-        if (i > 0) {
-            MODELO.Cliente c = model.clientes.get(i);
-            VISTA.VistaCliente ventanaCliente = new VISTA.VistaCliente(c);
-            view.dispose();
-            ventanaCliente.setVisible(true);
-            ventanaCliente.setLocationRelativeTo(null);
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(view, "Usuario o contraseña incorrectos");
-        }
+    public void onRegister() {
+        // Abrir pantalla de registro usando el mismo modelo
+        view.dispose();
+        ClienteSignOn signOnView = new ClienteSignOn(model);
+        signOnView.setLocationRelativeTo(null);
+        signOnView.setVisible(true);
+    }
+
+    public void onLogin() {
+        // Abrir ventana donde se introduce usuario/contraseña
+        view.dispose();
+        ClienteLogLogin loginView = new ClienteLogLogin(model);  // usamos el MISMO modelo
+        ClienteLogLoginController loginController =
+                new ClienteLogLoginController(model, loginView);
+        loginView.setController(loginController);
+        loginView.setLocationRelativeTo(null);
+        loginView.setVisible(true);
+    }
+
+    public void onBack() {
+        // Volver a la pantalla principal de selección (la que ya teníamos creada)
+        view.dispose();
+        vistaLogin.setLocationRelativeTo(null);
+        vistaLogin.setVisible(true);
     }
 }
