@@ -21,7 +21,7 @@ public class StaffLogin extends javax.swing.JFrame {
     public JButton getBack(){
     return this.jButton2;
     }
-     public JButton getLogin(){
+    public JButton getLogin(){
     return this.jButton1;
     }
 

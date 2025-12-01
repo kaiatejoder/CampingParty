@@ -60,6 +60,13 @@ public class CtrlWelcome {
                 vWel.setVisible(true);
             }
         });
+        cLog.getBack().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cLog.setVisible(false);
+                vWel.setVisible(true);
+            }
+        });
     }
     
 

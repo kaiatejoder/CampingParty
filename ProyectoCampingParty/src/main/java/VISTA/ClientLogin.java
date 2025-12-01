@@ -7,6 +7,7 @@ package VISTA;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JButton;
 import themes.RiuRauLaf;
 
 /**
@@ -23,6 +24,15 @@ public class ClientLogin extends javax.swing.JFrame {
     public ClientLogin() {
         RiuRauLaf.setup();
         initComponents();
+    }
+    public JButton getSignIn(){
+        return this.jButton3;
+    }
+    public JButton getLogIn(){
+        return this.jButton2;
+    }
+    public JButton getBack(){
+        return this.jButton1;
     }
 
   
