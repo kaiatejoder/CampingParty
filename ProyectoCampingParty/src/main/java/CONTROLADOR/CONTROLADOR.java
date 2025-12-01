@@ -1,3 +1,4 @@
+package CONTROLADOR;
 
 import MODELO.Modelo;
 import VISTA.*;
@@ -16,9 +17,9 @@ public class CONTROLADOR{
     private final StaffLogin vistaStaffLogin;
 
     // Controladores
-    private final ControladorBienvenida controladorBienvenida;
-    private final ControladorClienteLogin controladorClienteLogin;
-    private final ControladorStaffLogin controladorStaffLogin;
+    private final CtrlWelcome controladorBienvenida;
+    private final CtrlCli controladorClienteLogin;
+    private final CtrlStaff controladorStaffLogin;
 
     public CONTROLADOR() {
         // Modelo
@@ -53,7 +54,7 @@ public class CONTROLADOR{
 
         // Controlador de la pantalla de bienvenida
         controladorBienvenida =
-                new ControladorBienvenida(
+                new CtrlWelcome(
                         modelo,
                         vWelcome,
                         vistaClienteLogin,

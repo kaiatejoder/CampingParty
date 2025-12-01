@@ -5,14 +5,13 @@
 package VISTA;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JButton;
 
 /**
  *
  * @author Carla Terol
  */
 public class Welcome extends javax.swing.JFrame {
-    private StaffLogin tl;
-    private ClientLogin cl;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Welcome.class.getName());
 
     /**
@@ -20,13 +19,16 @@ public class Welcome extends javax.swing.JFrame {
      * @param tl La vista trabajador
      * @param cl  La vista Cliente
      */
-    public Welcome(StaffLogin tl, ClientLogin cl) {
-        this.tl = tl;
-        this.cl = cl;
+    public Welcome() {
         FlatLightLaf.setup();
         initComponents();
     }
-
+    public JButton getSt(){
+        return this.jButton2;
+    }
+    public JButton getCli(){
+        return this.jButton1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,17 +96,14 @@ public class Welcome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    this.setVisible(false); 
-    this.cl.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    this.setVisible(false); 
-    this.tl.setVisible(true);
+   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new Welcome(new StaffLogin(),new ClientLogin()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

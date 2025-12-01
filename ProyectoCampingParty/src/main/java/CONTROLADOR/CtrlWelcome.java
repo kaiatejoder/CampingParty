@@ -40,7 +40,8 @@ public class CtrlWelcome {
         vWel.getCli().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cli();
+                vWel.setVisible(false);
+                cLog.setVisible(true);
             }
         });
 
@@ -48,10 +49,19 @@ public class CtrlWelcome {
         vWel.getSt().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                st();
+                vWel.setVisible(false);
+                sLog.setVisible(true);
+            }
+        });
+        sLog.getBack().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sLog.setVisible(false);
+                vWel.setVisible(true);
             }
         });
     }
+    
 
     private void cli() {
         vWel.setVisible(false);

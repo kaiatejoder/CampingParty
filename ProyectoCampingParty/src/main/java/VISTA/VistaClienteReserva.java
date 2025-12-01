@@ -745,7 +745,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
        String nom = nombre.getText() + " " + apellidos.getText();
         Acompanyante a = new Acompanyante(nom, Integer.parseInt(edad.getText()));
         r.addAcompanyante(a);
-       tablaClientes.anyade(a);
+      // tablaClientes.anyade(a);
     }//GEN-LAST:event_addPartActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

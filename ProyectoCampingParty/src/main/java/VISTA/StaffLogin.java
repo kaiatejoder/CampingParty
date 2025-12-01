@@ -4,6 +4,8 @@
  */
 package VISTA;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author igrub
@@ -15,6 +17,12 @@ public class StaffLogin extends javax.swing.JFrame {
      */
     public StaffLogin() {
         initComponents();
+    }
+    public JButton getBack(){
+    return this.jButton2;
+    }
+     public JButton getLogin(){
+    return this.jButton1;
     }
 
     /**
@@ -81,18 +89,11 @@ public class StaffLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        TrabajadorSesión sesion = new TrabajadorSesión(); // usa el nombre exacto de tu clase
-        sesion.setLocationRelativeTo(this);
-        sesion.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         // Como Welcome pide (StaffLogin, ClientLogin), creamos nuevas instancias
-    Welcome inicio = new Welcome(new StaffLogin(), new ClientLogin());
-    inicio.setLocationRelativeTo(this);
-    inicio.setVisible(true);
-    this.dispose();
+ 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

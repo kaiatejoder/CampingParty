@@ -129,7 +129,7 @@ public class ClientLogin extends javax.swing.JFrame {
     ClientLogin ventanaCliente = new ClientLogin();
     
     // Pasar las ventanas al constructor
-    Welcome ventanaPrincipal = new Welcome(ventanaTrabajador, ventanaCliente);
+    Welcome ventanaPrincipal = new Welcome();
     ventanaPrincipal.setVisible(true);
     ventanaPrincipal.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
