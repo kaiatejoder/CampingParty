@@ -41,7 +41,12 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
         <maven.compiler.release>17</maven.compiler.release>
         <exec.mainClass>MAIN.ProyectoCampingParty</exec.mainClass>
+=======
+        <maven.compiler.release>21</maven.compiler.release>
+        <exec.mainClass>com.isii.campingriurau.ProyectoCampingParty</exec.mainClass>
+>>>>>>> 5ffff0eb9b2a8bcf6b75e1e57c71965bc7ecd1aa
     </properties>
 </project>
