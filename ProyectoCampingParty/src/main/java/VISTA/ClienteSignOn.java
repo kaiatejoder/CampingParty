@@ -435,9 +435,10 @@ public class ClienteSignOn extends javax.swing.JFrame {
           c.setUser(correo.getText());
       else if(!Valid.correo(correo.getText())){
             Error2.setText("ERROR: Formato de correo incorrecto");
+            return;
         }
       if(Valid.password(jPasswordField1.getPassword())){
-        c.setPass(jPasswordField1.getPassword().toString());
+        c.setPass(new String(jPasswordField1.getPassword()));
         jTabbedPane1.setSelectedIndex(2);
       }
       else if (!Valid.password(jPasswordField1.getPassword()))
@@ -456,8 +457,16 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
     private void RegistraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistraActionPerformed
     if(b){
-        //AQUÍ TOCA CERRAR Y PIRARSE A CLIENTELOGIN.
-     Error3.setText("Cliente registrado correctamente");
+        Error3.setText("Cliente registrado correctamente");
+        // Cerrar esta ventana después de registrarse
+        javax.swing.Timer timer = new javax.swing.Timer(1500, new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                ClienteSignOn.this.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
     else
         Error3.setText("ERROR: debes de estar de acuerdo para registrarte");

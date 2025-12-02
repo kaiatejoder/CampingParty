@@ -42,6 +42,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>com.isii.campingriurau.ProyectoCampingParty</exec.mainClass>
+        <exec.mainClass>MAIN.ProyectoCampingParty</exec.mainClass>
     </properties>
 </project>

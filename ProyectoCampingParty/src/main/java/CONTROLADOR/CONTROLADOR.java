@@ -14,12 +14,15 @@ public class CONTROLADOR{
     private final ClientSignIn vistaClienteLogLogin;
     private final ClienteSignOn vistaClienteSignOn;
     private final StaffLogin vistaTrabajadorLogin;
-    private final StaffLogin vistaStaffLogin;
 
     // Controladores
+    // Nota: aunque no se usan directamente, se crean para iniciar los listeners (efectos secundarios en init())
+    @SuppressWarnings("unused")
     private final CtrlWelcome controladorBienvenida;
-    private final CtrlCli controladorClienteLogin;
-    private final CtrlStaff controladorStaffLogin;
+    @SuppressWarnings("unused")
+    private final ControladorClienteLogin controladorClienteLogin;
+    @SuppressWarnings("unused")
+    private final ControladorStaffLogin controladorStaffLogin;
 
     public CONTROLADOR() {
         // Modelo
@@ -28,10 +31,9 @@ public class CONTROLADOR{
         // Vistas base
         vWelcome = new Welcome();
         vistaClienteLogin = new ClientLogin();
-        vistaClienteLogLogin = new ClientSignIn();
-        vistaClienteSignOn = new ClienteSignOn();
+        vistaClienteLogLogin = new ClientSignIn(modelo);
+        vistaClienteSignOn = new ClienteSignOn(modelo);
         vistaTrabajadorLogin = new StaffLogin();
-        vistaStaffLogin = new StaffLogin();
 
         // Controlador login cliente
         controladorClienteLogin =
@@ -43,13 +45,11 @@ public class CONTROLADOR{
                         vistaClienteSignOn
                 );
 
-        // Controlador login staff
+        // Controlador login staff (simplificado: solo pasa Welcome y StaffLogin principal)
         controladorStaffLogin =
                 new ControladorStaffLogin(
-                        modelo,
                         vWelcome,
-                        vistaTrabajadorLogin,
-                        vistaStaffLogin
+                        vistaTrabajadorLogin
                 );
 
         // Controlador de la pantalla de bienvenida
@@ -66,6 +66,7 @@ public class CONTROLADOR{
      * Método de arranque de la interfaz.
      */
     public void iniciar() {
+        vWelcome.setLocationRelativeTo(null);
         SwingUtilities.invokeLater(() -> vWelcome.setVisible(true));
     }
 }

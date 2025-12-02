@@ -55,6 +55,9 @@ public class Reserva {
     public Cliente getC() {
         return c;
     }
+    public Cliente getCliente() {
+        return c;
+    }
     public void setInicioEstancia(Date inicioEstancia) {
         this.inicioEstancia = inicioEstancia;
     }
@@ -77,6 +80,9 @@ public class Reserva {
             precio += p.getPrecio();
         }
         this.precioDia = precio;
+    }
+    public float getPrecioDia() {
+        return precioDia;
     }
     public void setPrecioTotal(int dias, int descuento) {
         float p;

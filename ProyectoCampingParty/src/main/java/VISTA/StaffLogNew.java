@@ -4,20 +4,55 @@
  */
 package VISTA;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 /**
  *
  * @author Carla Terol
  */
 public class StaffLogNew extends javax.swing.JFrame {
-    
+    private boolean[] parcelas;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffLogNew.class.getName());
 
     /**
      * Creates new form VistaClienteReserva
      */
     public StaffLogNew() {
+        boolean[] parcelas;
         FlatLightLaf.setup();
         initComponents();
+    }
+    public Date getDateOut(){
+        return this.Calend.getDate();
+    }
+    public JButton getButNext2(){
+        return this.butNext2;
+    }
+    public JButton getButNext3(){
+        return this.butNext3;
+    }
+    public JButton getButCanc(){
+        return this.butCanc;
+    }
+    public JButton getButBack1(){
+        return this.butBack1;
+    }
+    public JButton getAddTienda(){
+        return this.addTienda;
+    }
+    public JButton getButBack2(){
+        return this.butBack2;
+    }
+    public JButton getButCanc1(){
+        return this.ButBack3;
+    }
+    public JButton getAddP(){
+        return this.butAddp;
+    }
+    public JTextField getjTextField1(){
+        return this.jTextField1;
     }
 
     /**
@@ -33,22 +68,22 @@ public class StaffLogNew extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        Calend = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        butNext1 = new javax.swing.JButton();
+        jLabelRes = new javax.swing.JLabel();
+        butCanc = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        parcela5 = new javax.swing.JToggleButton();
         parcela1 = new javax.swing.JToggleButton();
-        parcela6 = new javax.swing.JToggleButton();
         parcela2 = new javax.swing.JToggleButton();
-        parcela7 = new javax.swing.JToggleButton();
         parcela3 = new javax.swing.JToggleButton();
-        parcela8 = new javax.swing.JToggleButton();
         parcela4 = new javax.swing.JToggleButton();
+        parcela5 = new javax.swing.JToggleButton();
+        parcela6 = new javax.swing.JToggleButton();
+        parcela7 = new javax.swing.JToggleButton();
+        parcela8 = new javax.swing.JToggleButton();
         parcela9 = new javax.swing.JToggleButton();
         parcela10 = new javax.swing.JToggleButton();
         parcela11 = new javax.swing.JToggleButton();
@@ -60,12 +95,12 @@ public class StaffLogNew extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        butNext2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        butBack1 = new javax.swing.JButton();
+        addTienda = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
@@ -77,10 +112,12 @@ public class StaffLogNew extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        butAddp = new javax.swing.JButton();
+        butBack2 = new javax.swing.JButton();
+        butNext3 = new javax.swing.JButton();
         Confirmar = new javax.swing.JPanel();
-        ButCanc = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        ButBack3 = new javax.swing.JButton();
+        butConf = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -96,14 +133,19 @@ public class StaffLogNew extends javax.swing.JFrame {
 
         jLabel3.setText("fecha de salida");
 
-        jButton2.setText("Siguiente");
-
-        jLabel4.setText("¡Se puede");
-
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        butNext1.setText("Siguiente");
+        butNext1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                butNext1ActionPerformed(evt);
+            }
+        });
+
+        jLabelRes.setText("Introduce la fecha");
+
+        butCanc.setText("Cancelar");
+        butCanc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butCancActionPerformed(evt);
             }
         });
 
@@ -116,20 +158,20 @@ public class StaffLogNew extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(205, 205, 205)
-                .addComponent(jButton3)
+                .addComponent(butCanc)
                 .addGap(64, 64, 64)
-                .addComponent(jButton2)
+                .addComponent(butNext1)
                 .addContainerGap(192, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Calend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelRes, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,25 +185,22 @@ public class StaffLogNew extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jLabel4))
+                        .addComponent(jLabelRes))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Calend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(147, 147, 147)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(butNext1)
+                    .addComponent(butCanc))
                 .addContainerGap())
         );
 
         jTabbedPane2.addTab("Fecha de la reserva", jPanel2);
 
         jPanel3.setLayout(new java.awt.GridLayout(4, 4));
-
-        parcela5.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela5);
 
         parcela1.setBackground(new java.awt.Color(102, 229, 146));
         parcela1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,17 +210,23 @@ public class StaffLogNew extends javax.swing.JFrame {
         });
         jPanel3.add(parcela1);
 
-        parcela6.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela6);
-
         parcela2.setBackground(new java.awt.Color(102, 229, 146));
         jPanel3.add(parcela2);
 
-        parcela7.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela7);
-
         parcela3.setBackground(new java.awt.Color(102, 229, 146));
         jPanel3.add(parcela3);
+
+        parcela4.setBackground(new java.awt.Color(102, 229, 146));
+        jPanel3.add(parcela4);
+
+        parcela5.setBackground(new java.awt.Color(102, 229, 146));
+        jPanel3.add(parcela5);
+
+        parcela6.setBackground(new java.awt.Color(102, 229, 146));
+        jPanel3.add(parcela6);
+
+        parcela7.setBackground(new java.awt.Color(102, 229, 146));
+        jPanel3.add(parcela7);
 
         parcela8.setBackground(new java.awt.Color(102, 229, 146));
         parcela8.addActionListener(new java.awt.event.ActionListener() {
@@ -190,9 +235,6 @@ public class StaffLogNew extends javax.swing.JFrame {
             }
         });
         jPanel3.add(parcela8);
-
-        parcela4.setBackground(new java.awt.Color(102, 229, 146));
-        jPanel3.add(parcela4);
 
         parcela9.setBackground(new java.awt.Color(102, 229, 146));
         jPanel3.add(parcela9);
@@ -235,7 +277,12 @@ public class StaffLogNew extends javax.swing.JFrame {
 
         jLabel11.setText("Nombre de la tienda");
 
-        jButton4.setText("Siguiente");
+        butNext2.setText("Siguiente");
+        butNext2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butNext2ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("m2");
 
@@ -249,17 +296,17 @@ public class StaffLogNew extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
         jLabel13.setText("¿Quieres agregar una tienda de campaña?");
 
-        jButton5.setText("Atrás");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        butBack1.setText("Atrás");
+        butBack1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                butBack1ActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Agregar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addTienda.setText("Agregar");
+        addTienda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addTiendaActionPerformed(evt);
             }
         });
 
@@ -278,7 +325,7 @@ public class StaffLogNew extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6)
+                            .addComponent(addTienda)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,9 +339,9 @@ public class StaffLogNew extends javax.swing.JFrame {
                 .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(butBack1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(butNext2)
                 .addGap(58, 58, 58))
         );
         jPanel1Layout.setVerticalGroup(
@@ -306,8 +353,8 @@ public class StaffLogNew extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5))
+                            .addComponent(butNext2)
+                            .addComponent(butBack1))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -323,7 +370,7 @@ public class StaffLogNew extends javax.swing.JFrame {
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)
+                        .addComponent(addTienda)
                         .addGap(31, 31, 31))))
         );
 
@@ -377,10 +424,24 @@ public class StaffLogNew extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
         jLabel10.setText("Agregar participantes");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        butAddp.setText("Agregar");
+        butAddp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                butAddpActionPerformed(evt);
+            }
+        });
+
+        butBack2.setText("Atrás");
+        butBack2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butBack2ActionPerformed(evt);
+            }
+        });
+
+        butNext3.setText("Siguiente");
+        butNext3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butNext3ActionPerformed(evt);
             }
         });
 
@@ -413,7 +474,7 @@ public class StaffLogNew extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 37, 37)
-                                .addComponent(jButton1)))
+                                .addComponent(butAddp)))
                         .addGap(65, 65, 65)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -421,7 +482,12 @@ public class StaffLogNew extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(butBack2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(butNext3))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -448,20 +514,23 @@ public class StaffLogNew extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                            .addComponent(butAddp))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butNext3)
+                    .addComponent(butBack2)))
         );
 
         jTabbedPane2.addTab("Miembros", jPanel4);
 
-        ButCanc.setText("No, vuelve atrás");
-        ButCanc.addActionListener(new java.awt.event.ActionListener() {
+        ButBack3.setText("No, vuelve atrás");
+        ButBack3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButCancActionPerformed(evt);
+                ButBack3ActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Sí, así perfecto");
+        butConf.setText("Sí, así perfecto");
 
         jLabel14.setText("¿Estás seguro?");
 
@@ -482,7 +551,7 @@ public class StaffLogNew extends javax.swing.JFrame {
                 .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ConfirmarLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(butConf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ConfirmarLayout.createSequentialGroup()
                         .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ConfirmarLayout.createSequentialGroup()
@@ -494,10 +563,10 @@ public class StaffLogNew extends javax.swing.JFrame {
                                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                         .addGroup(ConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ButCanc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(ButBack3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(74, 74, 74))
         );
         ConfirmarLayout.setVerticalGroup(
@@ -508,9 +577,9 @@ public class StaffLogNew extends javax.swing.JFrame {
                     .addGroup(ConfirmarLayout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton8)
+                        .addComponent(butConf)
                         .addGap(26, 26, 26)
-                        .addComponent(ButCanc))
+                        .addComponent(ButBack3))
                     .addGroup(ConfirmarLayout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -549,15 +618,15 @@ public class StaffLogNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void parcela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_parcela1ActionPerformed
 
     private void parcela11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela11ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_parcela11ActionPerformed
 
     private void parcela8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parcela8ActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_parcela8ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -568,13 +637,13 @@ public class StaffLogNew extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void butAddpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAddpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_butAddpActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void butCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCancActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_butCancActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
@@ -584,18 +653,77 @@ public class StaffLogNew extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void butBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBack1ActionPerformed
+    jTabbedPane2.setSelectedIndex(0);
+    }//GEN-LAST:event_butBack1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void addTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTiendaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_addTiendaActionPerformed
 
-    private void ButCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCancActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButCancActionPerformed
+    private void ButBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButBack3ActionPerformed
+        jTabbedPane2.setSelectedIndex(2);
+    }//GEN-LAST:event_ButBack3ActionPerformed
 
+    private void butBack2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBack2ActionPerformed
+     jTabbedPane2.setSelectedIndex(1);
+    }//GEN-LAST:event_butBack2ActionPerformed
+
+    private void butNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNext1ActionPerformed
+        jTabbedPane2.setSelectedIndex(1);
+    }//GEN-LAST:event_butNext1ActionPerformed
+
+    private void butNext2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNext2ActionPerformed
+     jTabbedPane2.setSelectedIndex(2);
+    }//GEN-LAST:event_butNext2ActionPerformed
+
+    private void butNext3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butNext3ActionPerformed
+     jTabbedPane2.setSelectedIndex(3);
+    }//GEN-LAST:event_butNext3ActionPerformed
+    public void setParcelas(boolean[] parc){
+        boolean[] parcelas = parc;
+        for(int i = 0; i < parcelas.length; i++){
+            if(parcelas[i]){
+                switch(i){
+                    case 0 -> parcela1.setEnabled(true);
+                    case 1 -> parcela2.setEnabled(true);
+                    case 2 -> parcela3.setEnabled(true);
+                    case 3 -> parcela4.setEnabled(true);
+                    case 4 -> parcela5.setEnabled(true);
+                    case 5 -> parcela6.setEnabled(true);
+                    case 6 -> parcela7.setEnabled(true);
+                    case 7 -> parcela8.setEnabled(true);
+                    case 8 -> parcela9.setEnabled(true);
+                    case 9 -> parcela10.setEnabled(true);
+                    case 10 -> parcela11.setEnabled(true);
+                    case 11 -> parcela12.setEnabled(true);
+                    case 12 -> parcela13.setEnabled(true);
+                    case 13 -> parcela14.setEnabled(true);
+                    case 14 -> parcela15.setEnabled(true);
+                    case 15 -> parcela16.setEnabled(true);
+                }
+            } else {
+                switch(i){
+                    case 0 -> parcela1.setEnabled(false);
+                    case 1 -> parcela2.setEnabled(false);
+                    case 2 -> parcela3.setEnabled(false);
+                    case 3 -> parcela4.setEnabled(false);
+                    case 4 -> parcela5.setEnabled(false);
+                    case 5 -> parcela6.setEnabled(false);
+                    case 6 -> parcela7.setEnabled(false);
+                    case 7 -> parcela8.setEnabled(false);
+                    case 8 -> parcela9.setEnabled(false);
+                    case 9 -> parcela10.setEnabled(false);
+                    case 10 -> parcela11.setEnabled(false);
+                    case 11 -> parcela12.setEnabled(false);
+                    case 12 -> parcela13.setEnabled(false);
+                    case 13 -> parcela14.setEnabled(false);
+                    case 14 -> parcela15.setEnabled(false);
+                    case 15 -> parcela16.setEnabled(false);
+                }
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -622,17 +750,19 @@ public class StaffLogNew extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ButCanc;
+    private javax.swing.JButton ButBack3;
+    private com.toedter.calendar.JDateChooser Calend;
     private javax.swing.JPanel Confirmar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton addTienda;
+    private javax.swing.JButton butAddp;
+    private javax.swing.JButton butBack1;
+    private javax.swing.JButton butBack2;
+    private javax.swing.JButton butCanc;
+    private javax.swing.JButton butConf;
+    private javax.swing.JButton butNext1;
+    private javax.swing.JButton butNext2;
+    private javax.swing.JButton butNext3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -645,12 +775,12 @@ public class StaffLogNew extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelRes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

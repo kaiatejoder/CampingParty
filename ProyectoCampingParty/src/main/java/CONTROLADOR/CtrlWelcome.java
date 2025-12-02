@@ -6,8 +6,6 @@ package CONTROLADOR;
 
 import MODELO.*;
 import VISTA.*;
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +16,6 @@ import java.awt.event.ActionListener;
  * @author Carla Terol 
  */
 public class CtrlWelcome {
-    private final Modelo m;
     private final Welcome vWel;
     private final ClientLogin cLog;
     private final StaffLogin sLog;
@@ -27,7 +24,6 @@ public class CtrlWelcome {
                                  Welcome vista,
                                  ClientLogin vCliLog,
                                  StaffLogin vStaffLog) {
-        this.m= md;
         this.vWel = vista;
         this.cLog = vCliLog;
         this.sLog = vStaffLog;
@@ -41,6 +37,7 @@ public class CtrlWelcome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vWel.setVisible(false);
+                cLog.setLocationRelativeTo(vWel);
                 cLog.setVisible(true);
             }
         });
@@ -50,35 +47,9 @@ public class CtrlWelcome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vWel.setVisible(false);
+                sLog.setLocationRelativeTo(vWel);
                 sLog.setVisible(true);
             }
         });
-        sLog.getBack().addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sLog.setVisible(false);
-                vWel.setVisible(true);
-            }
-        });
-        cLog.getBack().addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cLog.setVisible(false);
-                vWel.setVisible(true);
-            }
-        });
-    }
-    
-
-    private void cli() {
-        vWel.setVisible(false);
-        cLog.setLocationRelativeTo(vWel);
-        cLog.setVisible(true);
-    }
-
-    private void st() {
-        vWel.setVisible(false);
-        sLog.setLocationRelativeTo(vWel);
-        sLog.setVisible(true);
     }
 }

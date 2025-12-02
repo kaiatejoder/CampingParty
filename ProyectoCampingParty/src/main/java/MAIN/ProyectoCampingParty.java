@@ -1,7 +1,5 @@
 package MAIN;
-import VISTA.ClientLogin;
-import VISTA.StaffLogin;
-import VISTA.Welcome;
+import CONTROLADOR.CONTROLADOR;
 
 /**
  *
@@ -10,11 +8,14 @@ import VISTA.Welcome;
 public class ProyectoCampingParty {
 
     public static void main(String[] args) {
-        StaffLogin tl = new StaffLogin();
-        ClientLogin cl = new ClientLogin();
-        Welcome vl = new Welcome(tl,cl);
+        // Instancia el controlador principal, que se encarga de:
+        // 1. Crear todas las vistas
+        // 2. Crear el modelo
+        // 3. Instanciar todos los controladores
+        // 4. Conectar los listeners
+        CONTROLADOR controlador = new CONTROLADOR();
         
-        vl.setVisible(true);
-        vl.setTitle("Camping Riurau");
+        // Inicia la aplicación (muestra Welcome)
+        controlador.iniciar();
     }
 }

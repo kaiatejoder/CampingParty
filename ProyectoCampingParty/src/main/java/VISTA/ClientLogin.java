@@ -117,31 +117,15 @@ public class ClientLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ClienteSignOn c;
-        String s = "clientSignUp";
-        c = new ClienteSignOn(new Modelo() );
-        c.setVisible(true); 
-        this.dispose(); 
+        // Controlado por ControladorClienteLogin - no hacer nada aquí
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    // Ir a VistaCliente (directamente sin login)
-    String s = "clientSignIn";
-    
+        // Controlado por ControladorClienteLogin - no hacer nada aquí
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    // Volver a Welcome
-    this.dispose(); // Cerrar esta ventana
-    
-    // Crear las ventanas que necesita Welcome
-    StaffLogin ventanaTrabajador = new StaffLogin();
-    ClientLogin ventanaCliente = new ClientLogin();
-    
-    // Pasar las ventanas al constructor
-    Welcome ventanaPrincipal = new Welcome();
-    ventanaPrincipal.setVisible(true);
-    ventanaPrincipal.setLocationRelativeTo(null);
+        // Controlado por ControladorClienteLogin - no hacer nada aquí
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

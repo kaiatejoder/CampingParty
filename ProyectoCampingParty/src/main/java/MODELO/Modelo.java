@@ -33,8 +33,12 @@ public class Modelo {
         this.r = new Reservas();
     }
     public boolean[]getParcelasLibres(){
-    return this.parcelas.getLibres();
-}
+        return this.parcelas.getLibres();
+    }
+
+    public ArrayList<Actividad> getActs() {
+        return this.acts;
+    }
     public void setDatos(){
         Cliente c = new Cliente("Lupe López","11111111Y",22,666666666,"lupelopez@pornhub.com","Lupita");
         clientes.add(c);
