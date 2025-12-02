@@ -1,7 +1,7 @@
 package MAIN;
-import VISTA.ClienteLogin;
-import VISTA.TrabajadorLogin;
-import VISTA.VistaLogin;
+import VISTA.ClientLogin;
+import VISTA.StaffLogin;
+import VISTA.Welcome;
 
 /**
  *
@@ -10,9 +10,9 @@ import VISTA.VistaLogin;
 public class ProyectoCampingParty {
 
     public static void main(String[] args) {
-        TrabajadorLogin tl = new TrabajadorLogin();
-        ClienteLogin cl = new ClienteLogin();
-        VistaLogin vl = new VistaLogin(tl,cl);
+        StaffLogin tl = new StaffLogin();
+        ClientLogin cl = new ClientLogin();
+        Welcome vl = new Welcome(tl,cl);
         
         vl.setVisible(true);
         vl.setTitle("Camping Riurau");

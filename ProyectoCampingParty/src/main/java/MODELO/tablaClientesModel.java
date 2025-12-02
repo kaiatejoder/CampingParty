@@ -1,12 +1,14 @@
 package MODELO;
 import MODELO.Acompanyante;
 import java.util.ArrayList; 
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 /**
  * Tabla para mostrar los acompañantes en la vista de reserva del cliente
  * @author Carla Terol
  */
 
-public class tablaClientesModel extends javax.swing.table.AbstractTableModel {
+public class tablaClientesModel extends AbstractTableModel {
     private final String[] nombresColumnas = {"Nombre", "Edad"};
     private final Object[][] datos;
     private int fila;

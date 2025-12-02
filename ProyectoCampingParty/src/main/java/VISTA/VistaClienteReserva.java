@@ -6,9 +6,7 @@ package VISTA;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import MODELO.Reserva;
-import MODELO.tablaClientesModel;
 
-import com.formdev.flatlaf.FlatLightLaf;
 
 import java.util.Date;
 
@@ -18,6 +16,9 @@ import MODELO.Acompanyante;
 import MODELO.Tienda;
 import MODELO.tablaClientesModel;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import themes.RiuRauLaf;
 /**
  *
  * @author Carla Terol
@@ -28,9 +29,10 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     private Date fechaOut,fechaIn;
     Reserva r;
     Cliente c;
+    TableModel tc;
     Modelo m;
     private boolean[] parcelasSelect;
-    tablaClientesModel tc;
+    
 
     /**
      * Creates new form VistaClienteReserva
@@ -40,10 +42,12 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         this.c = c;
         this.m = m;
         ArrayList<Acompanyante> acom = new ArrayList();
+        
         tc = new tablaClientesModel(acom);
+        
         for(int i =0; i < 16; i++){
         parcelasSelect[i]= false;}
-        FlatLightLaf.setup();
+        RiuRauLaf.setup();
         initComponents();
         
     }
@@ -102,7 +106,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaClientes = new javax.swing.JTable(tc);
+        tablaClientes = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -489,7 +493,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Parcelas", jPanel1);
 
-        tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+        tablaClientes.setModel(tc);
         jScrollPane1.setViewportView(tablaClientes);
 
         jLabel6.setText("Quién viene?");
@@ -741,7 +745,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
        String nom = nombre.getText() + " " + apellidos.getText();
         Acompanyante a = new Acompanyante(nom, Integer.parseInt(edad.getText()));
         r.addAcompanyante(a);
-       tablaClientes.anyade(a);
+      // tablaClientes.anyade(a);
     }//GEN-LAST:event_addPartActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

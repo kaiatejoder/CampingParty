@@ -4,17 +4,25 @@
  */
 package VISTA;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author igrub
  */
-public class TrabajadorLogin extends javax.swing.JFrame {
+public class StaffLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form TrabajadorLogin
      */
-    public TrabajadorLogin() {
+    public StaffLogin() {
         initComponents();
+    }
+    public JButton getBack(){
+    return this.jButton2;
+    }
+    public JButton getLogin(){
+    return this.jButton1;
     }
 
     /**
@@ -81,18 +89,11 @@ public class TrabajadorLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        TrabajadorSesión sesion = new TrabajadorSesión(); // usa el nombre exacto de tu clase
-        sesion.setLocationRelativeTo(this);
-        sesion.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         // Como VistaLogin pide (TrabajadorLogin, ClienteLogin), creamos nuevas instancias
-    VistaLogin inicio = new VistaLogin(new TrabajadorLogin(), new ClienteLogin());
-    inicio.setLocationRelativeTo(this);
-    inicio.setVisible(true);
-    this.dispose();
+ 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -112,20 +113,21 @@ public class TrabajadorLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrabajadorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrabajadorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrabajadorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrabajadorLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrabajadorLogin().setVisible(true);
+                new StaffLogin().setVisible(true);
             }
         });
     }

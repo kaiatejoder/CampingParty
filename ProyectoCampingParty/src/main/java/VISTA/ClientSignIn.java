@@ -8,25 +8,24 @@ import MODELO.Cliente;
 import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import themes.RiuRauLaf;
 
 /**
  *
  * @author Carla
  */
-public class ClienteLogLogin extends javax.swing.JFrame {
+public class ClientSignIn extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteLogLogin.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientSignIn.class.getName());
     private String usuario;
+    Modelo m;
     private String password;
-    private Modelo m;
     /**
      * Creates new form CLienteLogLogin
      */
-    public ClienteLogLogin() {
-        m = new Modelo();
-        m.setDatos();
-        FlatLaf.registerCustomDefaultsSource("themes");
-        FlatLightLaf.setup();
+    public ClientSignIn(Modelo md) {
+        m = md;
+        RiuRauLaf.setup();
         initComponents();
     }
 
@@ -169,30 +168,7 @@ public class ClienteLogLogin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteLogLogin().setVisible(true));
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

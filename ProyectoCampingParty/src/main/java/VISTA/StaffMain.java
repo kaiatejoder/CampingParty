@@ -31,14 +31,14 @@ public class StaffMain extends javax.swing.JFrame {
         }
         jButton1.addActionListener(e -> {
         // Registrar Entrada
-        VistaStaffEntrada v = new VistaStaffEntrada();
+        StaffLogNew v = new StaffLogNew();
         v.setLocationRelativeTo(this);
         v.setVisible(true);
     });
 
     jButton2.addActionListener(e -> {
         // Administrar Reservas
-        VistaStaffActividad v = new VistaStaffActividad();
+        StaffAct v = new StaffAct();
         v.setLocationRelativeTo(this);
         v.setVisible(true);
     });

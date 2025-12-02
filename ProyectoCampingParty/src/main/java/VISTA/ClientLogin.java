@@ -7,21 +7,32 @@ package VISTA;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JButton;
+import themes.RiuRauLaf;
 
 /**
  *
  * @author Carla
  */
-public class ClienteLogin extends javax.swing.JFrame {
+public class ClientLogin extends javax.swing.JFrame {
     private Cliente c;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteLogin.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientLogin.class.getName());
 
     /**
      * Creates new form ClienteLogin
      */
-    public ClienteLogin() {
-        FlatLightLaf.setup();
+    public ClientLogin() {
+        RiuRauLaf.setup();
         initComponents();
+    }
+    public JButton getSignIn(){
+        return this.jButton3;
+    }
+    public JButton getLogIn(){
+        return this.jButton2;
+    }
+    public JButton getBack(){
+        return this.jButton1;
     }
 
   
@@ -107,6 +118,7 @@ public class ClienteLogin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         ClienteSignOn c;
+        String s = "clientSignUp";
         c = new ClienteSignOn(new Modelo() );
         c.setVisible(true); 
         this.dispose(); 
@@ -114,22 +126,20 @@ public class ClienteLogin extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     // Ir a VistaCliente (directamente sin login)
-    this.dispose(); // Cerrar esta ventana
-    ClienteLogLogin clientelog = new ClienteLogLogin();
-    clientelog.setVisible(true);
-    clientelog.setLocationRelativeTo(null);
+    String s = "clientSignIn";
+    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    // Volver a VistaLogin
+    // Volver a Welcome
     this.dispose(); // Cerrar esta ventana
     
-    // Crear las ventanas que necesita VistaLogin
-    TrabajadorLogin ventanaTrabajador = new TrabajadorLogin();
-    ClienteLogin ventanaCliente = new ClienteLogin();
+    // Crear las ventanas que necesita Welcome
+    StaffLogin ventanaTrabajador = new StaffLogin();
+    ClientLogin ventanaCliente = new ClientLogin();
     
     // Pasar las ventanas al constructor
-    VistaLogin ventanaPrincipal = new VistaLogin(ventanaTrabajador, ventanaCliente);
+    Welcome ventanaPrincipal = new Welcome();
     ventanaPrincipal.setVisible(true);
     ventanaPrincipal.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -156,7 +166,7 @@ public class ClienteLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteLogin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ClientLogin().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
