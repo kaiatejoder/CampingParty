@@ -42,6 +42,45 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>MAIN.ProyectoCampingParty</exec.mainClass>
+        <exec.mainClass>com.campingparty.main.ProyectoCampingParty</exec.mainClass>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <includes>
+                        <include>com/campingparty/main/**/*.java</include>
+                        <include>com/campingparty/themes/**/*.java</include>
+                        <include>com/campingparty/modelo/**/*.java</include>
+                        <include>com/campingparty/controlador/ControladorPrincipal.java</include>
+                        <include>com/campingparty/vista/IVista.java</include>
+                        <include>com/campingparty/vista/Welcome.java</include>
+                        <include>com/campingparty/vista/VistaBienvenida.java</include>
+                        <include>com/campingparty/vista/VistaClienteLogin.java</include>
+                        <include>com/campingparty/vista/VistaStaffLogin.java</include>
+                        <include>com/campingparty/vista/VistaCliente.java</include>
+                        <include>com/campingparty/vista/StaffMain.java</include>
+                        <include>com/campingparty/vista/VistaClienteModificarReserva.java</include>
+                        <include>com/campingparty/vista/VistaReservas.java</include>
+                        <include>com/campingparty/vista/ActividadSeleccionada.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>VISTA/**</exclude>
+                        <exclude>MODELO/**</exclude>
+                        <exclude>CONTROLADOR/**</exclude>
+                        <exclude>MAIN/**</exclude>
+                        <exclude>com/campingparty/modelo/Parcelas.java</exclude>
+                        <exclude>com/campingparty/modelo/Reservas.java</exclude>
+                        <exclude>com/campingparty/modelo/Participacion.java</exclude>
+                        <exclude>com/campingparty/modelo/Valid.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
