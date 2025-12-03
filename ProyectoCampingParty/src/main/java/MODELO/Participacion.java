@@ -43,6 +43,6 @@ public class Participacion{
 
     @Override
     public String toString(){
-        return "Participación en " + actividad.getTipo() + " - Cliente: " + cliente.getNombre();
+        return "Participación en " + actividad.getTitulo() + " - Cliente: " + cliente.getNombre();
     }
 }

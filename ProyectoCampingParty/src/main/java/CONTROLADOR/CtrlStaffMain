@@ -1,0 +1,7 @@
+public class CtrlStaffMain {
+    
+    // Clase mínima: sirve de tipo común para las implementaciones
+    public CtrlStaffMain(StaffMain vista) {
+        // constructor por defecto
+    }
+}

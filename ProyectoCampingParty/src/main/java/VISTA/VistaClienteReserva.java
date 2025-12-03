@@ -13,8 +13,8 @@ import java.util.Date;
 import javax.swing.ButtonGroup;
 
 import MODELO.Acompanyante;
+import MODELO.TablaClientesAssistModel;
 import MODELO.Tienda;
-import MODELO.tablaClientesModel;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -32,21 +32,24 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     TableModel tc;
     Modelo m;
     private boolean[] parcelasSelect;
+    private CONTROLADOR.ControladorVistaClienteReserva controlador;
     
 
     /**
      * Creates new form VistaClienteReserva
      */
-    public VistaClienteReserva(Modelo m, Cliente c) {
+    public VistaClienteReserva(Modelo m, Cliente c, CONTROLADOR.ControladorVistaClienteReserva controlador) {
         
         this.c = c;
         this.m = m;
+        this.controlador = controlador;
         ArrayList<Acompanyante> acom = new ArrayList();
         
-        tc = new tablaClientesModel(acom);
+        tc = new TablaClientesAssistModel(acom);
         
         for(int i =0; i < 16; i++){
-        parcelasSelect[i]= false;}
+            parcelasSelect[i] = m.getParcelasLibres()[i];
+    }
         RiuRauLaf.setup();
         initComponents();
         
@@ -912,7 +915,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
 
     private void butSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butSig2ActionPerformed
       jTabbedPane2.setSelectedIndex(3);
-      tablaClientes.setModel(new tablaClientesModel(r.getAcompanyantes()));
+      tablaClientes.setModel(new TablaClientesAssistModel(r.getAcompanyantes()));
     }//GEN-LAST:event_butSig2ActionPerformed
 
     private void jButtonSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSig2ActionPerformed
@@ -920,74 +923,10 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSig2ActionPerformed
 
     private void jButtonConfActionPerformed(java.awt.event.ActionEvent evt) {
-        // Validar que se seleccionó al menos una parcela
-        boolean parcelaSeleccionada = false;
-        for (boolean p : parcelasSelect) {
-            if (p) {
-                parcelaSeleccionada = true;
-                break;
-            }
-        }
-        
-        if (!parcelaSeleccionada) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar al menos una parcela", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        try {
-            // Obtener fechas de entrada y salida
-            java.util.Date fechaIn = jDateReservaIn.getDate();
-            java.util.Date fechaOut = jDateReservaOut.getDate();
-            
-            if (fechaIn == null || fechaOut == null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar fechas válidas", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            // Crear lista de parcelas seleccionadas
-            java.util.ArrayList<Parcela> parcelasReserva = new java.util.ArrayList<>();
-            for (int i = 0; i < parcelasSelect.length; i++) {
-                if (parcelasSelect[i]) {
-                    Parcela p = new Parcela(i + 1, 0, false, 0);
-                    parcelasReserva.add(p);
-                }
-            }
-            
-            // Crear lista vacía de tiendas y acompañantes para esta llamada básica
-            java.util.ArrayList<Tienda> tiendas = new java.util.ArrayList<>();
-            java.util.ArrayList<Acompanyante> acompanyantes = new java.util.ArrayList<>();
-            
-            // Crear objeto reserva con los parámetros correctos
-            Reserva reserva = new Reserva(fechaIn, fechaOut, parcelasReserva, tiendas, acompanyantes, c);
-            
-            // Obtener el ID del cliente por su DNI
-            Modelo modelo = new Modelo();
-            int clientId = modelo.getDAO().obtenerIdClientePorDNI(c.getDni());
-            
-            if (clientId <= 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Cliente no encontrado en la base de datos", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            // Insertar reserva en base de datos
-            boolean resultado = modelo.getDAO().agregarReserva(reserva, clientId);
-            
-            if (resultado) {
-                // Actualizar estado de parcelas en base de datos (reservadas = true, fechas)
-                for (int i = 0; i < parcelasSelect.length; i++) {
-                    if (parcelasSelect[i]) {
-                        modelo.getDAO().actualizarParcela(i + 1, false, true, fechaIn, fechaOut);
-                    }
-                }
-                
-                javax.swing.JOptionPane.showMessageDialog(this, "✓ Reserva confirmada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "✗ Error al confirmar la reserva", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+        // Delegar al controlador la validación y creación de reserva (ya inicializado en constructor)
+        java.util.Date fechaIn = jDateReservaIn.getDate();
+        java.util.Date fechaOut = jDateReservaOut.getDate();
+        controlador.confirmarReserva(fechaIn, fechaOut, parcelasSelect);
     }
 
     /**
@@ -1012,7 +951,15 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaClienteReserva(new Modelo(), new Cliente()).setVisible(true));
+        MODELO.Modelo m = new MODELO.Modelo();
+        MODELO.Cliente c = new MODELO.Cliente();
+        CONTROLADOR.ControladorVistaClienteReserva ctrl = 
+            new CONTROLADOR.ControladorVistaClienteReserva(null, m, c);
+        java.awt.EventQueue.invokeLater(() -> {
+            VistaClienteReserva view = new VistaClienteReserva(m, c, ctrl);
+            ctrl.setVista(view);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

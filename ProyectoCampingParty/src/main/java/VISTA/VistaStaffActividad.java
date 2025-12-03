@@ -3,23 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VISTA;
+import MODELO.Actividad;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.util.ArrayList;
+import javax.swing.JList;
+import themes.RiuRauLaf;
 /**
  *
  * @author Carla Terol
  */
 public class VistaStaffActividad extends javax.swing.JFrame {
     
+    private JList plantillas;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaStaffActividad.class.getName());
 
     /**
      * Creates new form VistaClienteReserva
      */
-    public VistaStaffActividad() {
-        FlatLightLaf.setup();
+    public VistaStaffActividad(ArrayList<Actividad> plantillas) {
+     
+        RiuRauLaf.setup();
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

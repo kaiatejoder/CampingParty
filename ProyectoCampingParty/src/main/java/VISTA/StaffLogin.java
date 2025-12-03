@@ -25,6 +25,13 @@ public class StaffLogin extends javax.swing.JFrame {
     return this.jButton1;
     }
 
+    public void addListeners(java.awt.event.ActionListener al) {
+        jButton1.setActionCommand("btnLogIn");
+        jButton1.addActionListener(al);
+        jButton2.setActionCommand("btnBack");
+        jButton2.addActionListener(al);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

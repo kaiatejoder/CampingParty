@@ -16,10 +16,15 @@ public class Cliente extends Persona {
     private ArrayList<Tienda> tiendas;
     private Reservas reservas;
 
-    
-    public Cliente(String nombre, String dni, int edad, int telefono, String username, String password){
+    public Cliente(int id, String nombre, String dni){
         this.nombre = nombre;
         this.dni = dni;
+        this.id = id;
+    }
+    public Cliente(String nombre, String dni,int id, int edad, int telefono, String username, String password){
+        this.nombre = nombre;
+        this.dni = dni;
+        this.id = id;
         this.tlf = telefono;
         this.user = username;
         this.pass = password;
@@ -35,9 +40,6 @@ public class Cliente extends Persona {
         this.reservas = new Reservas();
     }
 
-    public Cliente() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
 
    public void setUser(String u){

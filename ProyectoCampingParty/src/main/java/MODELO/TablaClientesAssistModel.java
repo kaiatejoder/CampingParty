@@ -8,12 +8,12 @@ import javax.swing.table.TableModel;
  * @author Carla Terol
  */
 
-public class tablaClientesModel extends AbstractTableModel {
+public class TablaClientesAssistModel extends AbstractTableModel {
     private final String[] nombresColumnas = {"Nombre", "Edad"};
     private final Object[][] datos;
     private int fila;
 
-    public tablaClientesModel(ArrayList<Acompanyante> acompanyantes) {
+    public TablaClientesAssistModel(ArrayList<Acompanyante> acompanyantes) {
         fila = acompanyantes.size();
         datos = new Object[acompanyantes.size()][2];
         for (int i = 0; i < acompanyantes.size(); i++) {

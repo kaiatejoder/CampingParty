@@ -13,7 +13,7 @@ public class ProyectoCampingParty {
         // 2. Crear el modelo
         // 3. Instanciar todos los controladores
         // 4. Conectar los listeners
-        CONTROLADOR controlador = new CONTROLADOR();
+        CONTROLADOR controlador = CONTROLADOR.inicializar();
         
         // Inicia la aplicación (muestra Welcome)
         controlador.iniciar();

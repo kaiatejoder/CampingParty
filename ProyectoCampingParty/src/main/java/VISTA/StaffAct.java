@@ -14,13 +14,16 @@ import java.util.Date;
 public class StaffAct extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffAct.class.getName());
+    private CONTROLADOR.CtrlStaffAct controlador;
 
     /**
      * Creates new form VistaClienteReserva
      */
-    public StaffAct() {
+    public StaffAct(CONTROLADOR.CtrlStaffAct controlador) {
+        this.controlador = controlador;
         FlatLightLaf.setup();
         initComponents();
+        agregarListenerPlantillas();
     }
 
     /**
@@ -208,42 +211,56 @@ public class StaffAct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            // Obtener datos del formulario
-            String titulo = jTextField1.getText();
-            String descripcion = jTextArea1.getText();
-            String tipo = (String) jComboBox1.getSelectedItem();
-            String audiencia = (String) jComboBox2.getSelectedItem();
-            Date fecha = jDateChooser2.getDate();
-            
-            if (titulo.isEmpty() || descripcion.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            if (fecha == null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            // Crear actividad (usando ID temporal 0, la BD lo generará)
-            Actividad actividad = new Actividad(0, tipo, fecha, 50); // 50 como participantes máximos por defecto
-            
-            // Guardar en BD
-            Modelo modelo = new Modelo();
-            boolean resultado = modelo.getDAO().agregarActividad(actividad);
-            
-            if (resultado) {
-                javax.swing.JOptionPane.showMessageDialog(this, "✓ Actividad creada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                // Limpiar formulario
-                jTextField1.setText("Título");
-                jTextArea1.setText("");
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "✗ Error al crear la actividad", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        // Delegar al controlador la validación y creación de actividad (ya inicializado en constructor)
+        String titulo = jTextField1.getText();
+        String descripcion = jTextArea1.getText();
+        String tipo = (String) jComboBox1.getSelectedItem();
+        String audiencia = (String) jComboBox2.getSelectedItem();
+        Date fecha = jDateChooser2.getDate();
+        
+        controlador.crearActividad(titulo, descripcion, tipo, audiencia, fecha);
+        
+        // Limpiar formulario
+        jTextField1.setText("Título");
+        jTextArea1.setText("");
+    }
+
+    /**
+     * Carga las plantillas de actividades en la lista
+     */
+    public void cargarPlantillas(java.util.ArrayList<Actividad> plantillas) {
+        javax.swing.DefaultListModel<String> model = new javax.swing.DefaultListModel<>();
+        for (Actividad p : plantillas) {
+            model.addElement("Plantilla " + p.getIdActividad() + " - " + p.getTipo());
         }
+        jList1.setModel(model);
+    }
+
+    /**
+     * Carga una plantilla en los campos del formulario
+     */
+    public void cargarPlantillaEnFormulario(Actividad plantilla) {
+        jTextField1.setText(plantilla.getTipo());
+        jComboBox1.setSelectedItem(plantilla.getTipo());
+        jDateChooser2.setDate(plantilla.getFechaHora());
+    }
+
+    /**
+     * Obtiene el índice de la plantilla seleccionada
+     */
+    public int getPlantillaSeleccionada() {
+        return jList1.getSelectedIndex();
+    }
+
+    /**
+     * Agrega listener a la lista de plantillas
+     */
+    private void agregarListenerPlantillas() {
+        jList1.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && jList1.getSelectedIndex() >= 0) {
+                controlador.cargarPlantillaSeleccionada(jList1.getSelectedIndex());
+            }
+        });
     }
 
     /**
@@ -268,28 +285,34 @@ public class StaffAct extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StaffAct().setVisible(true));
+        MODELO.Modelo m = new MODELO.Modelo();
+        CONTROLADOR.CtrlStaffAct ctrl = new CONTROLADOR.CtrlStaffAct(null, m, null);
+        java.awt.EventQueue.invokeLater(() -> {
+            StaffAct view = new StaffAct(ctrl);
+            ctrl.setVista(view);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JComboBox<String> jComboBox1;
+    public javax.swing.JComboBox<String> jComboBox2;
+    public com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser jDateChooser2;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel20;
+    public javax.swing.JLabel jLabel21;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JList<String> jList1;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

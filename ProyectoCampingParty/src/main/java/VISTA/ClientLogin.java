@@ -35,7 +35,14 @@ public class ClientLogin extends javax.swing.JFrame {
         return this.jButton1;
     }
 
-  
+    public void addListeners(java.awt.event.ActionListener al) {
+        jButton1.setActionCommand("btnBack");
+        jButton1.addActionListener(al);
+        jButton2.setActionCommand("btnLogIn");
+        jButton2.addActionListener(al);
+        jButton3.setActionCommand("btnSignIn");
+        jButton3.addActionListener(al);
+    }
 
     
 

@@ -6,6 +6,7 @@ package VISTA;
 
 import javax.swing.JOptionPane;
 import MODELO.Staff;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -53,18 +54,7 @@ public class StaffSignIn extends javax.swing.JFrame {
         });
 
         jButton1.setText("INICIAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Volver Atrás");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        
 
         jLabel4.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -126,43 +116,12 @@ public class StaffSignIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          String usuario = jTextField1.getText();
-    String contrasena = new String(jPasswordField1.getPassword());
-
-    if (usuario.isBlank() || contrasena.isBlank()) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Por favor, complete ambos campos.",
-                "Campos vacíos", javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
+    public void AddActionListeners(ActionListener al) {
+        jButton1.setActionCommand("btnLogIn");
+        jButton1.addActionListener(al);
+        jButton2.setActionCommand("btnBack");
+        jButton2.addActionListener(al);
     }
-
-    MODELO.Staff staff = Staff.autenticar(usuario, contrasena);
-
-    if (staff == null) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Usuario o contraseña incorrectos.",
-                "Error de autenticación", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "Bienvenido/a, " + staff.getNombre() + "!",
-            "Inicio de sesión correcto", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-    // Abre la pantalla principal del staff
-    VISTA.StaffMain main = new VISTA.StaffMain(staff);
-    main.setLocationRelativeTo(this);
-    main.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      VISTA.StaffLogin login = new VISTA.StaffLogin();
-      login.setLocationRelativeTo(this);
-      login.setVisible(true);
-      this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,12 +160,19 @@ public class StaffSignIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JPasswordField jPasswordField1;
+    public javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public void addActionListeners(ActionListener al) {
+       jButton1.setActionCommand("Login");
+        jButton1.addActionListener(al);
+        jButton2.setActionCommand("Back");
+        jButton2.addActionListener(al);
+    }
 }

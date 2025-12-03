@@ -16,12 +16,14 @@ import MODELO.Modelo;
 public class StaffLogNew extends javax.swing.JFrame {
     private boolean[] parcelas;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffLogNew.class.getName());
+    private CONTROLADOR.CtrlStaffLogNew controlador;
 
     /**
      * Creates new form VistaClienteReserva
      */
-    public StaffLogNew() {
+    public StaffLogNew(CONTROLADOR.CtrlStaffLogNew controlador) {
         boolean[] parcelas;
+        this.controlador = controlador;
         FlatLightLaf.setup();
         initComponents();
     }
@@ -732,33 +734,11 @@ public class StaffLogNew extends javax.swing.JFrame {
     }
 
     private void butConfActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            // Obtener datos seleccionados (fecha, parcelas, etc.)
-            Date fechaSalida = Calend.getDate();
-            
-            if (fechaSalida == null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            // Actualizar estado de parcelas en BD (ocupadas)
-            Modelo modelo = new Modelo();
-            java.sql.Date sqlFecha = new java.sql.Date(fechaSalida.getTime());
-            
-            // Actualizar todas las parcelas seleccionadas como ocupadas
-            // Por ahora, usamos una fecha ficticia de entrada (hoy)
-            Date hoy = new Date();
-            java.sql.Date sqlFechaHoy = new java.sql.Date(hoy.getTime());
-            
-            // Actualizar parcelas (asumiendo que hay un array de parcelas seleccionadas)
-            // Ocupada=true, Reservada=false
-            modelo.getDAO().actualizarParcela(1, true, false, sqlFechaHoy, sqlFecha);
-            
-            javax.swing.JOptionPane.showMessageDialog(this, "✓ Entrada/Salida registrada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+        // Delegar al controlador la validación y registro de entrada/salida (ya inicializado en constructor)
+        Date fechaSalida = Calend.getDate();
+        Date fechaEntrada = new Date(); // Usar fecha actual como entrada
+        
+        controlador.registrarEntradaSalida(1, fechaEntrada, fechaSalida);
     }
 
     /**
@@ -783,7 +763,13 @@ public class StaffLogNew extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StaffLogNew().setVisible(true));
+        MODELO.Modelo m = new MODELO.Modelo();
+        CONTROLADOR.CtrlStaffLogNew ctrl = new CONTROLADOR.CtrlStaffLogNew(null, m, null);
+        java.awt.EventQueue.invokeLater(() -> {
+            StaffLogNew view = new StaffLogNew(ctrl);
+            ctrl.setVista(view);
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

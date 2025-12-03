@@ -1,6 +1,7 @@
 package MODELO;
 
 import java.sql.*;
+import static java.sql.JDBCType.NULL;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
@@ -32,6 +33,7 @@ public class DAO {
      */
     public Cliente getCliente(String user, String pass) {
         Cliente c = null;
+        Cliente err = null;
         try {
             String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ?";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
@@ -40,6 +42,7 @@ public class DAO {
             ResultSet resultados = ps.executeQuery();
             
             if (resultados.next()) {
+                int id = resultados.getInt("id");
                 String nombre = resultados.getString("name");
                 String apellido1 = resultados.getString("surn1");
                 String apellido2 = resultados.getString("surn2");
@@ -48,13 +51,18 @@ public class DAO {
                 int telefono = resultados.getInt("tlf");
                 String nombreCompleto = nombre + " " + apellido1 + (apellido2 != null ? " " + apellido2 : "");
                 
-                c = new Cliente(nombreCompleto, dni, edad, telefono, user, pass);
+                c = new Cliente(nombreCompleto, dni, edad, id, telefono, user, pass);
             }
         } catch (SQLException e) {
             System.err.println("✗ Error al obtener cliente: " + e.getMessage());
+            return err;
         }
         return c;
+        
     }
+    /**
+     * Obtiene todos los clientes
+     */
 
     /**
      * Obtiene todas las actividades de la BD
@@ -62,18 +70,20 @@ public class DAO {
     public ArrayList<Actividad> getActividades() throws SQLException {
         ArrayList<Actividad> actividades = new ArrayList<>();
         try {
-            String sql = "SELECT idact, type, date, max FROM act";
+            String sql = "SELECT idact, type, date, max, tit, desc, loc FROM act";
             Statement sent = conexionBD.createStatement();
             ResultSet res = sent.executeQuery(sql);
             
             while (res.next()) {
                 int idact = res.getInt("idact");
-                String type = res.getString("type");
+                int type = res.getInt("type");
                 Timestamp timestamp = res.getTimestamp("date");
                 java.util.Date date = timestamp != null ? new java.util.Date(timestamp.getTime()) : null;
                 int max = res.getInt("max");
-                
-                actividades.add(new Actividad(idact, type, date, max));
+                String tit = res.getString("tit");
+                String desc = res.getString("desc");
+                String loc = res.getString("loc");
+                actividades.add(new Actividad(idact, type, max, tit, desc, loc));
             }
             System.out.println("✓ Se cargaron " + actividades.size() + " actividades");
         } catch (SQLException e) {
@@ -81,6 +91,35 @@ public class DAO {
             throw e;
         }
         return actividades;
+    }
+    /**
+     * Obtiene todas las plantillas de  actividades de la BD
+     */
+    public ArrayList<Actividad> getPlantillas() throws SQLException {
+        ArrayList<Actividad> plantillas = new ArrayList<>();
+        try {
+            String sql = "SELECT idact, type, date, max, tit, desc, loc FROM act WHERE type = 5";
+            Statement sent = conexionBD.createStatement();
+            ResultSet res = sent.executeQuery(sql);
+            
+            while (res.next()) {
+                int idact = res.getInt("idact");
+                int type = res.getInt("type");
+                Timestamp timestamp = res.getTimestamp("date");
+                java.util.Date date = timestamp != null ? new java.util.Date(timestamp.getTime()) : null;
+                int max = res.getInt("max");
+                String tit = res.getString("tit");
+                String desc = res.getString("desc");
+                String loc = res.getString("loc");
+                plantillas.add(new Actividad(idact, type, max, tit, desc, loc));
+                
+            }
+            System.out.println("✓ Se cargaron " + plantillas.size() + " actividades");
+        } catch (SQLException e) {
+            System.err.println("✗ Error consultando actividades: " + e.getMessage());
+            throw e;
+        }
+        return plantillas;
     }
 
     /**
@@ -117,17 +156,20 @@ public class DAO {
      */
     public boolean agregarActividad(Actividad actividad) {
         try {
-            String sql = "INSERT INTO act (idact, type, date, max) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO act (idact, type, date, max,tit,desc,loc) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
             
             ps.setInt(1, actividad.getIdActividad());
-            ps.setString(2, actividad.getTipo());
+            ps.setInt(2, actividad.getTipoCl());
             ps.setTimestamp(3, new java.sql.Timestamp(actividad.getFechaHora().getTime()));
             ps.setInt(4, actividad.getMaxParticipantes());
+            ps.setString(5, actividad.getTitulo());
+            ps.setString(6, actividad.getDesc());
+            ps.setString(7, actividad.getLoc());
             
             int resultado = ps.executeUpdate();
             if (resultado > 0) {
-                System.out.println("✓ Actividad agregada: " + actividad.getTipo());
+                System.out.println("✓ Actividad agregada: " + actividad.getLoc());
                 return true;
             }
         } catch (SQLException e) {
@@ -265,7 +307,7 @@ public class DAO {
      */
     public int obtenerIdClientePorDNI(String dni) {
         try {
-            String sql = "SELECT ID FROM persona WHERE DNI = ? LIMIT 1";
+            String sql = "SELECT ID FROM persona WHERE (DNI = ? and role = 1) LIMIT 1";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
             ps.setString(1, dni);
             
@@ -277,6 +319,57 @@ public class DAO {
             System.err.println("✗ Error al obtener ID del cliente: " + e.getMessage());
         }
         return -1;
+    }
+
+    /**
+     * Obtiene las plantillas de actividades (tipo = 5)
+     * @return 
+     */
+    public ArrayList<Actividad> getPlantillasActividades() {
+        ArrayList<Actividad> plantillas = new ArrayList<>();
+        try {
+            String sql = "SELECT idact, type, date, max FROM act WHERE type = 3";
+            Statement sent = conexionBD.createStatement();
+            ResultSet res = sent.executeQuery(sql);
+            
+            while (res.next()) {
+                int idact = res.getInt("idact");
+                String loc = res.getString("loc");
+                String tit = res.getString("tit");
+                String desc = res.getString("desc");
+                int max = res.getInt("max");
+                Actividad a = new Actividad(idact, max, tit, desc,loc);
+                plantillas.add(a);
+            }
+            System.out.println("✓ Se cargaron " + plantillas.size() + " plantillas de actividades");
+        } catch (SQLException e) {
+            System.err.println("✗ Error consultando plantillas: " + e.getMessage());
+        }
+        return plantillas;
+    }
+    
+    
+    public Cliente validarUserPass (String user, String pass){
+         Cliente cliente= null;
+        try {
+            String sql = "SELECT * FROM persona Where (role = 1 AND user = ? AND pass =?) LIMIT 1";
+            Statement sent = conexionBD.createStatement();
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, pass);
+            ResultSet res = sent.executeQuery(sql);
+            
+            while (res.next()) {
+                int id = res.getInt("id");
+                String nombre = res.getString("name")+ " " + res.getString("surn1") + " " + res.getString("surn2");
+                String DNI = res.getString("DNI");
+                cliente = new Cliente(id, nombre, DNI);
+            }
+            System.out.println("✓ Se encontró el cliente");
+        } catch (SQLException e) {
+            System.err.println("✗ Error con el cliente: " + e.getMessage());
+        }
+        return cliente;
     }
 
     /**

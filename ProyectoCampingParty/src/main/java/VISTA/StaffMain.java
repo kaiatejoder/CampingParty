@@ -5,6 +5,8 @@
 package VISTA;
 
 import MODELO.Staff;
+import MODELO.Modelo;
+import CONTROLADOR.*;
 
 /**
  *
@@ -16,10 +18,12 @@ public class StaffMain extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StaffMain.class.getName());
 
     private final MODELO.Staff staff; // importa la clase MODELO.Staff arriba
+    private final Modelo modelo;
 
     /** Constructor que recibe el staff autenticado */
-    public StaffMain(MODELO.Staff staff) {
+    public StaffMain(MODELO.Staff staff, Modelo modelo) {
         this.staff = staff;
+        this.modelo = modelo;
         initComponents();
         setLocationRelativeTo(null);
         if (staff != null) {
@@ -31,14 +35,18 @@ public class StaffMain extends javax.swing.JFrame {
         }
         jButton1.addActionListener(e -> {
         // Registrar Entrada
-        StaffLogNew v = new StaffLogNew();
+        CtrlStaffLogNew controlador = new CtrlStaffLogNew(null, modelo, staff);
+        StaffLogNew v = new StaffLogNew(controlador);
+        controlador.setVista(v);
         v.setLocationRelativeTo(this);
         v.setVisible(true);
     });
 
     jButton2.addActionListener(e -> {
         // Administrar Reservas
-        StaffAct v = new StaffAct();
+        CtrlStaffAct controlador = new CtrlStaffAct(null, modelo, staff);
+        StaffAct v = new StaffAct(controlador);
+        controlador.setVista(v);
         v.setLocationRelativeTo(this);
         v.setVisible(true);
     });
@@ -53,7 +61,7 @@ public class StaffMain extends javax.swing.JFrame {
 
     /** Constructor vacío para el GUI Builder (no lo borres) */
     public StaffMain() {
-        this(null);
+        this(null, null);
     }
 
     /**

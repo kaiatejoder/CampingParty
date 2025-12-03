@@ -22,12 +22,13 @@ public class ClienteSignOn extends javax.swing.JFrame {
     private Modelo m;
     private Cliente c;
     private boolean b;
+    private CONTROLADOR.ControladorClienteSignOn controlador;
+    
     /**
      * Creates new form ClienteSignOn
      */
-    public ClienteSignOn(Modelo m) {
+    public ClienteSignOn() {
         FlatLaf.registerCustomDefaultsSource("com.ProyectoCampingParty.src.main.java.themes");
-        this.m = m;
         FlatLightLaf.setup();
         initComponents();
     }
@@ -457,48 +458,30 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
     private void RegistraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistraActionPerformed
     if(b){
-        // Validar que la contraseña cumpla los requisitos
-        if(!Valid.password(jPasswordField1.getPassword())){
-            Error3.setText("ERROR: La contraseña debe incluir minúscula, mayúscula, dígito y carácter especial");
-            return;
-        }
-        
-        // Crear cliente con los datos ingresados
-        String[] nombres = c.getNombre().split(" ");
-        String nombre = nombres.length > 0 ? nombres[0] : "";
-        String apellido = nombres.length > 1 ? nombres[1] : "";
-        String apellido2 = nombres.length > 2 ? nombres[2] : "";
-        
-        Cliente clienteNuevo = new Cliente(
-            nombre + " " + apellido + (apellido2.isEmpty() ? "" : " " + apellido2),
+        // Delegar al controlador la validación y registro (ya inicializado en constructor)
+        controlador.registrarCliente(
+            c.getNombre(),
             c.getDni(),
             c.getEdad(),
             c.getTlf(),
             c.getUser(),
             c.getPass()
         );
-        
-        // Registrar en BD
-        boolean registrado = m.getDAO().agregarCliente(clienteNuevo);
-        
-        if(registrado) {
-            Error3.setText("✓ Cliente registrado correctamente");
-            // Cerrar esta ventana después de 1.5 segundos
-            javax.swing.Timer timer = new javax.swing.Timer(1500, new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent e) {
-                    ClienteSignOn.this.dispose();
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
-        } else {
-            Error3.setText("✗ Error al registrar cliente en BD");
-        }
     }
-    else
+    else {
         Error3.setText("ERROR: debes de estar de acuerdo para registrarte");
+    }
     }//GEN-LAST:event_RegistraActionPerformed
+
+    /**
+     * Agrega listeners centralizados a los botones principales
+     */
+    public void addListeners(java.awt.event.ActionListener al) {
+        atras.setActionCommand("btnBack");
+        atras.addActionListener(al);
+        Registra.setActionCommand("btnRegister");
+        Registra.addActionListener(al);
+    }
 
     private void PoliticaPrivacidad(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PoliticaPrivacidad
     String url="https://youtu.be/dQw4w9WgXcQ?si=AZ-OLL4JaMbtQKBc";
@@ -554,7 +537,12 @@ public class ClienteSignOn extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteSignOn(new Modelo()).setVisible(true));
+        
+        
+        java.awt.EventQueue.invokeLater(() -> {
+            ClienteSignOn view = new ClienteSignOn();
+            view.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package CONTROLADOR;
 
+import MODELO.Cliente;
 import MODELO.Modelo;
 import VISTA.ClientLogin;
 import VISTA.ClientSignIn;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Controlador concreto para la navegación del login de clientes.
+ * Maneja: volver atrás, registro y login de clientes.
  */
 public class ControladorClienteLogin extends CtrlCli {
 
@@ -34,43 +36,61 @@ public class ControladorClienteLogin extends CtrlCli {
     }
 
     private void init() {
-        // Volver a bienvenida
-        clientLogin.getBack().addActionListener(new ActionListener() {
+        // Listeners para ClientLogin
+        clientLogin.addListeners(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clientLogin.setVisible(false);
-                welcome.setLocationRelativeTo(null);
-                welcome.setVisible(true);
-            }
-        });
-
-        // Abrir pantalla de registro
-        clientLogin.getSignIn().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Preferimos mostrar la vista que nos pasaron si existe
-                if (clienteSignOn != null) {
+                String cmd = e.getActionCommand();
+                
+                if (cmd.equals("btnBack")) {
                     clientLogin.setVisible(false);
-                    clienteSignOn.setLocationRelativeTo(clientLogin);
-                    clienteSignOn.setVisible(true);
-                } else {
-                    new ClienteSignOn(modelo).setVisible(true);
-                    clientLogin.setVisible(false);
+                    welcome.setLocationRelativeTo(null);
+                    welcome.setVisible(true);
+                } 
+                else if (cmd.equals("btnSignIn")) {
+                    if (clienteSignOn != null) {
+                        clientLogin.setVisible(false);
+                        clienteSignOn.setLocationRelativeTo(clientLogin);
+                        clienteSignOn.setVisible(true);
+                    }
+                } 
+                else if (cmd.equals("btnLogIn")) {
+                    if (clientSignIn != null) {
+                        clientLogin.setVisible(false);
+                        clientSignIn.setLocationRelativeTo(clientLogin);
+                        clientSignIn.setVisible(true);
+                    }
                 }
             }
         });
 
-        // Abrir pantalla de iniciar sesión (form existente)
-        clientLogin.getLogIn().addActionListener(new ActionListener() {
+        // Listeners para ClientSignIn
+        clientSignIn.AddListeners(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (clientSignIn != null) {
-                    clientLogin.setVisible(false);
-                    clientSignIn.setLocationRelativeTo(clientLogin);
-                    clientSignIn.setVisible(true);
-                } else {
-                    new ClientSignIn(modelo).setVisible(true);
-                    clientLogin.setVisible(false);
+                String cmd = e.getActionCommand();
+                
+                if (cmd.equals("SignIn")) {
+                    String usuario = clientSignIn.jTextField1.getText().trim();
+                    String password = new String(clientSignIn.jPasswordField1.getPassword());
+                    
+                    if (usuario.isEmpty() || password.isEmpty()) {
+                        clientSignIn.jLabelError.setText("ERROR: Usuario o contraseña incorrectos");
+                    } else {
+                        Cliente c = modelo.tryUserPass(usuario, password);
+                        if (c != null) {
+                            // Usar controlador central para abrir VistaCliente
+                            CONTROLADOR.getInstance().abrirVistaCliente(c);
+                            clientSignIn.dispose();
+                        } else {
+                            clientSignIn.jLabelError.setText("ERROR: Usuario o contraseña incorrectos");
+                        }
+                    }
+                } 
+                else if (cmd.equals("goBack")) {
+                    clientSignIn.setVisible(false);
+                    clientLogin.setLocationRelativeTo(null);
+                    clientLogin.setVisible(true);
                 }
             }
         });

@@ -33,23 +33,22 @@ public class CtrlWelcome {
 
     private void init() {
         // Botón "Soy Cliente"
-        vWel.getCli().addActionListener(new ActionListener() {
+       
+        vWel.addListeners(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vWel.setVisible(false);
-                cLog.setLocationRelativeTo(vWel);
-                cLog.setVisible(true);
-            }
-        });
-
-        // Botón "Soy Staff"
-        vWel.getSt().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vWel.setVisible(false);
-                sLog.setLocationRelativeTo(vWel);
-                sLog.setVisible(true);
-            }
-        });
+                String c = e.getActionCommand();
+                if (c.equals("btnClient")) {
+                    vWel.setVisible(false);
+                    cLog.setLocationRelativeTo(vWel);
+                    cLog.setVisible(true);
+                } 
+                else if (c.equals("btnStaff")) {
+                    vWel.setVisible(false);
+                    sLog.setLocationRelativeTo(vWel);
+                    sLog.setVisible(true);
+                }
+        }});
+        
     }
 }

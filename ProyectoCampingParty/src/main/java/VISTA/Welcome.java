@@ -5,6 +5,7 @@
 package VISTA;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
@@ -98,7 +99,17 @@ public class Welcome extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    public void addListeners(ActionListener al)
+    {
+      
+    
+        jButton2.setActionCommand("btnCliente");
+        jButton2.addActionListener(al);
+        jButton1.setActionCommand("btnStaff");
+        jButton1.addActionListener(al);
+        
+    };
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
    
     }//GEN-LAST:event_jButton2ActionPerformed

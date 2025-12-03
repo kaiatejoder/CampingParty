@@ -17,7 +17,7 @@ import java.util.Date;
 public class Modelo {
     private int descuento;
     private Parcelas parcelas;
-    public ArrayList<Cliente> clientes;
+    
     private ArrayList<Actividad> acts;
     private Reservas r;
     private DAO dao;
@@ -29,7 +29,6 @@ public class Modelo {
             pArray[i] = new Parcela(i+1, 2 + i*5, i%2==0, 15 + i*2);
         }
         this.parcelas = new Parcelas(pArray);
-        this.clientes = new ArrayList<>();
         this.acts = new ArrayList<>();
         this.r = new Reservas();
         this.dao = new DAO(); // Inicializar DAO
@@ -41,34 +40,9 @@ public class Modelo {
     public ArrayList<Actividad> getActs() {
         return this.acts;
     }
-    public void setDatos(){
-        Cliente c = new Cliente("Lupe López","11111111Y",22,666666666,"lupelopez@pornhub.com","Lupita");
-        clientes.add(c);
-        Date dateIn = new Date(30,11,2025);
-        Date dateOut = new Date(3,12,2025);
-        Reserva res = new Reserva(dateIn,dateOut,c);
-    }
-    public ArrayList<String> getUserPass(){
-        ArrayList<String> res = new ArrayList<>();
-        for(int i =0; i< clientes.size(); i++){
-            res.add(clientes.get(i).getUser());
-            res.add(clientes.get(i).getPass());
-        }
-        return res;
-    }
-    public int tryUserPass(String u, String p){
-        int b = 0;
-        boolean user = false;
-        boolean pass = false;
-        
-        for(int i =0; i< clientes.size(); i++){
-            while(0<=b){
-            user = u.equals(clientes.get(i).getUser());
-            pass = p.equals(clientes.get(i).getPass());
-            if(user &&pass){
-            b = i/2;}
-        }}
-        return b;
+    
+    public Cliente tryUserPass(String u, String p){
+        return dao.validarUserPass(u, p);
     }
     public void write (String FileN,String s){
         try{
@@ -92,6 +66,10 @@ public class Modelo {
     
     public DAO getDAO() {
         return dao;
+    }
+    public ArrayList<Actividad> getPlantillas(){
+        
+        return dao.getPlantillasActividades();
     }
 
 }
