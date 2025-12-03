@@ -231,7 +231,7 @@ public class StaffAct extends javax.swing.JFrame {
     public void cargarPlantillas(java.util.ArrayList<Actividad> plantillas) {
         javax.swing.DefaultListModel<String> model = new javax.swing.DefaultListModel<>();
         for (Actividad p : plantillas) {
-            model.addElement("Plantilla " + p.getIdActividad() + " - " + p.getTipo());
+            model.addElement("Plantilla " + p.getIdActividad() + " - " + p.getTipoCl());
         }
         jList1.setModel(model);
     }
@@ -240,8 +240,8 @@ public class StaffAct extends javax.swing.JFrame {
      * Carga una plantilla en los campos del formulario
      */
     public void cargarPlantillaEnFormulario(Actividad plantilla) {
-        jTextField1.setText(plantilla.getTipo());
-        jComboBox1.setSelectedItem(plantilla.getTipo());
+        jTextField1.setText(plantilla.getTitulo());
+        jComboBox1.setSelectedItem(plantilla.getTipoCl());
         jDateChooser2.setDate(plantilla.getFechaHora());
     }
 
