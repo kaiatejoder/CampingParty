@@ -11,6 +11,7 @@ public class Persona {
     protected String pass;
     protected String nombre;
     protected String dni;
+    protected int id;
     protected int tlf;
     protected int role;
     public String[] TipoRole  ={
@@ -20,13 +21,14 @@ public class Persona {
     };
 
 
-    public Persona(String usuario, String contrasena, String nombre, String dni, int tlf, int role) {
+    public Persona(String usuario, String contrasena, String nombre, String dni, int tlf, int role, int id) {
         this.user = usuario;
         this.pass = contrasena;
         this.nombre = nombre;
         this.tlf = tlf;
         this.dni = dni;
         this.role = role;
+        this.id = id;
     }
     public Persona(String usuario, String contrasena, String nombre, String dni, int tlf) {
         this.user = usuario;
@@ -45,4 +47,5 @@ public class Persona {
     public String getRole() { return TipoRole[role]; }
     public int getTlf() { return tlf; }
     public void setPass(String pass) { this.pass = pass; }  
+    public int getId() { return id;}
 }

@@ -261,7 +261,26 @@ public class DAO {
     }
 
     /**
-     * Cierra la conexión con la BD
+     * Obtiene el ID del cliente por su DNI
+     */
+    public int obtenerIdClientePorDNI(String dni) {
+        try {
+            String sql = "SELECT ID FROM persona WHERE DNI = ? LIMIT 1";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            ps.setString(1, dni);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al obtener ID del cliente: " + e.getMessage());
+        }
+        return -1;
+    }
+
+    /**
+     * Cierra la conexión a la BD
      */
     public void cerrarConexion() {
         try {

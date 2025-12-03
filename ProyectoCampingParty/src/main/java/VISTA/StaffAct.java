@@ -4,6 +4,9 @@
  */
 package VISTA;
 import com.formdev.flatlaf.FlatLightLaf;
+import MODELO.Actividad;
+import MODELO.Modelo;
+import java.util.Date;
 /**
  *
  * @author Carla Terol
@@ -87,6 +90,11 @@ public class StaffAct extends javax.swing.JFrame {
         jLabel6.setText("Selecciona Día/Hora");
 
         jButton1.setText("Agregar Actividad");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -198,6 +206,45 @@ public class StaffAct extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            // Obtener datos del formulario
+            String titulo = jTextField1.getText();
+            String descripcion = jTextArea1.getText();
+            String tipo = (String) jComboBox1.getSelectedItem();
+            String audiencia = (String) jComboBox2.getSelectedItem();
+            Date fecha = jDateChooser2.getDate();
+            
+            if (titulo.isEmpty() || descripcion.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if (fecha == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Crear actividad (usando ID temporal 0, la BD lo generará)
+            Actividad actividad = new Actividad(0, tipo, fecha, 50); // 50 como participantes máximos por defecto
+            
+            // Guardar en BD
+            Modelo modelo = new Modelo();
+            boolean resultado = modelo.getDAO().agregarActividad(actividad);
+            
+            if (resultado) {
+                javax.swing.JOptionPane.showMessageDialog(this, "✓ Actividad creada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                // Limpiar formulario
+                jTextField1.setText("Título");
+                jTextArea1.setText("");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "✗ Error al crear la actividad", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments

@@ -20,6 +20,7 @@ public class Modelo {
     public ArrayList<Cliente> clientes;
     private ArrayList<Actividad> acts;
     private Reservas r;
+    private DAO dao;
 
     public Modelo(){
         this.descuento = 20;
@@ -31,6 +32,7 @@ public class Modelo {
         this.clientes = new ArrayList<>();
         this.acts = new ArrayList<>();
         this.r = new Reservas();
+        this.dao = new DAO(); // Inicializar DAO
     }
     public boolean[]getParcelasLibres(){
         return this.parcelas.getLibres();
@@ -86,6 +88,10 @@ public class Modelo {
     }
     public void setDescuento(int descuento) {
         this.descuento = descuento;
+    }
+    
+    public DAO getDAO() {
+        return dao;
     }
 
 }

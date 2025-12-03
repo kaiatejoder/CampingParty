@@ -457,16 +457,44 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
     private void RegistraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistraActionPerformed
     if(b){
-        Error3.setText("Cliente registrado correctamente");
-        // Cerrar esta ventana después de registrarse
-        javax.swing.Timer timer = new javax.swing.Timer(1500, new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                ClienteSignOn.this.dispose();
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
+        // Validar que la contraseña cumpla los requisitos
+        if(!Valid.password(jPasswordField1.getPassword())){
+            Error3.setText("ERROR: La contraseña debe incluir minúscula, mayúscula, dígito y carácter especial");
+            return;
+        }
+        
+        // Crear cliente con los datos ingresados
+        String[] nombres = c.getNombre().split(" ");
+        String nombre = nombres.length > 0 ? nombres[0] : "";
+        String apellido = nombres.length > 1 ? nombres[1] : "";
+        String apellido2 = nombres.length > 2 ? nombres[2] : "";
+        
+        Cliente clienteNuevo = new Cliente(
+            nombre + " " + apellido + (apellido2.isEmpty() ? "" : " " + apellido2),
+            c.getDni(),
+            c.getEdad(),
+            c.getTlf(),
+            c.getUser(),
+            c.getPass()
+        );
+        
+        // Registrar en BD
+        boolean registrado = m.getDAO().agregarCliente(clienteNuevo);
+        
+        if(registrado) {
+            Error3.setText("✓ Cliente registrado correctamente");
+            // Cerrar esta ventana después de 1.5 segundos
+            javax.swing.Timer timer = new javax.swing.Timer(1500, new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    ClienteSignOn.this.dispose();
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+        } else {
+            Error3.setText("✗ Error al registrar cliente en BD");
+        }
     }
     else
         Error3.setText("ERROR: debes de estar de acuerdo para registrarte");

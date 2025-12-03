@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import MODELO.Modelo;
 /**
  *
  * @author Carla Terol
@@ -531,6 +532,11 @@ public class StaffLogNew extends javax.swing.JFrame {
         });
 
         butConf.setText("Sí, así perfecto");
+        butConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butConfActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("¿Estás seguro?");
 
@@ -724,6 +730,37 @@ public class StaffLogNew extends javax.swing.JFrame {
             }
         }
     }
+
+    private void butConfActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            // Obtener datos seleccionados (fecha, parcelas, etc.)
+            Date fechaSalida = Calend.getDate();
+            
+            if (fechaSalida == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Actualizar estado de parcelas en BD (ocupadas)
+            Modelo modelo = new Modelo();
+            java.sql.Date sqlFecha = new java.sql.Date(fechaSalida.getTime());
+            
+            // Actualizar todas las parcelas seleccionadas como ocupadas
+            // Por ahora, usamos una fecha ficticia de entrada (hoy)
+            Date hoy = new Date();
+            java.sql.Date sqlFechaHoy = new java.sql.Date(hoy.getTime());
+            
+            // Actualizar parcelas (asumiendo que hay un array de parcelas seleccionadas)
+            // Ocupada=true, Reservada=false
+            modelo.getDAO().actualizarParcela(1, true, false, sqlFechaHoy, sqlFecha);
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "✓ Entrada/Salida registrada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
