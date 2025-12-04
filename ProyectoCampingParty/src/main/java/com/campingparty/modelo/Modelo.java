@@ -292,7 +292,12 @@ public class Modelo {
             System.err.println("Error al cargar actividades: " + e.getMessage());
         }
     }
-
+    public Cliente getCliente(String user, String pass){
+        return dao.getCliente(user, pass);
+    }
+    public Staff getStaff(String user, String pass){
+        return dao.getStaff(user, pass);
+    }
     /**
      * Obtiene la descripción general del estado del modelo
      */
