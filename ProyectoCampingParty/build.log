@@ -1,0 +1,19 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.isii:ProyectoCampingParty >--------------------
+[INFO] Building ProyectoCampingParty 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The POM for unknown.binary:jgoodies-common-1.2.0:jar:SNAPSHOT is missing, no dependency information available
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ProyectoCampingParty ---
+[INFO] skip non existing resourceDirectory C:\Users\ctero\OneDrive\C_drive\Documentos\GitHub\CampingParty\ProyectoCampingParty\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ ProyectoCampingParty ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.323 s
+[INFO] Finished at: 2025-12-03T21:22:10+01:00
+[INFO] ------------------------------------------------------------------------
