@@ -34,6 +34,32 @@ public class Reserva {
     }
 
     public Reserva(int idReserva, Date fechaInicio, Date fechaFin, Cliente cliente,
+                   String parcelas, String tiendas, String acompanyantes) {
+        this.idReserva = idReserva;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.cliente = cliente;
+        this.parcelas = parcelas != null ? parcelas : new ArrayList<>();
+        this.tiendas = tiendas != null ? tiendas : new ArrayList<>();
+        this.acompanyantes = acompanyantes != null ? acompanyantes : new ArrayList<>();
+        this.precioPorDia = 0;
+        this.precioTotal = 0;
+    }
+    public ArrayList<Parcela> getParcelas(String s){
+        ArrayList<Parcela> res;
+        
+    }
+    public String parcelastoString(){
+        String res;
+        res = "[";
+        for(int i=0; i < parcelas.size()- 1; i++)
+            res = res + Integer.toString(parcelas.get(i).getId()) + ",";
+        res+= Integer.toString(parcelas.getLast().getId());
+         res += "]";
+         return res;
+    }
+    
+    public Reserva(int idReserva, Date fechaInicio, Date fechaFin, Cliente cliente,
                    ArrayList<Parcela> parcelas, ArrayList<Tienda> tiendas, ArrayList<Acompanyante> acompanyantes) {
         this.idReserva = idReserva;
         this.fechaInicio = fechaInicio;

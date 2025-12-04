@@ -4,6 +4,7 @@
  */
 package VISTA;
 
+import MODELO.Modelo;
 import javax.swing.JOptionPane;
 import MODELO.Staff;
 
@@ -12,12 +13,14 @@ import MODELO.Staff;
  * @author Abel Saiz
  */
 public class StaffSignIn extends javax.swing.JFrame {
-
+    StaffLogin st;
     /**
      * Creates new form TrabajadorSesión
      */
-    public StaffSignIn() {
+    public StaffSignIn(StaffLogin sl, Modelo m) {
         initComponents();
+        st = sl;
+        
     }
 
     /**
@@ -127,7 +130,7 @@ public class StaffSignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          String usuario = jTextField1.getText();
+    String usuario = jTextField1.getText();
     String contrasena = new String(jPasswordField1.getPassword());
 
     if (usuario.isBlank() || contrasena.isBlank()) {
@@ -158,9 +161,9 @@ public class StaffSignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      VISTA.StaffLogin login = new VISTA.StaffLogin();
-      login.setLocationRelativeTo(this);
-      login.setVisible(true);
+
+      sl.setLocationRelativeTo(this);
+      sl.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

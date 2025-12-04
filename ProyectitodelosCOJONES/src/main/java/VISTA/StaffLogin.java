@@ -11,18 +11,21 @@ import javax.swing.JButton;
  * @author igrub
  */
 public class StaffLogin extends javax.swing.JFrame {
-
+    private Welcome vWel;
+    private StaffSignIn sI;
     /**
      * Creates new form TrabajadorLogin
      */
-    public StaffLogin() {
+    public StaffLogin(Welcome w, StaffSignIn sIn) {
+        this.vWel = w;
+        this.sI = sIn;
         initComponents();
     }
-    public JButton getBack(){
-    return this.jButton2;
+    public Welcome getWelcome(){
+    return this.vWel;
     }
-     public JButton getLogin(){
-    return this.jButton1;
+     public StaffLogin getLogin(){
+    return this;
     }
 
     /**
@@ -89,11 +92,16 @@ public class StaffLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        vWel.setVisible(false);
+        sI.setLocationRelativeTo(vWel);
+        sI.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- 
+        vWel.setVisible(false);
+        sI.setLocationRelativeTo(vWel);
+        sI.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -124,12 +132,7 @@ public class StaffLogin extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StaffLogin().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

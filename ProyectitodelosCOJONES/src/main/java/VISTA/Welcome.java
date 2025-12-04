@@ -13,13 +13,14 @@ import javax.swing.JButton;
  */
 public class Welcome extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Welcome.class.getName());
-
+    StaffLogin sLog;
+    ClientLogin cLog;
     /**
      * Creates new form VistaLogin
      * @param tl La vista trabajador
      * @param cl  La vista Cliente
      */
-    public Welcome() {
+    public Welcome(StaffLogin st, ClientLogin cl) {
         FlatLightLaf.setup();
         initComponents();
     }
@@ -96,11 +97,13 @@ public class Welcome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        this.setVisible(false);
+        sLog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-   
+        this.setVisible(false);
+        cLog.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {

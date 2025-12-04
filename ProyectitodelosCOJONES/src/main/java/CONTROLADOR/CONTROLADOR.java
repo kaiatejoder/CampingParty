@@ -11,11 +11,19 @@ public class CONTROLADOR{
     // Vistas compartidas
     private final Welcome vWelcome;
     private final ClientLogin vistaClienteLogin;
-    private final ClientSignIn vistaClienteLogLogin;
+    private final ClientSignIn vistaClienteSignIn;
     private final ClienteSignOn vistaClienteSignOn;
-    private final StaffLogin vistaTrabajadorLogin;
+    private final ClienteConReserva vistaCliRes;
+    private final VistaCliente vCli;
+    private final VistaClienteReserva vCliRes;
+    private final VistaClienteModificarReserva vCliModRes;
+    private final VistaReservas vReservas;
     private final StaffLogin vistaStaffLogin;
-
+    private final StaffSignIn vistaStaffSignIn;
+    private final StaffAct stAct;
+    private final StaffMain stMain;
+    private final StaffLogNew stRes;
+    private final ActividadSeleccionada actSelect;
     // Controladores
     private final CtrlWelcome controladorBienvenida;
     private final CtrlCli controladorClienteLogin;
@@ -26,12 +34,14 @@ public class CONTROLADOR{
         modelo = new Modelo();
 
         // Vistas base
-        vWelcome = new Welcome();
-        vistaClienteLogin = new ClientLogin();
-        vistaClienteLogLogin = new ClientSignIn();
-        vistaClienteSignOn = new ClienteSignOn();
-        vistaTrabajadorLogin = new StaffLogin();
+        
+        vistaClienteSignIn = new ClientSignIn(modelo);
+        vistaClienteSignOn = new ClienteSignOn(modelo);
+        vistaClienteLogin = new ClientLogin(vistaClienteSignIn, vistaClienteSignOn);
         vistaStaffLogin = new StaffLogin();
+        vistaStaffSignIn = new StaffSignIn();
+        vWelcome = new Welcome();
+        
 
         // Controlador login cliente
         controladorClienteLogin =

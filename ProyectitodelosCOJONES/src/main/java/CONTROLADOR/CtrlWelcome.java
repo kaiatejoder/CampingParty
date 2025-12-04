@@ -70,8 +70,6 @@ public class CtrlWelcome {
     }
 
     private void st() {
-        vWel.setVisible(false);
-        sLog.setLocationRelativeTo(vWel);
-        sLog.setVisible(true);
+        
     }
 }

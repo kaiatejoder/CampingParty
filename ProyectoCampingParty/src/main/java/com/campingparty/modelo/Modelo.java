@@ -34,7 +34,6 @@ public class Modelo {
         this.dao = new DAO();
         
         inicializarParcelas();
-        inicializarStaff();
     }
 
     /**
@@ -47,12 +46,7 @@ public class Modelo {
         }
     }
 
-    /**
-     * Inicializa el staff del camping
-     */
-    private void inicializarStaff() {
-        Staff.init();
-    }
+    
 
     // ==================== MÉTODOS RELATIVOS A PARCELAS ====================
 
@@ -202,7 +196,7 @@ public class Modelo {
     public boolean confirmarReserva(Reserva r) {
         // Aquí iría la lógica para guardar en BD a través del DAO
         try {
-            // dao.guardarReserva(r);
+             dao.guardarReserva(r);
             return true;
         } catch (Exception e) {
             System.err.println("Error al confirmar reserva: " + e.getMessage());
@@ -260,11 +254,8 @@ public class Modelo {
 
     // ==================== MÉTODOS RELATIVOS A STAFF ====================
 
-    /**
-     * Autentica un miembro del staff
-     */
-    public Staff autenticarStaff(String usuario, String contrasena) {
-        return Staff.autenticar(usuario, contrasena);
+    public Staff getStaff(String user, String pass){
+        return dao.getStaff(user, pass);
     }
 
     // ==================== MÉTODOS DE CONFIGURACIÓN ====================
@@ -295,9 +286,7 @@ public class Modelo {
     public Cliente getCliente(String user, String pass){
         return dao.getCliente(user, pass);
     }
-    public Staff getStaff(String user, String pass){
-        return dao.getStaff(user, pass);
-    }
+    
     /**
      * Obtiene la descripción general del estado del modelo
      */

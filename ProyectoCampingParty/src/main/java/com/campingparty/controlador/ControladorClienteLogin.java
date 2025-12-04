@@ -77,7 +77,7 @@ public class ControladorClienteLogin extends CtrlCli {
                     if (usuario.isEmpty() || password.isEmpty()) {
                         clientSignIn.jLabelError.setText("ERROR: Usuario o contraseña incorrectos");
                     } else {
-                        Cliente c = modelo.tryUserPass(usuario, password);
+                        Cliente c = modelo.getCliente(usuario, password);
                         if (c != null) {
                             // Usar controlador central para abrir VistaCliente
                             CONTROLADOR.getInstance().abrirVistaCliente(c);
