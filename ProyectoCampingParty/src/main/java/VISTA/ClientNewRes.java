@@ -23,9 +23,9 @@ import themes.RiuRauLaf;
  *
  * @author Carla Terol
  */
-public class VistaClienteReserva extends javax.swing.JFrame {
+public class ClientNewRes extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaClienteReserva.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientNewRes.class.getName());
     private Date fechaOut,fechaIn;
     Reserva r;
     Cliente c;
@@ -38,7 +38,7 @@ public class VistaClienteReserva extends javax.swing.JFrame {
     /**
      * Creates new form VistaClienteReserva
      */
-    public VistaClienteReserva(Modelo m, Cliente c, CONTROLADOR.ControladorVistaClienteReserva controlador) {
+    public ClientNewRes(Modelo m, Cliente c, CONTROLADOR.ControladorVistaClienteReserva controlador) {
         
         this.c = c;
         this.m = m;
@@ -635,11 +635,6 @@ public class VistaClienteReserva extends javax.swing.JFrame {
         });
 
         jButtonConf.setText("Sí, así perfecto");
-        jButtonConf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfActionPerformed(evt);
-            }
-        });
 
         jLabel14.setText("¿Estás seguro?");
 

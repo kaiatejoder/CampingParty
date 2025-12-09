@@ -41,22 +41,12 @@ public class Modelo {
         return this.acts;
     }
     
-    public Cliente tryUserPass(String u, String p){
+    public Cliente authCli(String u, String p){
         return dao.validarUserPass(u, p);
     }
-    public void write (String FileN,String s){
-        try{
-        File f = new File(FileN);
-        
-        FileWriter w = new FileWriter(f);
-        w.write(s);
-      w.close();  // must close manually
-      System.out.println("Successfully wrote to the file.");
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
+    public Staff validStaff(String user, String pass){
+        return dao.getStaff(user, pass);
     }
-}
     public int getDescuento() {
         return descuento;
     }

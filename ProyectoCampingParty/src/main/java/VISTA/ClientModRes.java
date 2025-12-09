@@ -8,14 +8,14 @@ import com.formdev.flatlaf.FlatLightLaf;
  *
  * @author Carla Terol
  */
-public class VistaClienteModificarReserva extends javax.swing.JFrame {
+public class ClientModRes extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaClienteModificarReserva.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientModRes.class.getName());
 
     /**
      * Creates new form VistaClienteReserva
      */
-    public VistaClienteModificarReserva() {
+    public ClientModRes() {
         FlatLightLaf.setup();
         initComponents();
     }
@@ -625,7 +625,7 @@ public class VistaClienteModificarReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaClienteModificarReserva().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ClientModRes().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

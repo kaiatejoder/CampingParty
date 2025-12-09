@@ -10,14 +10,14 @@ import themes.RiuRauLaf;
  *
  * @author Carla Terol
  */
-public class ClienteConReserva extends javax.swing.JFrame {
+public class ClientRes extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteConReserva.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientRes.class.getName());
 
     /**
      * Creates new form ClienteConReserva
      */
-    public ClienteConReserva() {
+    public ClientRes() {
         RiuRauLaf.setup();
         initComponents();
     }
@@ -137,7 +137,7 @@ public class ClienteConReserva extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClienteConReserva().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ClientRes().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

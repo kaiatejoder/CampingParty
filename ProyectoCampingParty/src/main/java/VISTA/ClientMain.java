@@ -4,24 +4,29 @@
  */
 package VISTA;
 
+import CONTROLADOR.Ctrl;
 import MODELO.Cliente;
 import com.formdev.flatlaf.FlatLightLaf;
+import themes.RiuRauLaf;
 /**
  *
  * @author Carla Terol
  */
-public class VistaCliente extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaCliente.class.getName());
+public class ClientMain extends javax.swing.JFrame {
+    Ctrl c;
+    Cliente cl;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientMain.class.getName());
 
     /**
      * Creates new form VistaCliente
      */
-    public VistaCliente(Cliente c) {
-        FlatLightLaf.setup();
+    public ClientMain(Cliente cli, Ctrl co) {
+        this.c = co;
+        this.cl = cli;
+        RiuRauLaf.setup();
         initComponents();
-        c.getReserva();
-        String Fechas = c.getReserva().getFechas();
+        cl.getReserva();
+        String Fechas = cl.getReserva().getFechas();
     }
 
     /**
@@ -39,17 +44,14 @@ public class VistaCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        labelFechas = new javax.swing.JLabel();
         modReserva = new javax.swing.JButton();
         CancReserva = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 24)); // NOI18N
-        jLabel1.setText("Hola, Cliente");
+        jLabel1.setText("Hola, " + cl.getNombre() + "!";);
 
         jLabel2.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -64,14 +66,14 @@ public class VistaCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Volver");
+        jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("FECHA");
+        labelFechas.setText("FECHA");
 
         modReserva.setText("Modificar");
 
@@ -90,7 +92,7 @@ public class VistaCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
@@ -104,20 +106,13 @@ public class VistaCliente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(modReserva)
                 .addGap(18, 18, 18)
                 .addComponent(CancReserva)
                 .addGap(18, 18, 18))
         );
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Reportar Incidencia");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,7 +142,7 @@ public class VistaCliente extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,30 +166,6 @@ public class VistaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CancReservaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaCliente(new Cliente()).setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancReserva;
@@ -203,11 +174,8 @@ public class VistaCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelFechas;
     private javax.swing.JButton modReserva;
     // End of variables declaration//GEN-END:variables
 }

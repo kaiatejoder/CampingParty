@@ -5,6 +5,7 @@
 package MODELO;
 
 import java.util.ArrayList;
+import java.util.Date;
 /**
  * Clase Cliente que representa un cliente del camping.
  * @author Carla Terol
@@ -39,8 +40,26 @@ public class Cliente extends Persona {
         this.tiendas = new ArrayList<>();
         this.reservas = new Reservas();
     }
+     public Cliente(String nombre, String dni, int edad,int telefono, String username, String password){
+        this.nombre = nombre;
+        this.dni = dni;
+        this.edad = edad;
+        this.tlf = telefono;
+        this.user = username;
+        this.pass = password;
+        this.tiendas = new ArrayList<>();
+        this.reservas = new Reservas();
+    }
 
-    
+    public Reserva tieneResAhora(Date da){
+        Reserva r = null;
+        for(int i =0;i< this.reservas.size();i++)
+        {
+            if(this.reservas.get(i).getInicioEstancia() == da)
+                r = reservas.get(i);
+        }
+        return r;
+    }
 
    public void setUser(String u){
         this.user = u;

@@ -35,7 +35,7 @@ public class DAO {
         Cliente c = null;
         Cliente err = null;
         try {
-            String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ?";
+            String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ? AND role = 1";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
             ps.setString(1, user);
             ps.setString(2, pass);
@@ -58,6 +58,36 @@ public class DAO {
             return err;
         }
         return c;
+        
+    }
+    /**
+     * Obtiene un cliente por usuario y contraseña
+     */
+    public Staff getStaff(String user, String pass) {
+        Staff c = null;
+        Staff err = null;
+        try {
+            String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ? AND role  = 2";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, pass);
+            ResultSet resultados = ps.executeQuery();
+            
+            if (resultados.next()) {
+                int id = resultados.getInt("id");
+                String nombre = resultados.getString("name");
+                String apellido1 = resultados.getString("surn1");
+                String apellido2 = resultados.getString("surn2");
+                String dni = resultados.getString("DNI");
+                String nombreCompleto = nombre + " " + apellido1 + (apellido2 != null ? " " + apellido2 : "");
+                
+                c = new Staff(nombreCompleto, dni, id);
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al obtener staff: " + e.getMessage());
+            return err;
+        }
+        return c;   
         
     }
     /**
@@ -127,7 +157,7 @@ public class DAO {
      */
     public boolean agregarCliente(Cliente cliente) {
         try {
-            String sql = "INSERT INTO persona (name, surn1, surn2, DNI, EDAD, tlf, user, pass, ban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)";
+            String sql = "INSERT INTO persona (name, surn1, surn2, DNI, EDAD, tlf, user, pass, ban, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 1)";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
             
             String[] nombres = cliente.getNombre().split(" ");
@@ -301,7 +331,27 @@ public class DAO {
         }
         return false;
     }
-
+/**
+     * Agrega una participación en una actividad
+     */
+    public boolean toHist(int idCliente, int idReserva) {
+        try {
+            String sql = "INSERT INTO part (pers, act, is) VALUES (?, ?, 1)";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            
+            ps.setInt(1, idCliente);
+            ps.setInt(2, idActividad);
+            
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
+                System.out.println("✓ Participación registrada: Cliente " + idCliente + " en Actividad " + idActividad);
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al agregar participación: " + e.getMessage());
+        }
+        return false;
+    }
     /**
      * Obtiene el ID del cliente por su DNI
      */
@@ -349,7 +399,7 @@ public class DAO {
     }
     
     
-    public Cliente validarUserPass (String user, String pass){
+    public Cliente validarUserPass(String user, String pass){
          Cliente cliente= null;
         try {
             String sql = "SELECT * FROM persona Where (role = 1 AND user = ? AND pass =?) LIMIT 1";
@@ -371,7 +421,8 @@ public class DAO {
         }
         return cliente;
     }
-
+    
+      
     /**
      * Cierra la conexión a la BD
      */

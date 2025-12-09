@@ -5,31 +5,39 @@
 package VISTA;
 
 
+import CONTROLADOR.Ctrl;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import MODELO.Valid;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.IOException;
+import themes.RiuRauLaf;
 
 /**
  *
  * @author Carla
  */
-public class ClienteSignOn extends javax.swing.JFrame {
+public class ClientSignOn extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteSignOn.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientSignOn.class.getName());
     private Modelo m;
-    private Cliente c;
+    private Cliente cl;
     private boolean b;
-    private CONTROLADOR.ControladorClienteSignOn controlador;
+    private Ctrl c;
+    private String nombre;
+    private String dni;
+    private String user;
+    private String pass;
+    private int e;
+    private int tlf;
     
     /**
      * Creates new form ClienteSignOn
      */
-    public ClienteSignOn() {
-        FlatLaf.registerCustomDefaultsSource("com.ProyectoCampingParty.src.main.java.themes");
-        FlatLightLaf.setup();
+    public ClientSignOn(Ctrl c) {
+        this.c = c;
+        RiuRauLaf.setup();
         initComponents();
     }
 
@@ -58,7 +66,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        tlf = new javax.swing.JTextField();
+        tlfLabel = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         Error2 = new javax.swing.JLabel();
         correo = new javax.swing.JTextField();
@@ -174,7 +182,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 18)); // NOI18N
         jLabel9.setText("Datos de contacto");
 
-        tlf.setText("Nº de teléfono");
+        tlfLabel.setText("Nº de teléfono");
 
         jLabel10.setText("Número de teléfono");
 
@@ -196,7 +204,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
 
         jPasswordField1.setText("zzzzzzzzzzzzzzzzzzzzzzzz");
         jPasswordField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPasswordField1.setEchoChar('*');
+        jPasswordField1.setEchoChar('•');
         jPasswordField1.setEnabled(true);
 
         atras.setText("Atrás");
@@ -236,7 +244,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(verContra, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tlf, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tlfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(33, 33, 33))
@@ -267,7 +275,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tlf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tlfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,12 +417,10 @@ public class ClienteSignOn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Siguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Siguiente1ActionPerformed
-      String nombre = (jTextField1.getText() + " " + jTextField2.getText());
-      String dni=(jTextField3.getText());
-      int e;
-        e = (Integer) Edad.getValue();
+      nombre = (jTextField1.getText() + " " + jTextField2.getText());
+      dni=(jTextField3.getText());
+      e = (Integer) Edad.getValue();
         if( e >= 18 && Valid.dni(dni)) {
-            c = new Cliente(nombre,dni,e);
             jTabbedPane1.setSelectedIndex(1);
         }
         else if (e < 18) {
@@ -431,15 +437,15 @@ public class ClienteSignOn extends javax.swing.JFrame {
     }//GEN-LAST:event_atrasActionPerformed
 
     private void sigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigActionPerformed
-      c.setTlf(Integer.parseInt(tlf.getText()));
+      tlf = Integer.parseInt(tlfLabel.getText());
       if(Valid.correo(correo.getText()))
-          c.setUser(correo.getText());
+          user = correo.getText();
       else if(!Valid.correo(correo.getText())){
             Error2.setText("ERROR: Formato de correo incorrecto");
             return;
         }
       if(Valid.password(jPasswordField1.getPassword())){
-        c.setPass(new String(jPasswordField1.getPassword()));
+        pass = new String(jPasswordField1.getPassword());
         jTabbedPane1.setSelectedIndex(2);
       }
       else if (!Valid.password(jPasswordField1.getPassword()))
@@ -459,29 +465,14 @@ public class ClienteSignOn extends javax.swing.JFrame {
     private void RegistraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistraActionPerformed
     if(b){
         // Delegar al controlador la validación y registro (ya inicializado en constructor)
-        controlador.registrarCliente(
-            c.getNombre(),
-            c.getDni(),
-            c.getEdad(),
-            c.getTlf(),
-            c.getUser(),
-            c.getPass()
-        );
+        c.SignUp(new Cliente(nombre,dni,e,tlf,user,pass),this);
+        
     }
     else {
         Error3.setText("ERROR: debes de estar de acuerdo para registrarte");
     }
     }//GEN-LAST:event_RegistraActionPerformed
 
-    /**
-     * Agrega listeners centralizados a los botones principales
-     */
-    public void addListeners(java.awt.event.ActionListener al) {
-        atras.setActionCommand("btnBack");
-        atras.addActionListener(al);
-        Registra.setActionCommand("btnRegister");
-        Registra.addActionListener(al);
-    }
 
     private void PoliticaPrivacidad(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PoliticaPrivacidad
     String url="https://youtu.be/dQw4w9WgXcQ?si=AZ-OLL4JaMbtQKBc";
@@ -489,7 +480,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException ex) {
-            System.getLogger(ClienteSignOn.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(ClientSignOn.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_PoliticaPrivacidad
 
@@ -499,7 +490,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException ex) {
-            System.getLogger(ClienteSignOn.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(ClientSignOn.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_AvisoLegal
 
@@ -518,32 +509,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        
-        
-        java.awt.EventQueue.invokeLater(() -> {
-            ClienteSignOn view = new ClienteSignOn();
-            view.setVisible(true);
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner Edad;
@@ -578,7 +544,7 @@ public class ClienteSignOn extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton sig;
-    private javax.swing.JTextField tlf;
+    private javax.swing.JTextField tlfLabel;
     private javax.swing.JButton verContra;
     // End of variables declaration//GEN-END:variables
 }

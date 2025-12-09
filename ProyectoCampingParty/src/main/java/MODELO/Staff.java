@@ -10,9 +10,15 @@ public class Staff extends Persona{
         this.user = usuario;
         this.pass = contrasena;
         this.nombre = nombre;
-        this.role = 0; // Asignar rol de STAFF
+        this.role = 2; // Asignar rol de STAFF
         this.dni = dni;
         this.tlf = tlf;
+    }
+    public Staff(String nombre, String dni,int id){
+        this.nombre = nombre;
+        this.role = 2; // Asignar rol de STAFF
+        this.dni = dni;
+        this.id = id;
     }
 
     public void init(){
