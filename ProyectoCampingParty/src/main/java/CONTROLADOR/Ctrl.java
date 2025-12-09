@@ -19,6 +19,7 @@ public class Ctrl {
     private ClientSignIn cIn;
     private ClientSignOn cOn;
     private ClientMain cM;
+    private ClientNewRes cNRes;
     private StaffMain sM;
     private ClientRes cRes;
     private StaffSignIn sIn;
@@ -54,16 +55,16 @@ public class Ctrl {
         fra.setVisible(false);
     }
     
-    public void auth(String user, String pass, Date d, JLabel lE, int r, JFrame fra){
+    public void auth(String user, String pass,  JLabel lE, int r, JFrame fra){
         JFrame f = fra;
-        Date fecha = d;
+        Date fecha = new Date();
         if(r == 1)
         {
             Cliente cl = m.authCli(user, pass);
             if (cl != null)
             {
                 if(cl.tieneResAhora(fecha)!= null){
-                    cRes = new ClientMain(cl, this);}
+                    cRes = new ClientRes(cl, cl.getReserva(), this);}
                 else 
                     {
                 cM = new ClientMain(cl, this);
@@ -87,6 +88,7 @@ public class Ctrl {
                 lE.setText("ERROR: Usuario o contraseña no válidos");
         }
     }
+    
     public void SignUp(Cliente cl, JFrame fra){
         JFrame fr = fra;
         if(m.getDAO().agregarCliente(cl)){
@@ -100,4 +102,7 @@ public class Ctrl {
             "Ha habido un problema. Por favor, inténtalo más tarde", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
+    public void tiendaFromJDialog(Tienda t){
+        cNRes.tiendaFromJDialog(t);
+    };
 }

@@ -19,4 +19,7 @@ public class Tienda {
     public float getM2(){
         return m2;
     }
+    public String getName(){
+    return this.nombre;
+    };
 }
