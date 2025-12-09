@@ -6,6 +6,7 @@ package CONTROLADOR;
 
 import MODELO.*;
 import VISTA.*;
+import java.util.Date;
 import javax.swing.*;
 
 /**
@@ -53,14 +54,15 @@ public class Ctrl {
         fra.setVisible(false);
     }
     
-    public void auth(String user, String pass, JLabel lE, int r, JFrame fra){
+    public void auth(String user, String pass, Date d, JLabel lE, int r, JFrame fra){
         JFrame f = fra;
+        Date fecha = d;
         if(r == 1)
         {
             Cliente cl = m.authCli(user, pass);
             if (cl != null)
             {
-                if(cl.tieneResAhora()){
+                if(cl.tieneResAhora(fecha)!= null){
                     cRes = new ClientMain(cl, this);}
                 else 
                     {

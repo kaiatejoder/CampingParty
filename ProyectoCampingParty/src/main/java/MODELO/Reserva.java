@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package MODELO;
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,7 @@ public class Reserva {
     private Date finReserva;
     private Date inicioEstancia;
     private Date finEstancia;
+    private int id;
     private boolean checkedIn;
     private Cliente c;
     private ArrayList<Parcela> parcelas;
@@ -57,6 +59,12 @@ public class Reserva {
     }
     public void setFinReserva(Date finReserva) {
         this.finReserva = finReserva;
+    }
+    public void setId(int id){
+        this.id= id;
+    }
+    public int getId(){
+         return this.id;
     }
     public Cliente getC() {
         return c;

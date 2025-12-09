@@ -14,6 +14,7 @@ import themes.RiuRauLaf;
  */
 public class ClientMain extends javax.swing.JFrame {
     Ctrl c;
+    String fechas;
     Cliente cl;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientMain.class.getName());
 
@@ -26,7 +27,7 @@ public class ClientMain extends javax.swing.JFrame {
         RiuRauLaf.setup();
         initComponents();
         cl.getReserva();
-        String Fechas = cl.getReserva().getFechas();
+         fechas = cl.getReserva().getFechas();
     }
 
     /**
@@ -51,7 +52,7 @@ public class ClientMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 24)); // NOI18N
-        jLabel1.setText("Hola, " + cl.getNombre() + "!";);
+        jLabel1.setText("Hola, " + cl.getNombre() + "!");
 
         jLabel2.setFont(new java.awt.Font("HelveticaNowDisplay Medium", 0, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -73,7 +74,7 @@ public class ClientMain extends javax.swing.JFrame {
             }
         });
 
-        labelFechas.setText("FECHA");
+        labelFechas.setText(fechas);
 
         modReserva.setText("Modificar");
 

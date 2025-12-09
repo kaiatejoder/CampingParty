@@ -14,16 +14,17 @@ import themes.RiuRauLaf;
  * @author Carla
  */
 public class ClientLogin extends javax.swing.JFrame {
-    private Cliente c;
+    private Ctrl c;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientLogin.class.getName());
     ClienteSignOn cSu; 
     ClientSignIn cIn;
     /**
      * Creates new form ClienteLogin
      */
-    public ClientLogin(ClientSignIn cSu, ClienteSignOn cIn) {
+    public ClientLogin(ClientSignIn cSu, ClienteSignOn cIn, Ctrl co) {
         this.cIn = cSu;
         this.cSu = cIn;
+        this.c = co;
         RiuRauLaf.setup();
         initComponents();
     }
@@ -125,13 +126,7 @@ public class ClientLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     // Volver a Welcome
-    this.setVisible(false); // Cerrar esta ventana
-    
-    // Crear las ventanas que necesita Welcome
-    StaffLogin ventanaTrabajador = new StaffLogin();
-    
-    // Pasar las ventanas al constructor
-    Welcome ventanaPrincipal = new Welcome(ventanaTrabajador,this);
+    c.toWelcome(this);
     ventanaPrincipal.setVisible(true);
     ventanaPrincipal.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
