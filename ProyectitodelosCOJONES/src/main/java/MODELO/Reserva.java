@@ -120,5 +120,9 @@ public class Reserva {
    public ArrayList<Acompanyante> getAcompanyantes(){
        return this.acompanyantes;
    }
+
+    public float getPrecioDia() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

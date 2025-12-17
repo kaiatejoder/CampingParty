@@ -84,4 +84,8 @@ public class Cliente extends Persona {
     public String toString(){
         return dni +";" + nombre + ";" + edad + ";" + tlf + ";" + user + ";" + pass + "\n";
     }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
