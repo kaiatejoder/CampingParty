@@ -4,15 +4,18 @@
  */
 package VISTA;
 
+import CONTROLADOR.Ctrl;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import themes.RiuRauLaf;
 
 /**
  *
  * @author Carla Terol
  */
 public class Welcome extends javax.swing.JFrame {
+    Ctrl c;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Welcome.class.getName());
 
     /**
@@ -20,15 +23,10 @@ public class Welcome extends javax.swing.JFrame {
      * @param tl La vista trabajador
      * @param cl  La vista Cliente
      */
-    public Welcome() {
-        FlatLightLaf.setup();
+    public Welcome(Ctrl co) {
+        this.c = co;
+        RiuRauLaf.setup();
         initComponents();
-    }
-    public JButton getSt(){
-        return this.jButton2;
-    }
-    public JButton getCli(){
-        return this.jButton1;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,21 +95,12 @@ public class Welcome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+       c.toCLog(this); 
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void addListeners(ActionListener al)
-    {
-      
-    
-        jButton2.setActionCommand("btnCliente");
-        jButton2.addActionListener(al);
-        jButton1.setActionCommand("btnStaff");
-        jButton1.addActionListener(al);
-        
-    };
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        c.toSLog(this); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {

@@ -4,6 +4,7 @@
  */
 package VISTA;
 
+import CONTROLADOR.Ctrl;
 import MODELO.Cliente;
 import MODELO.Modelo;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -15,37 +16,17 @@ import themes.RiuRauLaf;
  * @author Carla
  */
 public class ClientLogin extends javax.swing.JFrame {
-    private Cliente c;
+    private Ctrl c;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientLogin.class.getName());
 
     /**
      * Creates new form ClienteLogin
      */
-    public ClientLogin() {
+    public ClientLogin(Ctrl co) {
+        this.c = co;
         RiuRauLaf.setup();
         initComponents();
     }
-    public JButton getSignIn(){
-        return this.jButton3;
-    }
-    public JButton getLogIn(){
-        return this.jButton2;
-    }
-    public JButton getBack(){
-        return this.jButton1;
-    }
-
-    public void addListeners(java.awt.event.ActionListener al) {
-        jButton1.setActionCommand("btnBack");
-        jButton1.addActionListener(al);
-        jButton2.setActionCommand("btnLogIn");
-        jButton2.addActionListener(al);
-        jButton3.setActionCommand("btnSignIn");
-        jButton3.addActionListener(al);
-    }
-
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,41 +105,17 @@ public class ClientLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // Controlado por ControladorClienteLogin - no hacer nada aquí
+        c.toWelcome(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Controlado por ControladorClienteLogin - no hacer nada aquí
+        c.toSignIn(this,'c');
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Controlado por ControladorClienteLogin - no hacer nada aquí
+        c.toSignUp(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ClientLogin().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -10,4 +10,7 @@ public class CtrlCli {
     public CtrlCli() {
         // Constructor por defecto
     }
+    public void toCRes(this){
+        
+    }
 }

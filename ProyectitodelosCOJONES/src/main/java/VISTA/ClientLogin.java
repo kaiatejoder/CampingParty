@@ -14,13 +14,17 @@ import themes.RiuRauLaf;
  * @author Carla
  */
 public class ClientLogin extends javax.swing.JFrame {
-    private Cliente c;
+    private Ctrl c;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientLogin.class.getName());
-
+    ClienteSignOn cSu; 
+    ClientSignIn cIn;
     /**
      * Creates new form ClienteLogin
      */
-    public ClientLogin() {
+    public ClientLogin(ClientSignIn cSu, ClienteSignOn cIn, Ctrl co) {
+        this.cIn = cSu;
+        this.cSu = cIn;
+        this.c = co;
         RiuRauLaf.setup();
         initComponents();
     }
@@ -107,29 +111,22 @@ public class ClientLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ClienteSignOn c;
+        
         String s = "clientSignUp";
-        c = new ClienteSignOn(new Modelo() );
-        c.setVisible(true); 
+        cSu.setVisible(true); 
         this.dispose(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     // Ir a VistaCliente (directamente sin login)
     String s = "clientSignIn";
-    
+    cIn.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     // Volver a Welcome
-    this.dispose(); // Cerrar esta ventana
-    
-    // Crear las ventanas que necesita Welcome
-    StaffLogin ventanaTrabajador = new StaffLogin();
-    ClientLogin ventanaCliente = new ClientLogin();
-    
-    // Pasar las ventanas al constructor
-    Welcome ventanaPrincipal = new Welcome();
+    c.toWelcome(this);
     ventanaPrincipal.setVisible(true);
     ventanaPrincipal.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -137,27 +134,10 @@ public class ClientLogin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+   /* public static void main(String args[]) {
+       
         java.awt.EventQueue.invokeLater(() -> new ClientLogin().setVisible(true));
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -1,6 +1,6 @@
 package CONTROLADOR;
 
-import VISTA.VistaClienteReserva;
+import VISTA.ClientNewRes;
 import MODELO.*;
 import java.awt.event.*;
 import java.util.*;
@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class ControladorVistaClienteReserva implements ActionListener {
 
-    private VistaClienteReserva vista;
+    private ClientNewRes vista;
     private final Modelo modelo;
     private final Cliente cliente;
 
-    public ControladorVistaClienteReserva(VistaClienteReserva vista, Modelo modelo, Cliente cliente) {
+    public ControladorVistaClienteReserva(ClientNewRes vista, Modelo modelo, Cliente cliente) {
         this.vista = vista;
         this.modelo = modelo;
         this.cliente = cliente;
@@ -28,7 +28,7 @@ public class ControladorVistaClienteReserva implements ActionListener {
     /**
      * Asigna la vista a este controlador (inyección después de instanciación).
      */
-    public void setVista(VistaClienteReserva vista) {
+    public void setVista(ClientNewRes vista) {
         this.vista = vista;
     }
 

@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package MODELO;
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,8 @@ public class Reserva {
     private Date finReserva;
     private Date inicioEstancia;
     private Date finEstancia;
+    private int id;
+    private boolean checkedIn;
     private Cliente c;
     private ArrayList<Parcela> parcelas;
     private ArrayList<Tienda> tiendas;
@@ -27,6 +30,7 @@ public class Reserva {
         this.inicioReserva = inicioReserva;
         this.finReserva = finReserva;
         this.c = c;
+        this.checkedIn = false;
         this.parcelas = new ArrayList<>();
         this.tiendas = new ArrayList<>();
         this.acompanyantes = new ArrayList<>();
@@ -35,6 +39,7 @@ public class Reserva {
         this.inicioReserva = inicioReserva;
         this.finReserva = finReserva;
         this.c = c;
+        this.checkedIn = false;
         this.parcelas = p;
         this.tiendas = t;
         this.acompanyantes = a;
@@ -43,6 +48,9 @@ public class Reserva {
     public Date getInicioReserva() {
         return inicioReserva;
     }   
+    public boolean getCheck(){
+        return checkedIn;
+    }
     public void setInicioReserva(Date inicioReserva) {
         this.inicioReserva = inicioReserva;
     }
@@ -51,6 +59,12 @@ public class Reserva {
     }
     public void setFinReserva(Date finReserva) {
         this.finReserva = finReserva;
+    }
+    public void setId(int id){
+        this.id= id;
+    }
+    public int getId(){
+         return this.id;
     }
     public Cliente getC() {
         return c;
@@ -106,6 +120,9 @@ public class Reserva {
     public void addTienda(Tienda t){
         tiendas.add(t);
     }
+    public void setCheck(boolean b){
+        this.checkedIn = b;
+    }
     public void setParcelas(ArrayList<Parcela> parcelas) {
         this.parcelas = parcelas;
     }
@@ -125,6 +142,9 @@ public class Reserva {
     }
    public ArrayList<Acompanyante> getAcompanyantes(){
        return this.acompanyantes;
+   }
+   public void toHist(){
+       
    }
     
 }

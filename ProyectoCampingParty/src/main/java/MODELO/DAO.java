@@ -1,7 +1,6 @@
 package MODELO;
 
 import java.sql.*;
-import static java.sql.JDBCType.NULL;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
@@ -27,7 +26,7 @@ public class DAO {
             System.err.println("✗ Error de conexión: " + e.getMessage());
         }
     }
-
+    //================= CLIENTE =======================
     /**
      * Obtiene un cliente por usuario y contraseña
      */
@@ -35,7 +34,7 @@ public class DAO {
         Cliente c = null;
         Cliente err = null;
         try {
-            String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ?";
+            String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ? AND role = 1";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
             ps.setString(1, user);
             ps.setString(2, pass);
@@ -60,10 +59,94 @@ public class DAO {
         return c;
         
     }
+    
     /**
-     * Obtiene todos los clientes
+     * Agrega un nuevo cliente a la BD
      */
-
+    public boolean agregarCliente(Cliente cliente) {
+        try {
+            String sql = "INSERT INTO persona (name, surn1, surn2, DNI, EDAD, tlf, user, pass, ban, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 1)";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            
+            String[] nombres = cliente.getNombre().split(" ");
+            ps.setString(1, nombres[0]); // name
+            ps.setString(2, nombres.length > 1 ? nombres[1] : ""); // surn1
+            ps.setString(3, nombres.length > 2 ? nombres[2] : null); // surn2
+            ps.setString(4, cliente.getDni());
+            ps.setInt(5, cliente.getEdad());
+            ps.setInt(6, cliente.getTlf());
+            ps.setString(7, cliente.getUser());
+            ps.setString(8, cliente.getPass());
+            
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
+                System.out.println("✓ Cliente registrado: " + cliente.getNombre());
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al agregar cliente: " + e.getMessage());
+        }
+        return false;
+    }
+           /**
+            * Obtiene las reservas de un cliente específico
+            */
+    public ArrayList<Reserva> getReservasCliente(int idCliente) {
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM (reserva JOIN parcelas on WHERE cliente = ?";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            ps.setInt(1, idCliente);
+            ResultSet res = ps.executeQuery();
+            
+            while (res.next()) {
+                Date inicioReserva = res.getDate("dateresin");
+                Date finReserva = res.getDate("dateresout");
+                Date fin = res.getDate("dateout");
+                Date ini = res.getDate("datein");
+                Reserva r = new Reserva(inicioReserva, finReserva, null);
+                r.setId(res.getInt("id"));
+                reservas.add(r);
+            }
+            System.out.println("✓ Se cargaron " + reservas.size() + " reservas para cliente " + idCliente);
+        } catch (SQLException e) {
+            System.err.println("✗ Error obteniendo reservas: " + e.getMessage());
+        }
+        return reservas;
+    }
+    //======================= STAFF =============================
+    
+    /**
+     * Obtiene un cliente por usuario y contraseña
+     */
+    public Staff getStaff(String user, String pass) {
+        Staff c = null;
+        Staff err = null;
+        try {
+            String sql = "SELECT ID, name, surn1, surn2, DNI, EDAD, tlf, user, pass FROM persona WHERE user = ? AND pass = ? AND role  = 2";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, pass);
+            ResultSet resultados = ps.executeQuery();
+            
+            if (resultados.next()) {
+                int id = resultados.getInt("id");
+                String nombre = resultados.getString("name");
+                String apellido1 = resultados.getString("surn1");
+                String apellido2 = resultados.getString("surn2");
+                String dni = resultados.getString("DNI");
+                String nombreCompleto = nombre + " " + apellido1 + (apellido2 != null ? " " + apellido2 : "");
+                
+                c = new Staff(nombreCompleto, dni, id);
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al obtener staff: " + e.getMessage());
+            return err;
+        }
+        return c;   
+        
+    }
+    
     /**
      * Obtiene todas las actividades de la BD
      */
@@ -77,8 +160,7 @@ public class DAO {
             while (res.next()) {
                 int idact = res.getInt("idact");
                 int type = res.getInt("type");
-                Timestamp timestamp = res.getTimestamp("date");
-                java.util.Date date = timestamp != null ? new java.util.Date(timestamp.getTime()) : null;
+                Date date = res.getDate("date");
                 int max = res.getInt("max");
                 String tit = res.getString("tit");
                 String desc = res.getString("desc");
@@ -105,8 +187,7 @@ public class DAO {
             while (res.next()) {
                 int idact = res.getInt("idact");
                 int type = res.getInt("type");
-                Timestamp timestamp = res.getTimestamp("date");
-                java.util.Date date = timestamp != null ? new java.util.Date(timestamp.getTime()) : null;
+                Date date = res.getDate("date");
                 int max = res.getInt("max");
                 String tit = res.getString("tit");
                 String desc = res.getString("desc");
@@ -122,35 +203,7 @@ public class DAO {
         return plantillas;
     }
 
-    /**
-     * Agrega un nuevo cliente a la BD
-     */
-    public boolean agregarCliente(Cliente cliente) {
-        try {
-            String sql = "INSERT INTO persona (name, surn1, surn2, DNI, EDAD, tlf, user, pass, ban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)";
-            PreparedStatement ps = conexionBD.prepareStatement(sql);
-            
-            String[] nombres = cliente.getNombre().split(" ");
-            ps.setString(1, nombres[0]); // name
-            ps.setString(2, nombres.length > 1 ? nombres[1] : ""); // surn1
-            ps.setString(3, nombres.length > 2 ? nombres[2] : null); // surn2
-            ps.setString(4, cliente.getDni());
-            ps.setInt(5, cliente.getEdad());
-            ps.setInt(6, cliente.getTlf());
-            ps.setString(7, cliente.getUser());
-            ps.setString(8, cliente.getPass());
-            
-            int resultado = ps.executeUpdate();
-            if (resultado > 0) {
-                System.out.println("✓ Cliente registrado: " + cliente.getNombre());
-                return true;
-            }
-        } catch (SQLException e) {
-            System.err.println("✗ Error al agregar cliente: " + e.getMessage());
-        }
-        return false;
-    }
-
+    
     /**
      * Agrega una nueva actividad a la BD
      */
@@ -183,12 +236,12 @@ public class DAO {
      */
     public boolean agregarReserva(Reserva reserva, int idCliente) {
         try {
-            String sql = "INSERT INTO reserva (id, cliente, dateresin, dateresout, datein, dateout, tot, day) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO reserva (cliente, dateresin, dateresout, datein, dateout, tot, day) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conexionBD.prepareStatement(sql);
             
             ps.setInt(1, idCliente);
             ps.setString(2, reserva.getCliente().getNombre());
-            ps.setTimestamp(3, new java.sql.Timestamp(reserva.getInicioReserva().getTime()));
+            ps.setDate(3, reserva.getInicioReserva());
             ps.setTimestamp(4, new java.sql.Timestamp(reserva.getFinReserva().getTime()));
             ps.setTimestamp(5, new java.sql.Timestamp(reserva.getInicioEstancia().getTime()));
             ps.setTimestamp(6, new java.sql.Timestamp(reserva.getFinEstancia().getTime()));
@@ -256,29 +309,7 @@ public class DAO {
         return false;
     }
 
-    /**
-     * Obtiene las reservas de un cliente específico
-     */
-    public ArrayList<Reserva> getReservasCliente(int idCliente) {
-        ArrayList<Reserva> reservas = new ArrayList<>();
-        try {
-            String sql = "SELECT id, dateresin, dateresout, datein, dateout, tot, day FROM reserva WHERE id = ?";
-            PreparedStatement ps = conexionBD.prepareStatement(sql);
-            ps.setInt(1, idCliente);
-            ResultSet res = ps.executeQuery();
-            
-            while (res.next()) {
-                java.util.Date inicioReserva = new java.util.Date(res.getTimestamp("dateresin").getTime());
-                java.util.Date finReserva = new java.util.Date(res.getTimestamp("dateresout").getTime());
-                Reserva r = new Reserva(inicioReserva, finReserva, null);
-                reservas.add(r);
-            }
-            System.out.println("✓ Se cargaron " + reservas.size() + " reservas para cliente " + idCliente);
-        } catch (SQLException e) {
-            System.err.println("✗ Error obteniendo reservas: " + e.getMessage());
-        }
-        return reservas;
-    }
+
 
     /**
      * Agrega una participación en una actividad
@@ -301,7 +332,47 @@ public class DAO {
         }
         return false;
     }
-
+/**
+     * Agrega una participación en una actividad
+     */
+    public boolean toHist(int idCliente, Reserva r) {
+        try {
+            String sql = "INSERT INTO reservashist(idreserva,idcliente,datein,dateout,preciotot) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            
+            ps.setInt(1, r.getId());
+            ps.setInt(2, idCliente);
+            ps.setFloat(5, r.getPrecioTotal());
+            ps.setDate(3, r.getInicioEstancia());
+            ps.setDate(4, r.getFinEstancia());
+            
+            
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
+                System.out.println("✓ Reserva añadida al histórico de reservas ");
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al agregar participación: " + e.getMessage());
+        }
+        return false;
+    }
+        public boolean deleteRes(Reserva r) {
+        try {
+            String sql = "DELETE * FROM reserva INNER JOIN parcelasporreserva ON (reserva.id = parcres.idreserva)INNER JOIN part VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conexionBD.prepareStatement(sql);
+            
+           
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
+                System.out.println("✓ Reserva añadida al histórico de reservas ");
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("✗ Error al agregar participación: " + e.getMessage());
+        }
+        return false;
+    }
     /**
      * Obtiene el ID del cliente por su DNI
      */
@@ -349,7 +420,7 @@ public class DAO {
     }
     
     
-    public Cliente validarUserPass (String user, String pass){
+    public Cliente validarUserPass(String user, String pass){
          Cliente cliente= null;
         try {
             String sql = "SELECT * FROM persona Where (role = 1 AND user = ? AND pass =?) LIMIT 1";
@@ -371,7 +442,8 @@ public class DAO {
         }
         return cliente;
     }
-
+    
+      
     /**
      * Cierra la conexión a la BD
      */
@@ -386,3 +458,5 @@ public class DAO {
         }
     }
 }
+//CONSULTA SQL PARA INSERTAR UNA RESERVA:
+//INSERT INTO reserva(id,cliente,dateresin,dateresout) VALUES(0,1, '2026-04-03','2026-04-08')
